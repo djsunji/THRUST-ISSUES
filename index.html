@@ -1,0 +1,1398 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="JetQ: Refresher for Embraer Pilots. Selbsttest und Lernen fuer E1- und E2-Piloten.">
+<link rel="icon" type="image/png" href="jetq-logo-sm-v3.png">
+<title>JetQ</title>
+</head>
+<body>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Sharp:opsz,wght,FILL,GRAD@24,400,0..1,0&display=block" rel="stylesheet">
+<style>
+/* JetQ: calm EFB / flight-manual look. Square geometry, thin rules, Swiss red as the only strong accent. */
+:root{
+  --bg:#F1F2F4; --surface:rgba(255,255,255,.88); --surface2:#F6F7F8; --ink:#1A1F25; --soft:#56606A; --line:#D6DADF; --line2:#B9C0C8; --rule:#262C33;
+  --red:#E30613; --red-d:#A3040D; --red-t:rgba(227,6,19,.07); --char:#262C33; --onchar:#FFFFFF; --sel:#262C33; --onsel:#FFFFFF; --silver:#9AA3AD;
+  --ok:#1D7A46; --bad:#C0261F; --ok-t:rgba(29,122,70,.09); --bad-t:rgba(192,38,31,.08); --focus:#E30613;
+  --grid:rgba(30,40,55,.035); --bg2:#E3E8EE; --bgimg:radial-gradient(1100px 700px at 8% 0%,rgba(96,150,200,.42),transparent 62%),radial-gradient(900px 640px at 95% 12%,rgba(218,41,28,.10),transparent 60%),radial-gradient(1300px 820px at 70% 105%,rgba(236,186,130,.42),transparent 66%),linear-gradient(160deg,#d7e3ee 0%,#e8ebef 48%,#f2e7da 100%); --bgop:1; --chart:rgba(28,58,96,.13); --logo-bg:transparent; --shade:0 1px 0 rgba(20,25,30,.04);
+  --c-daily:#8A6534; --c-command:#7A6A22; --c-sys:#3E4A57; --c-limits:#A3402F; --c-perf:#2E7748; --c-proc:#9E1C24;
+  --c-ops:#2C5D8A; --c-rules:#1E6F6F; --c-airlaw:#57498A; --c-zrh:#E30613; --c-mem:#E30613; --c-winter:#2F6EA3; --c-sommer:#B8741A; --c-fruehling:#3F7F3A; --c-herbst:#A4532A;
+  --f-body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-cond:"IBM Plex Sans Condensed","IBM Plex Sans",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SFMono-Regular",Menlo,monospace;
+  --f-emoji:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;
+  --r:0px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1114; --surface:rgba(22,26,31,.88); --surface2:#1B2026; --ink:#E6E9EC; --soft:#9DA6B0; --line:#2A3139; --line2:#3B444E; --rule:#C9CFD6;
+  --red:#FF3341; --red-d:#C4101C; --red-t:rgba(255,51,65,.12); --char:#22282F; --onchar:#F2F4F6; --sel:#DCE1E6; --onsel:#111418; --silver:#7D8792;
+  --ok:#4CC27F; --bad:#FF6A62; --ok-t:rgba(76,194,127,.12); --bad-t:rgba(255,106,98,.11); --focus:#FF5A63;
+  --grid:rgba(200,215,230,.028); --bg2:#080B0E; --bgimg:radial-gradient(1100px 700px at 8% 0%,rgba(58,112,178,.38),transparent 62%),radial-gradient(900px 640px at 95% 12%,rgba(210,40,60,.15),transparent 60%),radial-gradient(1300px 820px at 70% 105%,rgba(118,80,170,.28),transparent 66%),linear-gradient(160deg,#0f1c2d 0%,#131a26 50%,#1d1729 100%); --bgop:1; --chart:rgba(150,185,225,.14); --logo-bg:transparent; --shade:none;
+  --c-daily:#C49A62; --c-command:#C2AE5C; --c-sys:#8E9BAA; --c-limits:#E07A66; --c-perf:#5DB97E; --c-proc:#FF6A70;
+  --c-ops:#6A9FD0; --c-rules:#4DB5B5; --c-airlaw:#9C8FD8; --c-zrh:#FF3341; --c-mem:#FF3341; --c-winter:#79AEE0; --c-sommer:#E3A24A; --c-fruehling:#7CC274; --c-herbst:#E08A5C;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0E1114; --surface:rgba(22,26,31,.88); --surface2:#1B2026; --ink:#E6E9EC; --soft:#9DA6B0; --line:#2A3139; --line2:#3B444E; --rule:#C9CFD6;
+  --red:#FF3341; --red-d:#C4101C; --red-t:rgba(255,51,65,.12); --char:#22282F; --onchar:#F2F4F6; --sel:#DCE1E6; --onsel:#111418; --silver:#7D8792;
+  --ok:#4CC27F; --bad:#FF6A62; --ok-t:rgba(76,194,127,.12); --bad-t:rgba(255,106,98,.11); --focus:#FF5A63;
+  --grid:rgba(200,215,230,.028); --bg2:#080B0E; --bgimg:radial-gradient(1100px 700px at 8% 0%,rgba(58,112,178,.38),transparent 62%),radial-gradient(900px 640px at 95% 12%,rgba(210,40,60,.15),transparent 60%),radial-gradient(1300px 820px at 70% 105%,rgba(118,80,170,.28),transparent 66%),linear-gradient(160deg,#0f1c2d 0%,#131a26 50%,#1d1729 100%); --bgop:1; --chart:rgba(150,185,225,.14); --logo-bg:transparent; --shade:none;
+  --c-daily:#C49A62; --c-command:#C2AE5C; --c-sys:#8E9BAA; --c-limits:#E07A66; --c-perf:#5DB97E; --c-proc:#FF6A70;
+  --c-ops:#6A9FD0; --c-rules:#4DB5B5; --c-airlaw:#9C8FD8; --c-zrh:#FF3341; --c-mem:#FF3341; --c-winter:#79AEE0; --c-sommer:#E3A24A; --c-fruehling:#7CC274; --c-herbst:#E08A5C;
+  color-scheme:dark}
+:root[data-theme="light"]{color-scheme:light}
+
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;color:var(--ink);font:16px/1.55 var(--f-body);background-color:var(--bg);
+  background-image:linear-gradient(170deg,var(--bg) 0%,var(--bg) 35%,var(--bg2) 100%);background-attachment:fixed;min-height:100vh;-webkit-font-smoothing:antialiased}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:var(--bgimg);opacity:var(--bgop)}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer;-webkit-tap-highlight-color:transparent;border-radius:var(--r)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:2px}
+.wrap{max-width:1120px;margin:0 auto;padding:12px 20px 80px}
+@media (max-width:600px){.wrap{padding-inline:16px}}
+h1,h2,h3{font-family:var(--f-body);font-weight:600;line-height:1.2;margin:0;text-wrap:balance;letter-spacing:-.01em}
+.ic{font-family:"Material Symbols Sharp";font-weight:400;font-style:normal;font-size:1.25em;line-height:1;width:1em;height:1em;display:inline-block;overflow:hidden;vertical-align:-.22em;letter-spacing:normal;text-transform:none;white-space:nowrap;direction:ltr;font-feature-settings:"liga";-webkit-font-smoothing:antialiased;font-variation-settings:"FILL" 0,"wght" 400,"GRAD" 0,"opsz" 24}
+.ic.f{font-variation-settings:"FILL" 1,"wght" 400,"GRAD" 0,"opsz" 24}
+.emo{font-family:var(--f-emoji);font-style:normal;line-height:1;display:inline-block}
+.kicker{font-family:var(--f-cond);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:0}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.phead,.crumbs,.acbar,.nav,.hero,.season,.special,.rub,.kpis,.tblwrap,.thema,.acgroup,.acbanner,.setup,.card,.fact,details.qi,.komp,.kmain,.kside,.qrh,.prep,.panel,.statgrid,.rubstats,.artblock,.toc,.aquiz,.membar,.searchbox input,.who.login,.langsw,.themebtn{-webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1)}
+.phead{background:var(--surface);padding:16px;border:1px solid var(--line2)}
+.crumbs{background:var(--surface);padding:0 10px;width:fit-content;max-width:100%;border:1px solid var(--line2)}
+.acbar{background:var(--surface);padding:8px 12px;width:fit-content;max-width:100%;border:1px solid var(--line2)}
+.top .logo,button.logo{background:var(--surface);border:1px solid var(--line2);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+/* ---------- top bar ---------- */
+.topbar{display:flex;align-items:center;gap:12px;margin:0 0 22px;padding:6px 0 12px;border-bottom:1px solid var(--line2)}
+.nav{display:flex;gap:0;border:1px solid var(--line2);background:var(--surface)}
+.navbtn{display:inline-flex;align-items:center;gap:7px;min-height:44px;border:0;border-right:1px solid var(--line2);background:transparent;padding:6px 14px;font-weight:500;font-size:.93rem;color:var(--ink)}
+.navbtn:last-child{border-right:0}
+.navbtn .emo{font-size:1.05em}
+.navbtn:hover{background:var(--surface2)}
+.navbtn[aria-current="page"]{background:var(--sel);color:var(--onsel);box-shadow:inset 0 -3px 0 var(--red)}
+.tright{margin-left:auto;display:flex;align-items:center;gap:8px;min-width:0}
+.who{display:inline-flex;align-items:center;gap:6px;min-height:40px;max-width:200px;border:0;background:none;padding:0 6px;color:var(--soft);font-size:.9rem;font-weight:500}
+.who span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.who:hover{color:var(--ink)}
+.who .ns{display:none}
+.who.login{max-width:none;white-space:nowrap;border:1px solid var(--ink);color:var(--ink);background:var(--surface);padding:0 12px;font-weight:600;min-height:40px}
+.who.login:hover{background:var(--sel);color:var(--onsel)}
+@media (max-width:760px){.who.login .nl{display:none}.who.login .ns{display:inline}.who.login{padding:0 10px}}
+.langsw{display:inline-flex;border:1px solid var(--line2);background:var(--surface)}
+.langsw button{border:0;background:transparent;min-width:38px;min-height:38px;padding:0 8px;font-family:var(--f-mono);font-size:.8rem;font-weight:600;color:var(--soft)}
+.langsw button[aria-pressed="true"]{background:var(--sel);color:var(--onsel)}
+.themebtn{width:40px;height:40px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);display:grid;place-items:center;flex:none}
+.themebtn:hover{border-color:var(--ink)}
+.lgd{display:none!important}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .lgl{display:none!important}:root:not([data-theme="light"]) .lgd{display:block!important}}
+:root[data-theme="dark"] .lgl{display:none!important}:root[data-theme="dark"] .lgd{display:block!important}
+.logo{display:block;border:0;background:var(--logo-bg);padding:2px 4px;flex:none}
+.logo img{display:block;width:52px;height:auto}
+.navbtn .ns{display:none}
+@media (max-width:350px){.navbtn{font-size:.64rem!important}}
+@media (max-width:760px){
+  .topbar{flex-wrap:wrap;gap:10px;padding-top:0}
+  .tright{order:1;width:100%;justify-content:flex-end}
+  .tright .logo{order:-1;margin-right:auto;padding:0}
+  .tright .who{padding-left:0}
+  .nav{order:2;width:100%;display:grid;grid-template-columns:repeat(5,minmax(0,1fr))}
+  .navbtn{flex-direction:column;justify-content:center;gap:3px;padding:7px 1px 6px;font-size:.7rem;min-height:54px;text-align:center;line-height:1.1;min-width:0;overflow:hidden}
+  .navbtn > span:not(.ic){max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .navbtn .nl{display:none}.navbtn .ns{display:block}
+  .navbtn .ic{font-size:1.3rem}
+  .logo img{width:46px}
+}
+
+/* ---------- generic buttons ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:10px 20px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-weight:600;font-size:.98rem;text-align:center}
+.btn:hover:not([disabled]){background:var(--surface2)}
+.btn.pri{background:var(--red);border-color:var(--red);color:#fff}
+.btn.pri:hover:not([disabled]){background:var(--red-d);border-color:var(--red-d)}
+.btn.dark{background:var(--sel);border-color:var(--sel);color:var(--onsel)}
+.btn.dark:hover:not([disabled]){filter:brightness(1.15);background:var(--sel)}
+.btn.ghost{border-color:var(--line2)}
+.btn.sm{min-height:40px;padding:6px 14px;font-size:.9rem}
+.btn[disabled]{opacity:.45;cursor:default}
+.center{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.hint{color:var(--soft);font-size:.9rem;margin:0}
+.note{color:var(--soft);font-size:.86rem;margin-top:28px;max-width:75ch;border-top:1px solid var(--line);padding-top:12px}
+.loading{padding:60px 0;text-align:center;color:var(--soft)}
+
+/* ---------- hero (front page) ---------- */
+.hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:0;margin:0 0 22px;background:var(--surface);border:1px solid var(--line2);border-top:3px solid var(--red);box-shadow:var(--shade)}
+.herotext{padding:clamp(18px,3.4vw,36px);display:flex;flex-direction:column;gap:14px;min-width:0}
+.brand{display:flex;align-items:center;gap:16px}
+.brand .lg{flex:none;background:var(--logo-bg);padding:4px}
+.brand img{display:block;width:clamp(86px,11vw,118px);height:auto}
+.brand h1{font-size:clamp(1.45rem,2.6vw,2rem);font-weight:600}
+.hero .lead{margin:0;color:var(--ink);max-width:56ch;font-size:1.02rem}
+.hero .lead b{font-weight:600}
+.docs{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.docs li{font-family:var(--f-mono);font-size:.74rem;font-weight:500;letter-spacing:.04em;border:1px solid var(--line2);padding:2px 8px;color:var(--soft)}
+.hello{margin:0;font-weight:500;color:var(--soft);font-size:.95rem}
+.langpick{display:grid;gap:6px}
+.langpick .opts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));max-width:360px;border:1px solid var(--rule)}
+.langpick button{min-height:46px;border:0;background:var(--surface);font-weight:600;display:flex;align-items:center;justify-content:center;gap:8px}
+.langpick button+button{border-left:1px solid var(--rule)}
+.langpick button[aria-pressed="true"]{background:var(--sel);color:var(--onsel)}
+.langpick button small{font-family:var(--f-mono);font-size:.72rem;opacity:.7}
+.ctas{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.slides{position:relative;min-height:320px;background:#15191E;overflow:hidden;border-left:1px solid var(--line2)}
+.slides figure{position:absolute;inset:0;margin:0;opacity:0;transition:opacity 1.8s ease}
+.slides figure.on{opacity:1}
+.slides img{display:block;width:100%;height:100%;object-fit:cover}
+.slides figcaption{position:absolute;left:0;bottom:0;right:0;padding:26px 16px 12px;background:linear-gradient(transparent,rgba(10,12,15,.78));color:#fff;font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;display:flex;gap:10px;align-items:baseline}
+.slides figcaption b{font-weight:600;color:#fff;background:#E30613;padding:0 6px}
+.sdots{position:absolute;right:12px;top:12px;display:flex;gap:6px;z-index:2}
+.sdots button{width:22px;height:22px;border:0;background:transparent;padding:0;display:grid;place-items:center}
+.sdots button::before{content:"";width:9px;height:9px;background:rgba(255,255,255,.45);border:1px solid rgba(0,0,0,.25)}
+.sdots button[aria-current="true"]::before{background:#fff}
+@media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}.slides{border-left:0;border-top:1px solid var(--line2);min-height:0;aspect-ratio:16/10}}
+@media (prefers-reduced-motion:reduce){.slides figure{transition:none}}
+
+/* seasonal tests */
+.seasons{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin:0 0 14px}
+.season{display:flex;gap:16px;align-items:flex-start;background:var(--surface);border:1px solid var(--line2);border-top:3px solid var(--c);padding:16px 18px;min-width:0}
+.season .se{flex:none;font-size:2rem;line-height:1;padding-top:4px}
+.sothers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;align-items:stretch;min-width:0}
+.sothers>.kicker{margin:0;grid-column:1/-1}
+@media (max-width:760px){.sothers{grid-template-columns:minmax(0,1fr)}}
+.season.small .sb{align-content:start}
+.season.small .sact{margin-top:auto;padding-top:8px}
+.season.small{padding:12px 14px;gap:12px}
+.season.small .se{font-size:1.5rem;padding-top:2px}
+.season.small h2{font-size:1.08rem}
+.season.small p{font-size:.92rem}
+.season.small .sact{margin-top:6px;gap:8px}
+.season.small .sact .btn{min-height:36px;padding:6px 14px}
+.season.small .tagp{font-size:.78rem}
+.season .sb{display:grid;gap:4px;min-width:0;flex:1}
+.season h2{font-size:1.15rem;font-weight:600}
+.season p{margin:0;color:var(--soft);font-size:.9rem;max-width:62ch}
+.season .sact{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:10px}
+.season.big{padding:clamp(18px,3vw,26px);gap:clamp(16px,3vw,26px)}
+.season.big .se{font-size:clamp(2.6rem,6vw,3.6rem)}
+.season.big{align-items:center}
+.season.big h2{font-size:clamp(1.6rem,3.6vw,2.2rem)}
+.season.big p{font-size:clamp(1.02rem,1.6vw,1.15rem);color:var(--ink);max-width:70ch}
+.season.big p.hint{font-size:.92rem!important;color:var(--soft)}
+.season.big .kicker{font-size:.85rem}
+@media (max-width:480px){.season.big{flex-direction:column;gap:8px}}
+
+/* memory items bar */
+.membar{display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:stretch;width:100%;border:0;padding:0;margin:0 0 26px;background:var(--char);color:var(--onchar);text-align:left;box-shadow:var(--shade)}
+.membar .mi{display:grid;place-items:center;width:clamp(64px,9vw,88px);background:var(--red);font-size:clamp(1.8rem,4vw,2.4rem)}
+.membar .mt{padding:16px 18px;display:grid;gap:2px;min-width:0}
+.membar .mt b{font-family:var(--f-cond);font-weight:700;font-size:clamp(1.25rem,3vw,1.6rem);letter-spacing:.06em;text-transform:uppercase}
+.membar .mt span{opacity:.82;font-size:.93rem}
+.membar .mg{display:flex;align-items:center;gap:8px;padding:0 18px;font-family:var(--f-mono);font-size:.82rem;opacity:.9;white-space:nowrap}
+.membar:hover{filter:brightness(1.12)}
+@media (max-width:560px){.membar .mg span{display:none}.membar .mg{padding:0 12px}}
+
+/* section heads */
+.shead{display:flex;justify-content:space-between;align-items:baseline;gap:6px 12px;flex-wrap:wrap;margin:30px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--rule)}
+.shead h2{font-family:var(--f-cond);font-weight:700;font-size:1.02rem;letter-spacing:.1em;text-transform:uppercase}
+.shead small{color:var(--soft);font-size:.86rem}
+.shead:first-child{margin-top:0}
+
+/* aircraft switch */
+.acbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.acbar .lbl{font-family:var(--f-cond);font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.acbar .hint{flex-basis:100%}
+.seg{display:inline-flex;flex-wrap:wrap;max-width:100%;border:1px solid var(--rule);background:var(--surface)}
+.seg button{border:0;border-right:1px solid var(--line2);background:transparent;padding:6px 16px;font-weight:600;min-height:40px;font-size:.92rem}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed="true"]{background:var(--sel);color:var(--onsel)}
+
+/* special tiles */
+.specials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.specials{grid-template-columns:minmax(0,1fr)}}
+.special{display:flex;align-items:center;gap:14px;text-align:left;min-height:84px;border:1px solid var(--line2);border-left:3px solid var(--c);background:var(--surface);padding:12px 16px}
+.special .si{flex:none;width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line2);color:var(--c)}
+.special b{display:block;font-weight:600;font-size:1.02rem}
+.special span span{color:var(--soft);font-size:.88rem}
+.special:hover:not([disabled]){border-color:var(--rule);border-left-color:var(--c)}
+.special[disabled]{opacity:.5;cursor:not-allowed}
+
+/* rubric tiles */
+.rubriken{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+@media (max-width:640px){.rubriken{grid-template-columns:minmax(0,1fr)}}
+.rub{position:relative;display:flex;flex-direction:column;gap:6px;min-height:150px;padding:14px 16px 14px;text-align:left;background:var(--surface);border:1px solid var(--line2);border-top:3px solid var(--c);box-shadow:var(--shade)}
+.rub:hover{border-color:var(--rule);border-top-color:var(--c)}
+.rub .rtop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rub .emo{font-size:1.65rem}
+.rub .rn{font-family:var(--f-mono);font-size:.78rem;color:var(--soft);white-space:nowrap}
+.rub h3{font-size:1.12rem;font-weight:600}
+.rub p{margin:0;color:var(--soft);font-size:.9rem}
+.rub .rfoot{margin-top:auto;padding-top:8px;display:flex;align-items:center;gap:10px}
+.progress{flex:1;height:3px;background:var(--line);overflow:hidden}
+.progress i{display:block;height:100%;background:var(--c)}
+.rub .rp{font-family:var(--f-mono);font-size:.74rem;color:var(--soft);white-space:nowrap}
+
+/* stats table */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line2);background:var(--surface);margin:0 0 14px}
+.kpis div{padding:12px 14px;border-right:1px solid var(--line)}
+.kpis div:last-child{border-right:0}
+.kpis b{display:block;font-family:var(--f-mono);font-weight:600;font-size:1.45rem;line-height:1.15;font-variant-numeric:tabular-nums}
+.kpis span{color:var(--soft);font-size:.84rem}
+@media (max-width:640px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.kpis div:nth-child(2){border-right:0}.kpis div:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.tblwrap{overflow-x:auto;border:1px solid var(--line2);background:var(--surface)}
+table.stat{width:100%;border-collapse:collapse;font-size:.92rem}
+table.stat th,table.stat td{padding:8px 12px;border-bottom:1px solid var(--line);text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+table.stat th{font-family:var(--f-cond);font-weight:600;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);background:var(--surface2);border-bottom:1px solid var(--rule)}
+table.stat th:first-child,table.stat td:first-child{text-align:left;white-space:normal}
+table.stat td{font-family:var(--f-mono);font-size:.86rem}
+table.stat td:first-child{font-family:var(--f-body);font-size:.92rem}
+table.stat td:first-child .emo{margin-right:8px;font-size:1.05rem;vertical-align:-.1em}
+table.stat tr:last-child td{border-bottom:0}
+table.stat tfoot td{border-top:1px solid var(--rule);font-weight:600;background:var(--surface2)}
+table.stat .z{color:var(--line2)}
+table.stat.comp td{text-align:left;white-space:normal;font-family:var(--f-body);font-size:.88rem;vertical-align:top}
+table.stat.comp th{text-align:left}
+table.stat.comp .csub{color:var(--soft);font-size:.8rem}
+table.stat.comp .cscope{min-width:220px;color:var(--soft)}
+.cstand{font-family:var(--f-mono);font-size:.82rem;color:var(--soft);margin:0 0 10px}
+.cmiss{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--soft)}
+.linkbtn{background:none;border:0;padding:0;color:var(--red);font:inherit;text-decoration:underline;cursor:pointer}
+@media (max-width:520px){table.stat th,table.stat td{padding:7px 6px}table.stat td:first-child .emo{margin-right:4px}table.stat{font-size:.84rem}}
+
+/* crumbs + page headers */
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:2px 4px;margin:0 0 14px;font-size:.88rem}
+.crumb{background:none;border:0;padding:6px 4px;font-weight:500;color:var(--soft);text-decoration:underline;text-decoration-color:var(--line2);text-underline-offset:3px;min-height:36px}
+.crumb:hover{color:var(--ink)}
+.crumb.cur{text-decoration:none;color:var(--ink);cursor:default}
+.crumbs .sep{color:var(--line2)}
+.phead{display:flex;align-items:flex-start;gap:14px;margin:4px 0 18px;padding-bottom:16px;border-bottom:1px solid var(--line2)}
+.phead .pi{width:52px;height:52px;display:grid;place-items:center;flex:none;border:1px solid var(--line2);border-top:3px solid var(--c,var(--red));background:var(--surface);color:var(--c,var(--ink))}
+.phead .pi .emo{font-size:1.7rem}
+.phead .pi .ic{font-size:1.75rem}
+.phead h1{font-size:clamp(1.5rem,4.6vw,2.2rem);font-weight:600}
+.phead p{margin:4px 0 0;color:var(--soft)}
+.phead > div{min-width:0;flex:1}
+
+/* themes */
+.themen{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+@media (max-width:520px){.themen{grid-template-columns:minmax(0,1fr)}}
+.thema{display:flex;flex-direction:column;gap:5px;min-height:128px;padding:14px 16px;text-align:left;background:var(--surface);border:1px solid var(--line2);border-left:3px solid var(--c)}
+.thema:hover{border-color:var(--rule);border-left-color:var(--c)}
+.thema .ti{color:var(--c);font-size:1.1rem}
+.thema b{font-weight:600;font-size:1.02rem;line-height:1.3}
+.thema .t{color:var(--soft);font-size:.88rem}
+.thema .meta{margin-top:auto;padding-top:4px;display:flex;gap:6px;flex-wrap:wrap}
+.thema.all{border-style:dashed;border-left-style:solid}
+.tagp{display:inline-block;font-family:var(--f-mono);font-size:.72rem;font-weight:500;letter-spacing:.02em;padding:1px 7px;border:1px solid var(--line2);color:var(--soft);background:var(--surface)}
+.acgroup,.acbanner{display:grid;grid-template-columns:minmax(0,160px) minmax(0,1fr);align-items:center;gap:16px;background:var(--surface);border:1px solid var(--line2);padding:8px;margin:26px 0 12px}
+.acbanner{margin:0 0 16px}
+.acgroup img,.acbanner img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#0C0F13}
+.acgroup h2,.acbanner h2{font-size:1.1rem;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.acgroup p,.acbanner p{margin:4px 0 0;color:var(--soft);font-size:.9rem}
+@media (max-width:520px){.acgroup,.acbanner{grid-template-columns:100px minmax(0,1fr);gap:12px}.acgroup h2,.acbanner h2{font-size:1rem}}
+.tbadge{display:inline-block;font-family:var(--f-mono);font-weight:600;font-size:.74em;line-height:1.35;color:#fff;background:#E30613;padding:0 .4em;margin-right:.45em;vertical-align:.1em;letter-spacing:.02em;font-style:normal}
+
+/* setup */
+.setup{background:var(--surface);border:1px solid var(--line2);border-top:3px solid var(--c);padding:clamp(16px,3.4vw,28px);display:grid;gap:24px}
+.setup h3{font-family:var(--f-cond);font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-bottom:10px}
+.setup>*{min-width:0}
+.modes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (max-width:640px){.modes{grid-template-columns:minmax(0,1fr)}}
+.mode{border:1px solid var(--line2);background:var(--surface);padding:14px 16px;text-align:left;display:grid;gap:4px}
+.mode b{font-size:1.05rem;font-weight:600;display:flex;align-items:center;gap:8px}
+.mode span{color:var(--soft);font-size:.9rem}
+.mode[aria-pressed="true"]{border-color:var(--rule);box-shadow:inset 3px 0 0 var(--c);background:var(--surface2)}
+.slider{display:grid;gap:6px;justify-items:center;max-width:440px;margin:0 auto}
+.slider output{font-family:var(--f-mono);font-weight:600;font-size:2.2rem;line-height:1;color:var(--ink);font-variant-numeric:tabular-nums}
+.slider input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:6px;background:linear-gradient(var(--red),var(--red)) 0/var(--p,50%) 100% no-repeat,var(--line);cursor:pointer;margin:10px 0}
+.slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:var(--surface);border:2px solid var(--rule)}
+.slider input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:0;background:var(--surface);border:2px solid var(--rule)}
+.scale{display:flex;justify-content:space-between;width:100%;color:var(--soft);font-family:var(--f-mono);font-size:.8rem}
+
+/* quiz */
+.qtop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.bar{flex:1 1 180px;height:4px;background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--c,var(--red));transition:width .3s}
+.count{font-family:var(--f-mono);font-weight:500;color:var(--soft);font-variant-numeric:tabular-nums}
+.timer{font-family:var(--f-mono);font-weight:600;font-variant-numeric:tabular-nums;background:var(--surface);border:1px solid var(--rule);padding:6px 12px}
+.timer.warn{border-color:var(--bad);color:var(--bad)}
+.card{background:var(--surface);border:1px solid var(--line2);border-top:3px solid var(--c,var(--red));padding:clamp(16px,3.6vw,30px);box-shadow:var(--shade)}
+.qmeta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.question{font-weight:600;font-size:clamp(1.15rem,3vw,1.45rem);line-height:1.4;margin:0 0 20px}
+.answers{display:grid;grid-template-columns:minmax(0,1fr);gap:8px}
+.ans{position:relative;display:flex;align-items:center;gap:14px;min-height:58px;padding:10px 48px 10px 12px;text-align:left;font-size:1rem;font-weight:500;background:var(--surface);color:var(--ink);border:1px solid var(--line2)}
+.ans .key{flex:none;width:30px;height:30px;display:grid;place-items:center;border:1px solid var(--rule);font-family:var(--f-mono);font-weight:600;font-size:.88rem}
+.ans:hover:not([disabled]){border-color:var(--rule);background:var(--surface2)}
+.ans[disabled]{cursor:default;color:var(--soft)}
+.ans.picked{border:2px solid var(--rule);color:var(--ink);background:var(--surface2)}
+.ans.picked .key{background:var(--sel);color:var(--onsel);border-color:var(--sel)}
+.ans.right{border:2px solid var(--ok);background:var(--ok-t);color:var(--ink)}
+.ans.right .key{background:var(--ok);border-color:var(--ok);color:#fff}
+.ans.wrong{border:2px solid var(--bad);background:var(--bad-t);color:var(--ink)}
+.ans.wrong .key{background:var(--bad);border-color:var(--bad);color:#fff}
+.ans .mark{position:absolute;right:14px;top:50%;transform:translateY(-50%);font-size:1.2rem}
+.ans.right .mark{color:var(--ok)} .ans.wrong .mark{color:var(--bad)}
+.feedback{margin-top:20px;display:grid;gap:14px}
+.verdict{font-family:var(--f-cond);font-weight:700;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;padding-left:10px;border-left:3px solid}
+.verdict.ok{color:var(--ok)} .verdict.bad{color:var(--bad)}
+.explain{padding:14px 16px;background:var(--surface2);border:1px solid var(--line)}
+.explain p{margin:0 0 8px}
+.src{display:flex;gap:8px;align-items:flex-start;color:var(--soft);font-size:.88rem;margin:0}
+.quote{font-family:var(--f-mono);font-size:.8rem;line-height:1.55;color:var(--soft);background:var(--bg);border-left:2px solid var(--line2);padding:8px 12px;margin:8px 0 0;overflow-wrap:anywhere}
+.quote b{font-family:var(--f-body);font-weight:600;color:var(--ink);margin-right:4px}
+.qnav{display:flex;flex-wrap:wrap;gap:4px;margin:0 0 6px}
+.qnav button{position:relative;min-width:34px;height:34px;padding:0 4px;border:1px solid var(--line2);background:var(--surface);color:var(--soft);font-family:var(--f-mono);font-size:.78rem;font-weight:600;font-variant-numeric:tabular-nums}
+.qnav button:hover{border-color:var(--ink);color:var(--ink)}
+.qnav button.ans-d{background:var(--surface2);color:var(--ink);border-color:var(--rule)}
+.qnav button.q-ok{box-shadow:inset 0 -3px 0 var(--ok)}
+.qnav button.q-bad{box-shadow:inset 0 -3px 0 var(--bad)}
+.qnav button.flg::after{content:"";position:absolute;top:-1px;right:-1px;border-style:solid;border-width:0 10px 10px 0;border-color:transparent var(--red) transparent transparent}
+.qnav button[aria-current="step"]{background:var(--sel);color:var(--onsel);border-color:var(--sel)}
+.qlegend{display:flex;gap:14px;flex-wrap:wrap;margin:0 0 14px;font-size:.76rem;color:var(--soft)}
+.qlegend span{display:inline-flex;align-items:center;gap:6px}
+.qlegend i{display:inline-block;width:12px;height:12px;border:1px solid var(--line2);background:var(--surface);position:relative}
+.qlegend i.lg-a{background:var(--surface2);border-color:var(--rule)}
+.qlegend i.lg-f::after{content:"";position:absolute;top:-1px;right:-1px;border-style:solid;border-width:0 7px 7px 0;border-color:transparent var(--red) transparent transparent}
+.qbar{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}
+.qbar #prev{justify-self:start}.qbar #nextq,.qbar #fin{justify-self:end}
+.flagbtn[aria-pressed="true"]{color:var(--red);border-color:var(--red)}
+.flagtag{color:var(--red);border-color:var(--red)}
+.qconfirm{margin-top:14px;padding:14px 16px;border:1px solid var(--line2);border-left:3px solid var(--red);background:var(--surface2);display:grid;gap:10px}
+.qconfirm p{margin:0;font-weight:600}
+@media (max-width:520px){.qbar{grid-template-columns:1fr 1fr}.qbar .flagbtn{grid-column:1/-1;order:3}.qbar .btn{padding-inline:12px}.qnav button{min-width:30px;height:30px}}
+.nextrow{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
+.peekrow{display:flex;justify-content:center;margin-top:16px}
+.peekbtn{display:inline-flex;align-items:center;gap:8px;min-height:42px;border:1px dashed var(--line2);background:transparent;padding:6px 16px;font-weight:500;font-size:.92rem;color:var(--soft)}
+.peekbtn:hover{color:var(--ink);border-color:var(--rule)}
+.peekbtn[aria-expanded="true"]{border-style:solid;color:var(--ink)}
+.peeknote{color:var(--soft);font-size:.86rem;text-align:center;margin:8px 0 0}
+.ref{display:grid;gap:4px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.refhead{display:flex;gap:8px;align-items:flex-start;font-weight:600;font-size:.92rem}
+.refpdf{color:var(--soft);font-size:.8rem;font-family:var(--f-mono);overflow-wrap:anywhere;padding-left:1.7em}
+.ref details{margin-top:6px}
+.ref summary{cursor:pointer;font-weight:600;font-size:.9rem;color:var(--ink)}
+.passage{margin:8px 0 0;padding:14px 16px 12px;border:1px solid var(--line);border-left:3px solid var(--c,var(--red));background:var(--surface);font-family:var(--f-body);font-size:.88rem;line-height:1.6;color:var(--ink);max-height:80vh;overflow:auto}
+.passage .pdoc{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.05em;text-transform:uppercase;color:var(--soft);border-bottom:1px dashed var(--line);padding-bottom:6px;margin-bottom:10px}
+.passage p{margin:0 0 .7em;max-width:70ch}
+.passage p:last-child{margin-bottom:0}
+.passage .ph{font-family:var(--f-cond);font-weight:700;font-size:.92rem;letter-spacing:.03em;margin:.9em 0 .35em;color:var(--ink)}
+.passage .ph:first-of-type{margin-top:0}
+.passage .pl{display:block;padding-left:1.4em;text-indent:-1.4em;margin:.15em 0}
+.passage .pn{display:block;margin:.4em 0 .1em}
+.passage .pn b{font-weight:700;color:var(--red)}
+.passage .ell{color:var(--soft)}
+.passage mark{background:color-mix(in srgb,var(--red) 18%,transparent);color:var(--ink);padding:0 2px;box-decoration-break:clone;-webkit-box-decoration-break:clone}
+
+/* done */
+.done{text-align:center}
+.done h1{font-size:1.4rem}
+.score{font-family:var(--f-mono);font-weight:600;font-size:clamp(2.8rem,10vw,4.2rem);line-height:1.1;font-variant-numeric:tabular-nums;margin-top:10px}
+.badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;font-family:var(--f-cond);font-weight:700;letter-spacing:.08em;text-transform:uppercase;margin:12px 0;border:1px solid}
+.badge.ok{background:var(--ok-t);color:var(--ok)}
+.badge.bad{background:var(--bad-t);color:var(--bad)}
+.done p{color:var(--soft)}
+.review{text-align:left;margin-top:24px;display:grid;gap:8px}
+.rev{display:grid;gap:4px;border:1px solid var(--line2);border-left:3px solid var(--line2);padding:10px 14px;background:var(--surface)}
+.rev.r-ok{border-left-color:var(--ok)}
+.rev.r-bad{border-left-color:var(--bad)}
+.rev b{font-weight:600}
+.a-ok{color:var(--ok);font-weight:600}
+.a-bad{color:var(--bad);font-weight:600;text-decoration:line-through}
+.rev .m{color:var(--soft);font-size:.9rem}
+
+/* library */
+.searchbox{display:flex;gap:10px;margin:0 0 20px}
+.searchbox input,.field input{flex:1;min-width:0;min-height:48px;border:1px solid var(--line2);border-radius:var(--r);padding:8px 14px;background:var(--surface);font-size:1rem}
+.searchbox input:focus,.field input:focus{border-color:var(--rule);outline:2px solid var(--focus);outline-offset:-1px}
+.intro{max-width:72ch;font-size:1rem;margin:0 0 18px}
+.label{font-family:var(--f-cond);font-weight:700;font-size:.92rem;letter-spacing:.08em;text-transform:uppercase;margin:24px 0 10px;display:flex;justify-content:space-between;align-items:baseline;gap:6px 10px;flex-wrap:wrap;padding-bottom:5px;border-bottom:1px solid var(--rule)}
+.label small{font-family:var(--f-body);font-weight:400;letter-spacing:0;text-transform:none;color:var(--soft);font-size:.86rem}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px;margin-bottom:24px}
+@media (max-width:520px){.facts{grid-template-columns:minmax(0,1fr)}}
+.fact{background:var(--surface);border:1px solid var(--line2);border-left:3px solid var(--c,var(--line2));padding:12px 14px;display:grid;gap:6px;align-content:start;min-width:0}
+.fact b{font-weight:600;font-size:1rem}
+.fact p{margin:0}
+.fact .src{font-size:.82rem}
+.qlist{display:grid;gap:6px}
+details.qi{background:var(--surface);border:1px solid var(--line2);padding:10px 14px}
+details.qi summary{cursor:pointer;font-weight:500;list-style:none;display:flex;gap:10px}
+details.qi summary::-webkit-details-marker{display:none}
+details.qi summary::before{content:"+";flex:none;width:22px;height:22px;display:grid;place-items:center;border:1px solid var(--line2);font-family:var(--f-mono);font-weight:600;font-size:.85rem}
+details.qi[open] summary::before{content:"−"}
+details.qi .body{margin-top:10px;display:grid;gap:6px}
+.hl{background:color-mix(in srgb,var(--red) 22%,transparent)}
+.komp{list-style:none;counter-reset:k;margin:0 0 24px;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;border:1px solid var(--line2);background:var(--surface)}
+@media (max-width:720px){.komp{grid-template-columns:minmax(0,1fr)}}
+.komp li{counter-increment:k;position:relative;min-width:0;border-bottom:1px solid var(--line)}
+.komp li:nth-child(odd){border-right:1px solid var(--line)}
+@media (max-width:720px){.komp li:nth-child(odd){border-right:0}}
+.komp li::before{content:counter(k,decimal-leading-zero);position:absolute;left:12px;top:13px;font-family:var(--f-mono);font-size:.78rem;font-weight:600;color:var(--c);pointer-events:none}
+.kbtn{display:grid;gap:3px;width:100%;height:100%;text-align:left;background:none;border:0;padding:11px 14px 11px 46px;color:inherit;font:inherit;cursor:pointer}
+.kbtn:hover{background:var(--surface2)}
+.komp .kn{font-weight:600;font-size:.98rem;line-height:1.3}
+.komp .kf{color:var(--ink);font-size:.9rem}
+.komp .kq{display:flex;gap:6px;align-items:center;color:var(--soft);font-size:.76rem;font-family:var(--f-mono)}
+.kmore{margin-left:auto;display:inline-flex;align-items:center;gap:2px;color:var(--c);font-weight:600;font-family:var(--f-body)}
+.kdetail{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(0,1fr);gap:14px;align-items:start;margin:0 0 18px}
+@media (max-width:820px){.kdetail{grid-template-columns:minmax(0,1fr)}}
+.kmain,.kside{background:var(--surface);border:1px solid var(--line2);padding:16px 18px;min-width:0}
+.kfun{font-weight:600;font-size:1.06rem;margin:0 0 10px;border-left:3px solid var(--c);padding-left:12px}
+.kdesc p{margin:0 0 .8em;max-width:68ch}
+.kside h3{font-family:var(--f-cond);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:0 0 8px}
+.kside h3:not(:first-child){margin-top:16px}
+.kchips{display:flex;flex-wrap:wrap;gap:6px}
+.kchip{display:inline-flex;align-items:center;gap:6px;border:1px solid var(--line2);padding:5px 10px;background:var(--surface);color:var(--ink);font:inherit;font-size:.86rem;font-weight:500;cursor:pointer;text-align:left}
+.kchip .ic{color:var(--c);font-size:1.05em}
+.kchip.sys{border-left:3px solid var(--c-sys)}
+.kchip.dim{color:var(--soft);background:var(--surface2)}
+.kchip:hover{border-color:var(--rule)}
+.knav{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin:0 0 24px}
+.knav .btn span{max-width:30ch;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* memory items (QRH style) */
+.memtools{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:0 0 8px}
+.memtools .sp{flex:1}
+.memhint{margin:0 0 16px;color:var(--soft);font-size:.88rem;min-height:1.2em}
+.qrhs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,460px),1fr));gap:14px;align-items:start}
+.qrh{background:var(--surface);border:1px solid var(--rule);min-width:0}
+.qrh-h{display:flex;align-items:center;gap:10px;padding:9px 14px;background:var(--char);color:var(--onchar);border-bottom:3px solid var(--red)}
+.qrh-h h2{font-family:var(--f-cond);font-weight:700;font-size:1.02rem;letter-spacing:.06em;text-transform:uppercase;line-height:1.25}
+.qrh-h .tbadge{margin:0;flex:none}
+.qrh-trig{margin:0;padding:9px 14px;border-bottom:1px solid var(--line);font-size:.9rem}
+.qrh-trig b{font-family:var(--f-cond);font-weight:700;font-size:.76rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin-right:6px}
+.qsteps{list-style:none;margin:0;padding:6px 0}
+.qsteps li{padding:0 14px}
+.qcond{display:block;padding:6px 0 0 1.2em;font-style:italic;font-size:.88rem;color:var(--soft)}
+.qrow{display:flex;align-items:baseline;gap:6px;width:100%;border:0;background:none;padding:7px 0;text-align:left;font:inherit;color:inherit;cursor:default}
+.hiding .qrow{cursor:pointer}
+.hiding .qrow:hover .qa.masked{border-color:var(--rule)}
+.qrow .qi{font-weight:600;font-size:.95rem;text-transform:uppercase;letter-spacing:.02em;min-width:0}
+.qrow .ql{flex:1 1 24px;min-width:18px;border-bottom:2px dotted var(--line2);transform:translateY(-4px)}
+.qrow .qa{flex:none;max-width:55%;text-align:right;font-family:var(--f-mono);font-weight:600;font-size:.9rem;text-transform:uppercase}
+.qrow .qa.masked{font-family:var(--f-body);font-weight:500;font-size:.78rem;text-transform:none;color:var(--soft);border:1px dashed var(--line2);padding:1px 10px;min-width:90px;text-align:center}
+.qrow .qa.revealed{color:var(--red)}
+.qrow.full .qi{text-transform:none;font-weight:500}
+.qrh-note{margin:0;padding:8px 14px;border-top:1px solid var(--line);font-size:.88rem;background:var(--surface2)}
+.qrh-src{padding:8px 14px 10px;border-top:1px solid var(--line);font-size:.8rem;color:var(--soft);display:grid;gap:4px}
+.qrh-src summary{cursor:pointer;font-weight:600;color:var(--ink)}
+.qrh-src .quote{margin-top:6px}
+.qrh-empty{padding:10px 14px;color:var(--soft);font-size:.88rem;font-style:italic}
+.prep{background:var(--surface);border:1px dashed var(--line2);padding:28px 20px;text-align:center;color:var(--soft)}
+.prep .emo{font-size:2rem;display:block;margin-bottom:8px}
+
+/* profile */
+.pgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:820px){.pgrid{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line2);border-top:3px solid var(--c,var(--red));padding:clamp(16px,3vw,24px);min-width:0}
+.panel h2{font-size:1.15rem;margin:0 0 4px}
+.form{display:grid;gap:14px;margin-top:14px}
+.field{display:grid;gap:5px}
+.field label{font-weight:600;font-size:.92rem}
+.field label small{font-weight:400;color:var(--soft)}
+.field .err{color:var(--bad);font-size:.85rem;min-height:0;margin:0}
+.field input[aria-invalid="true"]{border-color:var(--bad)}
+.nopw{display:flex;gap:8px;align-items:flex-start;line-height:1.4;margin:0;padding:10px 12px;background:var(--surface2);border-left:3px solid var(--rule);font-size:.88rem}
+.nopw .ic{flex:none;font-size:1.2rem;line-height:1.2}
+.saved{margin:0;font-size:.9rem;font-weight:500}
+.saved.ok{color:var(--ok)} .saved.warn{color:var(--soft)}
+.statgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line2);background:var(--surface);margin-bottom:20px}
+.statgrid .num{padding:12px 14px;border-right:1px solid var(--line)}
+.statgrid .num:last-child{border-right:0}
+@media (max-width:700px){.statgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.statgrid .num:nth-child(2){border-right:0}.statgrid .num:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+.num b{display:block;font-family:var(--f-mono);font-size:1.45rem;font-weight:600;line-height:1.15;font-variant-numeric:tabular-nums}
+.num span{color:var(--soft);font-size:.84rem}
+.rubstats{display:grid;gap:0;margin-bottom:24px;border:1px solid var(--line2);background:var(--surface)}
+.rs{display:grid;grid-template-columns:minmax(0,220px) 1fr auto;align-items:center;gap:12px;padding:9px 14px;border-bottom:1px solid var(--line)}
+.rs:last-child{border-bottom:0}
+@media (max-width:520px){.rs{grid-template-columns:minmax(0,1fr) auto}.rs .bar{grid-column:1/-1;order:3}}
+.rs b{font-weight:500;overflow-wrap:anywhere}
+.rs b .emo{margin-right:8px}
+.rs .pct{font-family:var(--f-mono);font-size:.86rem;font-variant-numeric:tabular-nums;color:var(--soft)}
+
+/* articles (Fachartikel) */
+:root{--k-a:#2364AA;--k-b:#1D7A46;--k-c:#6B4FB0;--k-ok:#1D7A46;--k-warn:#B26A00;--k-crit:#C0261F;--k-info:#6B7480;--k-e2:#E30613;--k-e1:#3E4A57;--tint:11%;--tint-z:3%}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--k-a:#6AA6E8;--k-b:#4CC27F;--k-c:#AE97F0;--k-ok:#4CC27F;--k-warn:#E8A33D;--k-crit:#FF6A62;--k-info:#9DA6B0;--k-e2:#FF3341;--k-e1:#8E9BAA;--tint:15%;--tint-z:4%}}
+:root[data-theme="dark"]{--k-a:#6AA6E8;--k-b:#4CC27F;--k-c:#AE97F0;--k-ok:#4CC27F;--k-warn:#E8A33D;--k-crit:#FF6A62;--k-info:#9DA6B0;--k-e2:#FF3341;--k-e1:#8E9BAA;--tint:15%;--tint-z:4%}
+.k-a{--k:var(--k-a)}.k-b{--k:var(--k-b)}.k-c{--k:var(--k-c)}.k-ok{--k:var(--k-ok)}.k-warn{--k:var(--k-warn)}.k-crit{--k:var(--k-crit)}.k-info{--k:var(--k-info)}.k-e1{--k:var(--k-e1)}.k-e2{--k:var(--k-e2)}
+.arts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:10px;margin:0 0 22px}
+.acard{display:flex;flex-direction:column;gap:6px;min-width:0;text-align:left;background:var(--surface);border:1px solid var(--line2);border-left:3px solid var(--c,var(--red));padding:14px 16px;box-shadow:var(--shade)}
+.acard:hover{border-color:var(--rule);border-left-color:var(--c,var(--red))}
+.acard .ak{display:flex;align-items:center;gap:6px;font-family:var(--f-cond);font-weight:600;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--c,var(--soft))}
+.acard b{font-weight:600;font-size:1.05rem;line-height:1.3}
+.acard .t{color:var(--soft);font-size:.9rem}
+.acard .meta{margin-top:auto;padding-top:6px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.acard .more{margin-left:auto;display:inline-flex;align-items:center;gap:2px;color:var(--c,var(--red));font-weight:600;font-size:.86rem}
+.artblock{background:var(--surface);border:1px solid var(--line2);border-top:3px solid var(--red);padding:clamp(14px,3vw,22px);margin:0 0 22px}
+.artblock>.label:first-child{margin-top:0}
+.artblock .rg{display:flex;align-items:center;gap:8px;margin:16px 0 8px;font-weight:600;font-size:.95rem}
+.artblock .rg:first-of-type{margin-top:4px}
+.artblock .arts{margin-bottom:0}
+.artblock .acard{box-shadow:none}
+/* reading view */
+.article{min-width:0}
+.ahead{margin:4px 0 18px;padding-bottom:16px;border-bottom:1px solid var(--line2);max-width:78ch}
+.ahead .kicker{display:flex;align-items:center;gap:8px;flex-wrap:wrap;color:var(--c,var(--soft))}
+.ahead h1{font-size:clamp(1.55rem,4.6vw,2.3rem);font-weight:600;margin:8px 0 10px}
+.ahead .lead{margin:0;font-size:clamp(1.02rem,2.2vw,1.14rem);line-height:1.55;color:var(--ink);max-width:68ch}
+.ahead .ameta{margin-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+.toc{max-width:72ch;margin:0 0 26px;border:1px solid var(--line2);border-left:3px solid var(--c,var(--red));background:var(--surface);padding:10px 14px 12px}
+.toc .kicker{margin-bottom:4px}
+.toc ol{list-style:none;margin:0;padding:0;counter-reset:toc;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr));gap:0 18px}
+.toc li{counter-increment:toc;min-width:0}
+.toc button{display:flex;gap:10px;align-items:baseline;width:100%;min-height:36px;border:0;background:none;padding:5px 0;text-align:left;font-size:.93rem;color:var(--ink);border-bottom:1px solid var(--line)}
+.toc button::before{content:counter(toc,decimal-leading-zero);flex:none;font-family:var(--f-mono);font-size:.76rem;font-weight:600;color:var(--c,var(--red))}
+.toc button:hover{color:var(--c,var(--red))}
+.asec{margin:0 0 30px;scroll-margin-top:16px}
+.asec>h2{font-size:clamp(1.15rem,3vw,1.35rem);font-weight:600;margin:0 0 12px;max-width:72ch;padding-left:12px;border-left:3px solid var(--c,var(--red))}
+.prose{max-width:72ch;font-size:1.02rem;line-height:1.68}
+.prose p{margin:0 0 1em}
+.prose p:last-child{margin-bottom:0}
+.prose strong,.atbl strong,.callout strong{font-weight:650}
+.prose ul{margin:0;padding-left:1.3em}
+.prose li{margin:0 0 .45em;padding-left:.2em}
+.prose li::marker{color:var(--c,var(--red))}
+.callout{max-width:72ch;margin:0 0 26px;padding:12px 16px 12px 16px;background:var(--surface);border:1px solid var(--line2);border-left:4px solid var(--k);font-size:.98rem;line-height:1.6;--k:var(--k-a)}
+.callout.warn{--k:var(--k-warn);background:color-mix(in srgb,var(--k-warn) var(--tint-z),var(--surface))}
+.callout.merke{--k:var(--k-crit);background:color-mix(in srgb,var(--k-crit) var(--tint-z),var(--surface))}
+.callout.info{background:color-mix(in srgb,var(--k-a) var(--tint-z),var(--surface))}
+.callout .ch{display:flex;align-items:center;gap:6px;font-family:var(--f-cond);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--k);margin:0 0 4px}
+.callout p{margin:0 0 .6em}
+.callout p:last-child{margin-bottom:0}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.lchip{display:inline-flex;align-items:center;gap:7px;border:1px solid var(--line2);background:color-mix(in srgb,var(--k) var(--tint),var(--surface));padding:3px 10px 3px 6px;font-size:.84rem;font-weight:500}
+.lchip i{width:12px;height:12px;background:var(--k);flex:none}
+.atblwrap{overflow:auto;border:1px solid var(--line2);background:var(--surface);max-width:100%;-webkit-overflow-scrolling:touch}
+.atblwrap.long{max-height:min(72vh,640px)}
+table.atbl{width:100%;border-collapse:separate;border-spacing:0;font-size:.92rem;line-height:1.45}
+table.atbl th,table.atbl td{padding:8px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);min-width:7.5em}
+table.atbl th{position:sticky;top:0;z-index:1;background:var(--surface2);font-family:var(--f-cond);font-weight:600;font-size:.78rem;letter-spacing:.07em;text-transform:uppercase;color:var(--soft);border-bottom:1px solid var(--rule);white-space:nowrap}
+table.atbl td:first-child{font-weight:600;border-left:4px solid transparent}
+table.atbl th:first-child{border-left:4px solid transparent}
+table.atbl tbody tr:nth-child(even) td{background:color-mix(in srgb,var(--ink) var(--tint-z),var(--surface))}
+table.atbl tbody tr[class*="k-"] td{background:color-mix(in srgb,var(--k) var(--tint),var(--surface))}
+table.atbl tbody tr[class*="k-"]:nth-child(even) td{background:color-mix(in srgb,var(--k) calc(var(--tint) + 4%),var(--surface))}
+table.atbl tbody tr[class*="k-"] td:first-child{border-left-color:var(--k)}
+table.atbl tbody tr:last-child td{border-bottom:0}
+.fnote{max-width:72ch;margin:8px 0 0;color:var(--soft);font-size:.86rem;line-height:1.5}
+.tsec{margin-bottom:30px}
+.srcs{display:grid;gap:8px;max-width:86ch;margin:0 0 26px}
+.srcitem{background:var(--surface);border:1px solid var(--line2);padding:10px 14px}
+.srcitem .src{color:var(--ink);font-weight:500}
+.srcitem details{margin-top:6px}
+.srcitem summary{cursor:pointer;font-size:.86rem;font-weight:600;color:var(--soft)}
+.srcitem summary:hover{color:var(--ink)}
+.aquiz{display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap;background:var(--surface);border:1px solid var(--line2);border-left:3px solid var(--c,var(--red));padding:14px 16px;margin:0 0 22px}
+.aquiz p{margin:0;flex:1 1 240px;color:var(--soft);font-size:.92rem}
+.anav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 24px}
+.anav button{display:grid;gap:3px;min-width:0;text-align:left;background:var(--surface);border:1px solid var(--line2);padding:12px 14px}
+.anav button:hover{border-color:var(--rule)}
+.anav button.nx{text-align:right;grid-column:2}
+.anav small{font-family:var(--f-cond);font-weight:600;font-size:.74rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);display:flex;align-items:center;gap:4px}
+.anav button.nx small{justify-content:flex-end}
+.anav b{font-weight:600;font-size:.95rem;line-height:1.3;overflow-wrap:anywhere}
+@media (max-width:520px){.anav{grid-template-columns:minmax(0,1fr)}.anav button.nx{grid-column:1}table.atbl{font-size:.86rem}table.atbl th,table.atbl td{padding:7px 9px}.prose{font-size:1rem}}
+@media print{.topbar,.toc,.aquiz,.anav,.crumbs{display:none}.atblwrap,.atblwrap.long{max-height:none;overflow:visible}}
+</style>
+
+<div class="wrap">
+  <header class="topbar">
+    <nav class="nav" id="nav"></nav>
+    <div class="tright">
+      <button class="who" id="who" hidden></button>
+      <div class="langsw" id="langsw" role="group"></div>
+      <button class="themebtn" id="themebtn"></button>
+      <button class="logo" id="home"><img class="lgl" src="jetq-logo-sm-v3.png" alt="JetQ" width="180" height="171"><img class="lgd" src="jetq-logo-sm-v3-dark.png" alt="JetQ" width="180" height="171"></button>
+    </div>
+  </header>
+  <main id="app"><div class="loading">…</div></main>
+</div>
+
+<script>
+"use strict";
+const $=s=>document.querySelector(s);
+const $$=s=>document.querySelectorAll(s);
+const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const ms=(n,f)=>`<span class="ic${f?" f":""}" aria-hidden="true">${n}</span>`;
+
+/* ---------- i18n ---------- */
+const I18N={
+de:{
+  "nav.home":"Start","nav.mem":"Memory Items","nav.lib":"Bibliothek","nav.prof":"Profil","nav.comp":"Compliance","comp.sub":"Welche Dokumente und Revisionen JetQ verwendet.","comp.stand":"Stand der Inhalte: {d}","comp.doc":"Dokument","comp.nr":"Dokument-Nr.","comp.rev":"Revision","comp.date":"Datum","comp.scope":"Umfang","comp.pub":"Herausgeber","comp.missing":"Nicht verwendet oder nicht vorhanden","comp.note":"JetQ ist eine Lernhilfe und ersetzt keine Handbücher. Massgebend sind immer die aktuell gültigen Revisionen. Prüfe vor dem Lernen, ob eine neuere Revision erschienen ist; dann können einzelne Werte abweichen.","comp.link":"Compliance: verwendete Dokumente und Revisionen",
+  "top.theme":"Tag- und Nachtmodus wechseln","top.login":"Anmelden / Registrieren","top.login.s":"Anmelden","prof.login":"Anmelden oder registrieren","prof.login.sub":"Melde dich an, damit JetQ deinen Fortschritt speichert und dir zuordnet. Statistiken erscheinen erst nach der Anmeldung.","prof.nostats":"Deine Statistik erscheint hier, sobald du angemeldet bist.","top.day":"Tagmodus","top.night":"Nachtmodus","top.home":"JetQ Startseite","top.lang":"Sprache","top.prof":"Profil öffnen",
+  "loading":"Fragen werden geladen…","loadfail":"Die Fragen konnten nicht geladen werden. Bitte Seite neu laden.",
+  "hero.kicker":"Refresher for Embraer Pilots",
+  "hero.title":"Selbsttest und Lernen für E1- und E2-Piloten",
+  "hero.lead":"JetQ ist die Selbsttest- und Lernseite für Pilotinnen und Piloten auf <b>Embraer E1</b> (E190/E195) und <b>E2</b> (E190-E2/E195-E2). Fragen, Fakten und Memory Items stammen aus den Handbüchern, jeweils mit Fundstelle und Originalzitat.",
+  "hero.lang":"Sprache · Language","hero.cr":"Checkride starten","hero.lib":"Zur Bibliothek","hero.reg":"Registrieren","hero.edit":"Profil bearbeiten",
+  "hello.m":"Guten Morgen","hello.d":"Guten Tag","hello.e":"Guten Abend","hello.n":"Gute Nacht",
+  "slides":"Fotos der Flotte","slide.go":"Foto {n} zeigen","cap.cockpit":"Cockpit",
+  "sea.cur":"Aktuelle Saison","sea.t.fruehling":"Frühlingstest","sea.t.sommer":"Sommertest","sea.t.herbst":"Herbsttest","sea.t.winter":"Wintertest","sea.nS":"{n} Fragen","sea.other":"Weitere Saisons","sea.r.fruehling":"Frühling: März bis Mai","sea.r.sommer":"Sommer: Juni bis August","sea.r.herbst":"Herbst: September bis November","sea.r.winter":"Winter: Dezember bis Februar","sea.start":"Saisontest starten","sea.startS":"Starten","sea.n":"{n} Fragen im Pool · {k} pro Test","sea.prep":"Fragen in Vorbereitung","sea.title":"{s}-Test","winter.name":"Winter","winter.desc":"De-icing und Anti-icing, Cold Weather Operations, Low Visibility Procedures und kontaminierte Pisten.","sommer.name":"Sommer","sommer.desc":"Density Altitude, reduzierte Performance bei Hitze, Thunderstorm Avoidance, Windshear und Turbulenzen.",
+  "mem.bar.s":"E2 und E1 im QRH-Format · verdecken, aufsagen, abfragen","mem.bar.n":"{n} Items",
+  "ac.label":"Flugzeug","ac.aria":"Flugzeugtyp","ac.hintAll":"Fragen beider Typen. Wähle E2 oder E1, um nur dessen Fragen und die allgemeinen zu sehen.","ac.hintOne":"Nur {a}-Fragen und allgemeine Fragen.",
+  "sec.train":"Training","sec.rub":"Rubriken","sec.rub.s":"Wähle ein Gebiet",
+  "sp.cr.t":"Checkride","sp.cr.s":"30 gemischte Fragen aus allen Rubriken, mit Zeitlimit","sp.f.t":"Fehler wiederholen","sp.f.s":"{n} Fragen, die zuletzt falsch waren","sp.f.none":"Noch keine falschen Antworten","sp.z.t":"Zufällige 10","sp.z.s":"Schnelles Training im Lernmodus",
+  "n.q":"{n} Fragen","n.t":"{n} Themen","n.f":"{n} Fakten","rub.sure":"{p} sicher","prog.aria":"{p} sicher beantwortet",
+  "stats.title":"Inhalt","stats.sub":"Fragen pro Rubrik und Flugzeugtyp","st.rub":"Rubrik","st.q":"Fragen","st.both":"Beide","st.f":"Fakten","st.total":"Total",
+  "k.q":"Fragen","k.f":"Bibliothekseinträge","k.k":"Komponenten","k.m":"Memory Items",
+  "disclaimer":"JetQ ist eine Lernhilfe auf Basis der Handbücher. Massgebend sind immer die aktuell gültigen Handbücher (AFM, AOM, OM-A, OM-B, MEL, QRH).",
+  "crumbs":"Pfad","rub.all":"Alle Themen","rub.all.s":"Gemischt aus der ganzen Rubrik","rub.acgroup":"{n} Themen aus dem Cockpit der {a}","cockpit.alt":"Cockpit der {a}",
+  "setup.mode":"Modus","setup.lern":"Lernmodus","setup.lern.s":"Nach jeder Frage siehst du die Lösung, die Erklärung und die Fundstelle im Handbuch.","setup.pr":"Prüfungsmodus","setup.pr.s":"{s} Sekunden pro Frage, Auswertung am Schluss. Bestanden ab {p}.",
+  "setup.diff":"Schwierigkeit","diff.0":"Alle","diff.1":"Basis","diff.2":"Vertiefung","diff.3":"Experte","setup.n":"Anzahl Fragen","setup.avail":"von {n} verfügbaren Fragen","setup.go.pr":"Prüfung starten","setup.go.l":"Quiz starten","setup.learn":"Zuerst lernen","setup.only":"Fragen nur zu diesem Flugzeugtyp",
+  "quiz.quit":"Beenden","quiz.peek":"Erklärung & Handbuch-Stelle","quiz.peeknote":"Nachgeschlagen: Diese Frage gibt keine Punkte, zählt aber nicht als Fehler.","quiz.next":"Weiter","quiz.prev":"Zurück","quiz.flag":"Markieren","quiz.unflag":"Markierung entfernen","quiz.flagged":"Markiert","quiz.nav":"Fragenübersicht","quiz.goto":"Zu Frage {n}","quiz.lg.ans":"beantwortet","quiz.lg.open":"offen","quiz.lg.flag":"markiert","quiz.open":"Noch {n} Fragen unbeantwortet.","quiz.open1":"Noch 1 Frage unbeantwortet.","quiz.flags":"{n} Fragen markiert.","quiz.flags1":"1 Frage markiert.","quiz.toopen":"Zur ersten offenen Frage","quiz.toflag":"Zur ersten Markierung","quiz.eval":"Auswerten","quiz.result":"Ergebnis ansehen","quiz.ok":"Richtig","quiz.bad":"Falsch","quiz.peeked":" (nachgeschlagen)",
+  "done.peeked":"{n} nachgeschlagene Fragen sind nicht mitgezählt.","done.pass":"Bestanden","done.fail":"Nicht bestanden","done.pct":"{p} richtig","done.timeup":"Die Zeit ist abgelaufen. Unbeantwortete Fragen zählen als falsch.","done.saved.db":"Dein Fortschritt ist in deinem Konto gespeichert.","done.saved.local":"Dein Fortschritt ist in diesem Browser gespeichert.","done.again":"Nochmals","done.home":"Zur Startseite","done.na":"Nicht beantwortet",
+  "ref.passage":"Textstelle im Handbuch","ref.page":"PDF-Seite {n}","ref.orig":"Original:",
+  "lib.title":"Bibliothek","lib.sub":"Die wichtigsten Fakten pro Thema mit Fundstelle, dazu alle Fragen mit Lösung.","lib.ph":"Suchen, z. B. V1, APU, Crosswind, FTL","lib.aria":"Bibliothek durchsuchen","lib.facts":"Fakten","lib.hits":"{n} Treffer","lib.nofacts":"Keine Fakten gefunden.","lib.qs":"Fragen","lib.noq":"Keine Fragen gefunden.",
+  "lib.komp":"Komponenten","lib.komp.s":"{n} Bauteile laut {src}","lib.kf":"Wichtige Fakten","lib.kf.s":"{n} Einträge","lib.quiz":"Quiz zu diesem Thema","lib.cat":"Fragenkatalog","lib.cat.s":"{n} Fragen, antippen für die Lösung","lib.details":"Details",
+  "komp.of":"Komponente {i} von {n}","komp.conn":"Verbundene Komponenten","komp.sys":"Verbundene Systeme","komp.more":"Weitere Komponenten","komp.rel":"Passende Fragen","komp.rel.s":"{n} aus dem Fragenkatalog",
+  "mem.title":"Memory Items","mem.sub":"Sofortmassnahmen, die aus dem Gedächtnis ausgeführt werden, im QRH-Format. Massgebend sind QRH, AFM und AOM.","mem.trig":"Auslöser","mem.hide":"Verdecken","mem.show":"Aufdecken","mem.hidehint":"Aktionen verdeckt: Sage jede Aktion auf und tippe dann auf die Zeile, um sie zu prüfen.","mem.tap":"antippen","mem.rehide":"Alle wieder verdecken","mem.quiz":"Memory-Items-Quiz","mem.quiz.s":"{n} Fragen","mem.prep":"Die Memory Items für die {a} sind in Vorbereitung.","mem.nosteps":"Die Schritte werden noch aus dem Handbuch übernommen.","mem.src":"Quelle","mem.zitat":"Originalzitat","mem.count":"{n} Items","mem.note":"Hinweis",
+  "prof.title":"Profil","prof.reg":"Registrieren","prof.sub":"Dein Name, deine E-Mail-Adresse und dein Fortschritt.","prof.sub.reg":"Lege ein Profil an, damit JetQ dich mit Namen begrüsst und dein Fortschritt dir zugeordnet ist.",
+  "prof.name":"Name","prof.email":"E-Mail","prof.crew":"Crew Code (Helvetic)","prof.crew.hint":"(für eine Rangliste, die später eingeführt wird)","prof.opt":"optional","prof.nopw":"Die Anmeldung läuft über dein Claude-Konto, deshalb brauchst du hier kein Passwort.",
+  "prof.save":"Speichern","prof.create":"Registrieren und anmelden","err.name":"Bitte gib deinen Namen ein.","err.email":"Bitte gib eine gültige E-Mail-Adresse ein.",
+  "prof.saved.db":"Gespeichert in deinem Konto.","prof.saved.local":"Gespeichert in diesem Browser. Die Kontospeicherung ist in dieser Ansicht nicht verfügbar.","prof.local.note":"Die Kontospeicherung ist in dieser Ansicht nicht verfügbar. Dein Profil wird nur in diesem Browser gespeichert.","prof.saving":"Wird gespeichert…",
+  "prof.progress":"Fortschritt","prof.st.db":"Gespeichert in deinem Konto, auf allen Geräten.","prof.st.local":"Gespeichert in diesem Browser.",
+  "st.pts":"Punkte","st.seen":"Fragen gesehen","st.ok":"zuletzt richtig","st.runs":"Durchgänge","prof.perrub":"Sicher beantwortet pro Rubrik","prof.perrub.s":"Anteil der Fragen, die zuletzt richtig waren","prof.last":"Letzte Durchgänge","prof.none":"Noch keine Durchgänge. Starte mit einer Rubrik oder dem Checkride.","prof.ptsnote":"Punkte: 10 pro richtige Antwort, mal Schwierigkeitsstufe. Eine bestandene Prüfung gibt 50 Bonuspunkte.","mode.pr":"Prüfung","mode.l":"Lernen","prof.okof":"{ok} von {n} richtig ({p})",
+  "art.title":"Fachartikel","art.lib.s":"Ausführliche Artikel mit Tabellen und Fundstellen, nach Rubrik","art.th.s":"{n} ausführliche Artikel zu diesem Thema","art.n":"{n} Artikel","art.n1":"1 Artikel",
+  "art.secs":"{n} Abschnitte","art.secs1":"1 Abschnitt","art.tbls":"{n} Tabellen","art.tbls1":"1 Tabelle","art.read":"Lesen","art.both":"E1 + E2",
+  "art.toc":"Inhalt","art.src":"Quellen","art.src.s":"{n} Fundstellen mit Originalzitat","art.zitat":"Originalzitat",
+  "art.qs":"Passende Fragen","art.qs.s":"{n} Fragen zu den Themen dieses Artikels","art.qs.none":"Zu diesen Themen gibt es noch keine Fragen.","art.quiz":"Quiz starten",
+  "art.prev":"Vorheriger Artikel","art.next":"Nächster Artikel","art.info":"Hinweis","art.warn":"Achtung","art.merke":"Merke","art.legend":"Legende"
+},
+en:{
+  "nav.home":"Home","nav.mem":"Memory Items","nav.lib":"Library","nav.prof":"Profile","nav.comp":"Compliance","comp.sub":"Which documents and revisions JetQ is based on.","comp.stand":"Content as of: {d}","comp.doc":"Document","comp.nr":"Document no.","comp.rev":"Revision","comp.date":"Date","comp.scope":"Scope","comp.pub":"Publisher","comp.missing":"Not used or not available","comp.note":"JetQ is a study aid and does not replace the manuals. The currently valid revisions are always authoritative. Check whether a newer revision has been published; individual values may then differ.","comp.link":"Compliance: documents and revisions used",
+  "top.theme":"Toggle day and night mode","top.login":"Sign in / Register","top.login.s":"Sign in","prof.login":"Sign in or register","prof.login.sub":"Sign in so JetQ can save your progress and link it to you. Statistics appear only after you sign in.","prof.nostats":"Your statistics will appear here once you are signed in.","top.day":"Day mode","top.night":"Night mode","top.home":"JetQ home","top.lang":"Language","top.prof":"Open profile",
+  "loading":"Loading questions…","loadfail":"The questions could not be loaded. Please reload the page.",
+  "hero.kicker":"Refresher for Embraer Pilots",
+  "hero.title":"Self-test and learning for E1 and E2 pilots",
+  "hero.lead":"JetQ is the self-test and learning site for pilots on the <b>Embraer E1</b> (E190/E195) and <b>E2</b> (E190-E2/E195-E2). Questions, facts and memory items are taken from the manuals, each with its reference and the original quote.",
+  "hero.lang":"Sprache · Language","hero.cr":"Start checkride","hero.lib":"Open library","hero.reg":"Create profile","hero.edit":"Edit profile",
+  "hello.m":"Good morning","hello.d":"Good afternoon","hello.e":"Good evening","hello.n":"Good night",
+  "slides":"Fleet photos","slide.go":"Show photo {n}","cap.cockpit":"Flight deck",
+  "sea.cur":"Current season","sea.t.fruehling":"Spring test","sea.t.sommer":"Summer test","sea.t.herbst":"Autumn test","sea.t.winter":"Winter test","sea.nS":"{n} questions","sea.other":"Other seasons","sea.r.fruehling":"Spring: March to May","sea.r.sommer":"Summer: June to August","sea.r.herbst":"Autumn: September to November","sea.r.winter":"Winter: December to February","sea.start":"Start seasonal test","sea.startS":"Start","sea.n":"{n} questions in the pool · {k} per test","sea.prep":"Questions in preparation","sea.title":"{s} test","winter.name":"Winter","winter.desc":"De-icing and anti-icing, cold weather operations, low visibility procedures and contaminated runways.","sommer.name":"Summer","sommer.desc":"Density altitude, reduced performance in hot weather, thunderstorm avoidance, windshear and turbulence.",
+  "mem.bar.s":"E2 and E1 in QRH format · hide, recite, test yourself","mem.bar.n":"{n} items",
+  "ac.label":"Aircraft","ac.aria":"Aircraft type","ac.hintAll":"Questions for both types. Choose E2 or E1 to see only its questions plus the general ones.","ac.hintOne":"Only {a} questions and general questions.",
+  "sec.train":"Training","sec.rub":"Categories","sec.rub.s":"Choose a subject",
+  "sp.cr.t":"Checkride","sp.cr.s":"30 mixed questions from all categories, timed","sp.f.t":"Review mistakes","sp.f.s":"{n} questions you last answered wrong","sp.f.none":"No wrong answers yet","sp.z.t":"Random 10","sp.z.s":"Quick practice in learning mode",
+  "n.q":"{n} questions","n.t":"{n} topics","n.f":"{n} facts","rub.sure":"{p} mastered","prog.aria":"{p} answered correctly",
+  "stats.title":"Contents","stats.sub":"Questions per category and aircraft type","st.rub":"Category","st.q":"Questions","st.both":"Both","st.f":"Facts","st.total":"Total",
+  "k.q":"Questions","k.f":"Library entries","k.k":"Components","k.m":"Memory items",
+  "disclaimer":"JetQ is a study aid based on the manuals. The currently valid manuals (AFM, AOM, OM-A, OM-B, MEL, QRH) are always authoritative.",
+  "crumbs":"Breadcrumb","rub.all":"All topics","rub.all.s":"Mixed from the whole category","rub.acgroup":"{n} topics from the {a} flight deck","cockpit.alt":"{a} flight deck",
+  "setup.mode":"Mode","setup.lern":"Learning mode","setup.lern.s":"After each question you see the answer, the explanation and the manual reference.","setup.pr":"Exam mode","setup.pr.s":"{s} seconds per question, results at the end. Pass mark {p}.",
+  "setup.diff":"Difficulty","diff.0":"All","diff.1":"Basic","diff.2":"Advanced","diff.3":"Expert","setup.n":"Number of questions","setup.avail":"of {n} available questions","setup.go.pr":"Start exam","setup.go.l":"Start quiz","setup.learn":"Study first","setup.only":"Questions for this aircraft type only",
+  "quiz.quit":"End","quiz.peek":"Explanation & manual reference","quiz.peeknote":"Looked up: this question scores no points but does not count as a mistake.","quiz.next":"Next","quiz.prev":"Back","quiz.flag":"Flag","quiz.unflag":"Remove flag","quiz.flagged":"Flagged","quiz.nav":"Question overview","quiz.goto":"Go to question {n}","quiz.lg.ans":"answered","quiz.lg.open":"open","quiz.lg.flag":"flagged","quiz.open":"{n} questions still unanswered.","quiz.open1":"1 question still unanswered.","quiz.flags":"{n} questions flagged.","quiz.flags1":"1 question flagged.","quiz.toopen":"Go to first open question","quiz.toflag":"Go to first flag","quiz.eval":"Evaluate","quiz.result":"See result","quiz.ok":"Correct","quiz.bad":"Incorrect","quiz.peeked":" (looked up)",
+  "done.peeked":"{n} looked-up questions are not counted.","done.pass":"Passed","done.fail":"Not passed","done.pct":"{p} correct","done.timeup":"Time is up. Unanswered questions count as wrong.","done.saved.db":"Your progress is saved to your account.","done.saved.local":"Your progress is saved in this browser.","done.again":"Try again","done.home":"Back to home","done.na":"Not answered",
+  "ref.passage":"Manual passage","ref.page":"PDF page {n}","ref.orig":"Original:",
+  "lib.title":"Library","lib.sub":"The key facts per topic with references, plus every question with its answer.","lib.ph":"Search, e.g. V1, APU, crosswind, FTL","lib.aria":"Search the library","lib.facts":"Facts","lib.hits":"{n} results","lib.nofacts":"No facts found.","lib.qs":"Questions","lib.noq":"No questions found.",
+  "lib.komp":"Components","lib.komp.s":"{n} components per {src}","lib.kf":"Key facts","lib.kf.s":"{n} entries","lib.quiz":"Quiz on this topic","lib.cat":"Question bank","lib.cat.s":"{n} questions, tap for the answer","lib.details":"Details",
+  "komp.of":"Component {i} of {n}","komp.conn":"Connected components","komp.sys":"Related systems","komp.more":"Other components","komp.rel":"Related questions","komp.rel.s":"{n} from the question bank",
+  "mem.title":"Memory Items","mem.sub":"Immediate actions performed from memory, in QRH format. The QRH, AFM and AOM are authoritative.","mem.trig":"Trigger","mem.hide":"Hide actions","mem.show":"Show actions","mem.hidehint":"Actions hidden: recite each action, then tap the row to check it.","mem.tap":"tap","mem.rehide":"Hide all again","mem.quiz":"Memory items quiz","mem.quiz.s":"{n} questions","mem.prep":"The {a} memory items are in preparation.","mem.nosteps":"The steps are still being transcribed from the manual.","mem.src":"Source","mem.zitat":"Original quote","mem.count":"{n} items","mem.note":"Note",
+  "prof.title":"Profile","prof.reg":"Create profile","prof.sub":"Your name, your email address and your progress.","prof.sub.reg":"Create a profile so JetQ greets you by name and your progress is linked to you.",
+  "prof.name":"Name","prof.email":"Email","prof.crew":"Crew Code (Helvetic)","prof.crew.hint":"(for a leaderboard to be introduced later)","prof.opt":"optional","prof.nopw":"You sign in through your Claude account, so you do not need a password here.",
+  "prof.save":"Save","prof.create":"Register and sign in","err.name":"Please enter your name.","err.email":"Please enter a valid email address.",
+  "prof.saved.db":"Saved to your account.","prof.saved.local":"Saved in this browser. Account storage is not available in this view.","prof.local.note":"Account storage is not available in this view. Your profile is saved in this browser only.","prof.saving":"Saving…",
+  "prof.progress":"Progress","prof.st.db":"Saved to your account, on all devices.","prof.st.local":"Saved in this browser.",
+  "st.pts":"Points","st.seen":"Questions seen","st.ok":"Last correct","st.runs":"Sessions","prof.perrub":"Mastered per category","prof.perrub.s":"Share of questions last answered correctly","prof.last":"Recent sessions","prof.none":"No sessions yet. Start with a category or the checkride.","prof.ptsnote":"Points: 10 per correct answer, times the difficulty level. A passed exam gives 50 bonus points.","mode.pr":"Exam","mode.l":"Learning","prof.okof":"{ok} of {n} correct ({p})",
+  "art.title":"Articles","art.lib.s":"In-depth articles with tables and references, by category","art.th.s":"{n} in-depth articles on this topic","art.n":"{n} articles","art.n1":"1 article",
+  "art.secs":"{n} sections","art.secs1":"1 section","art.tbls":"{n} tables","art.tbls1":"1 table","art.read":"Read","art.both":"E1 + E2",
+  "art.toc":"Contents","art.src":"Sources","art.src.s":"{n} references with the original quote","art.zitat":"Original quote",
+  "art.qs":"Related questions","art.qs.s":"{n} questions on the topics of this article","art.qs.none":"There are no questions on these topics yet.","art.quiz":"Start quiz",
+  "art.prev":"Previous article","art.next":"Next article","art.info":"Note","art.warn":"Caution","art.merke":"Remember","art.legend":"Legend"
+}};
+let LANG=(function(){try{let v=localStorage.getItem("ep.lang");if(v&&v[0]==='"')v=JSON.parse(v);return v==="en"?"en":"de"}catch(e){return "de"}})();
+function t(k,v){let s=(I18N[LANG]&&I18N[LANG][k])??I18N.de[k]??k;if(v)for(const [a,b] of Object.entries(v))s=s.split("{"+a+"}").join(b);return s}
+/* localized data field: X_en in English, fallback X */
+function L(o,f){if(!o)return "";if(LANG==="en"){const v=o[f+"_en"];if(v!=null&&v!==""&&!(Array.isArray(v)&&!v.length))return v}return o[f]}
+const LOC=()=>LANG==="en"?"en-GB":"de-CH";
+const fN=n=>Number(n||0).toLocaleString(LOC());
+const fP=x=>Math.round(x*100)+(LANG==="en"?"%":" %");
+const fD=iso=>{try{return new Date(iso+"T12:00:00").toLocaleDateString(LOC(),{day:"numeric",month:"short",year:"numeric"})}catch(e){return iso}};
+function setLang(l){LANG=l==="en"?"en":"de";try{localStorage.setItem("ep.lang",LANG)}catch(e){}document.documentElement.lang=LANG;paintChrome();render()}
+
+const IC={
+  mix:ms("shuffle"), redo:ms("replay"), book:ms("menu_book"), user:ms("person"), home:ms("home"), clock:ms("schedule"), learn:ms("school"),
+  doc:ms("description"), next:ms("arrow_forward"), ok:ms("check"), bad:ms("close"), play:ms("play_arrow",1), flight:ms("flight",1), edit:ms("edit"), info:ms("info"), vis:ms("visibility"), visoff:ms("visibility_off"), quiz:ms("quiz")
+};
+const TICON={
+  /* ops */ alternates:"alt_route",bodenbetrieb:"local_gas_station",enteisung:"ac_unit",flugbetrieb:"flight",kabine:"airline_seat_recline_normal",kraftstoff:"oil_barrel",lvo:"foggy","minima-anflug":"flight_land",navigation:"explore",notfall:"emergency",passagiere:"groups",wetter:"thunderstorm",
+  /* rules */ altimetrie:"height",clearances:"approval",funkverkehr:"headset_mic",mindesthoehen:"landscape","notfall-kommunikation":"sos",rvsm:"swap_vert","speed-holding":"speed",tcas:"radar","vfr-ifr":"visibility",wirbelschleppen:"cyclone",
+  /* airlaw */ "crew-composition":"diversity_3","dangerous-goods":"warning",dokumente:"folder_open","ftl-fdp":"schedule","ftl-ruhe":"bedtime",gesundheit:"medical_services",organisation:"account_tree",qualifikation:"workspace_premium","security-reporting":"shield",  "sms-frms":"health_and_safety",verantwortung:"military_tech",
+  /* proc */ "cockpit-sop":"power_settings_new","start-takeoff":"flight_takeoff","approach-landing":"flight_land","rto-engine-failure":"do_not_disturb_on","memory-items":"psychology","egpws-tcas-windshear":"terrain","upset-stall":"rotate_right","abnormal-general":"report","emergency-descent":"south","nn-elec-hyd-fuel":"bolt","nn-fctl-gear-ams":"tune","abnormal-general":"report","abnormal-grundsaetze":"report","afm-elec-hyd-fuel":"bolt","afm-fctl-gear-ams":"tune","afm-recall":"psychology","approach-landing":"flight_land","climb-cruise-descent":"trending_up","cockpit-prep":"power_settings_new","cockpit-vorbereitung":"power_settings_new","egpws-tcas-windshear":"terrain","emer-descent-landing":"south","emergency-descent-ditching":"south","flows-callouts-sop":"record_voice_over","gpws-tcas-ws-upset":"terrain","memory-items":"psychology","non-normal-elec-hyd":"bolt","non-normal-flight-controls":"tune","non-normal-fuel-ams-gear":"oil_barrel","normal-approach-landing":"flight_land","normal-start-taxi-takeoff":"flight_takeoff","rto-engine-failure":"do_not_disturb_on","rto-triebwerksausfall":"do_not_disturb_on","start-taxi":"directions_car","takeoff-climb":"flight_takeoff","upset-stall-unreliable":"rotate_right",
+  /* sys */ afcs:"smart_toy",aircond:"mode_fan",apu:"settings_power",at:"speed",bleed:"air",brakes:"do_not_disturb_on",comm:"settings_input_antenna",doors:"door_front",egpws:"terrain",elec:"bolt",engine:"cyclone",fctl:"tune",fire:"local_fire_department",fms:"keyboard",fuel:"oil_barrel",gear:"trip_origin",general:"flight",hyd:"water_drop",ice:"ac_unit",instr:"monitor",lights:"lightbulb",nav:"explore",oxy:"masks",press:"compress",steering:"swap_calls",tcas:"radar",warn:"notifications_active",wxr:"thunderstorm",
+  /* limits */ allwetter:"foggy","engines-apu":"cyclone","envelope-wind":"air","gewichte-cg":"scale","mel-ata21-26":"list_alt","mel-ata27-30":"list_alt","mel-ata31-36":"list_alt","mel-ata49-80":"list_alt","mel-grundlagen":"menu_book","mel-items":"build","nav-kommunikation":"settings_input_antenna",speeds:"speed",systeme:"settings",
+  /* seasons */ "s-winter-deicing":"ac_unit","s-winter-lvp":"foggy","s-summer-perf":"thermostat","s-summer-wx":"thunderstorm","s-autumn-wind":"air","s-autumn-wx":"rainy","s-spring-wx":"thunderstorm","s-spring-ops":"flutter_dash",
+  /* perf */ beladung:"luggage",definitionen:"straighten",flugplanung:"map",kontaminiert:"water",landung:"flight_land",massbalance:"balance",reiseflug:"cloud",startleistung:"flight_takeoff",triebwerksausfall:"trending_down"
+};
+const ticon=id=>ms(TICON[String(id).replace(/^e[12]-/,"")]||"article");
+const ORDER=["daily","command","sys","limits","perf","proc","ops","rules","airlaw","zrh"];
+const EMO={daily:"☕",command:"🎖️",zrh:"🇨🇭",ops:"🧭",rules:"🚦",airlaw:"⚖️",proc:"📋",sys:"⚙️",limits:"⛔",perf:"📈",memory:"🧠"};
+const emo=id=>`<span class="emo" aria-hidden="true">${EMO[id]||"📘"}</span>`;
+const rc=id=>`var(--c-${String(id).replace(/[^a-z0-9-]/gi,"")},var(--char))`;
+const PASS=0.75, SEC_PER_Q=75;
+const ACSUB={E1:"E190 / E195",E2:"E190-E2 / E195-E2"};
+
+/* ---------- state ---------- */
+const store={get(k,d){try{const v=localStorage.getItem("ep."+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem("ep."+k,JSON.stringify(v))}catch(e){}}};
+let DATA=null;
+const S={screen:"home",ac:store.get("ac","alle"),rubrik:null,thema:null,komp:0,setup:{mode:"lern",n:10,stufe:0},quiz:null,query:"",
+  st:Object.assign({q:{},punkte:0,tests:[]},store.get("stats",{})),db:null,user:null,uid:null,
+  profile:store.get("profile",null),profileSrc:null,pmsg:null,
+  mac:"E2",mhide:false,mrev:new Set(),slide:0};
+
+/* day / night */
+function curDark(){const th=document.documentElement.dataset.theme;return th?th==="dark":matchMedia("(prefers-color-scheme: dark)").matches}
+function paintThemeBtn(){const d=curDark(),b=$("#themebtn");b.innerHTML=ms(d?"light_mode":"dark_mode");b.title=d?t("top.day"):t("top.night");b.setAttribute("aria-label",t("top.theme"))}
+(function(){const th=store.get("theme",null);if(th)document.documentElement.dataset.theme=th;document.documentElement.lang=LANG;
+  $("#themebtn").onclick=()=>{const n=curDark()?"light":"dark";document.documentElement.dataset.theme=n;store.set("theme",n);paintThemeBtn()};
+  try{matchMedia("(prefers-color-scheme: dark)").addEventListener("change",paintThemeBtn)}catch(e){}})();
+function paintChrome(){
+  paintThemeBtn();
+  $("#home").setAttribute("aria-label",t("top.home"));
+  const ls=$("#langsw"); ls.setAttribute("aria-label",t("top.lang"));
+  ls.innerHTML=[["de","DE","Deutsch"],["en","EN","English"]].map(([k,l,n])=>`<button data-lang="${k}" aria-pressed="${LANG===k}" title="${n}" lang="${k}">${l}</button>`).join("");
+  ls.querySelectorAll("[data-lang]").forEach(b=>b.onclick=()=>setLang(b.dataset.lang));
+  const w=$("#who"); const nm=S.profile&&S.profile.name;
+  w.hidden=false; w.classList.toggle("login",!nm);
+  w.innerHTML=nm?`${IC.user}<span>${esc(nm)}</span>`:`${ms("login")}<span class="nl">${t("top.login")}</span><span class="ns">${t("top.login.s")}</span>`;
+  w.title=nm?t("top.prof"):t("top.login"); w.onclick=()=>go("profil");
+}
+paintChrome(); $("#app").innerHTML=`<div class="loading">${t("loading")}</div>`;
+
+/* ---------- helpers ---------- */
+const rub=id=>DATA.rubriken.find(r=>r.id===id);
+const themaOf=(r,id)=>r&&r.themen.find(x=>x.id===id);
+const acOk=q=>S.ac==="alle"||!q.flugzeug||q.flugzeug==="beide"||q.flugzeug===S.ac;
+function pool({rubrik,thema,stufe,special}={}){
+  let a=DATA.fragen.filter(acOk);
+  if(rubrik) a=a.filter(q=>q.rubrik===rubrik);
+  if(thema) a=a.filter(q=>q.thema===thema);
+  if(stufe) a=a.filter(q=>q.stufe===stufe);
+  if(special==="fehler") a=a.filter(q=>S.st.q[q.id]&&S.st.q[q.id][2]===0);
+  return a;
+}
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const stufeName=s=>s?t("diff."+s):"";
+function rubProgress(rid){const qs=pool({rubrik:rid});if(!qs.length)return 0;let ok=0;qs.forEach(q=>{const x=S.st.q[q.id];if(x&&x[2]===1)ok++});return ok/qs.length}
+function setC(el,rid){el.style.setProperty("--c",rc(rid))}
+const factsOf=r=>r.themen.reduce((s,x)=>s+((x.bibliothek&&x.bibliothek.fakten)||[]).length,0);
+/* rubriken in display order, hiding empty ones */
+function RUBS(){
+  const cnt={};DATA.fragen.forEach(q=>cnt[q.rubrik]=(cnt[q.rubrik]||0)+1);
+  const list=DATA.rubriken.filter(r=>(cnt[r.id]||0)>0||factsOf(r)>0);
+  const ix=id=>{const i=ORDER.indexOf(id);return i<0?99:i};
+  return list.slice().sort((a,b)=>ix(a.id)-ix(b.id));
+}
+/* seasons: meteorological (spring Mar-May, summer Jun-Aug, autumn Sep-Nov, winter Dec-Feb) */
+const SEA_N=20, SEA_EMO={fruehling:"🌱",sommer:"☀️",herbst:"🍂",winter:"❄️"}, SEA_ORD=["fruehling","sommer","herbst","winter"];
+function curSeason(now){now=now||new Date();return SEA_ORD[Math.floor(((now.getMonth()+10)%12)/3)]}
+function seasonDef(id){const a=Array.isArray(DATA.saisons)?DATA.saisons.find(x=>x&&x.id===id):null;
+  return {id,name:(a&&L(a,"name"))||t(id+".name"),desc:(a&&L(a,"beschreibung"))||t(id+".desc")}}
+const seasonQs=id=>DATA.fragen.filter(q=>acOk(q)&&Array.isArray(q.saison)&&q.saison.includes(id));
+function seasonsHTML(){
+  const cur=curSeason(), i=SEA_ORD.indexOf(cur), oth=[1,2,3].map(k=>SEA_ORD[(i+k)%4]);
+  const box=(id,big)=>{const d=seasonDef(id),n=seasonQs(id).length;
+    return `<section class="season ${big?"big":"small"}" style="--c:var(--c-${id})"><span class="se emo" aria-hidden="true">${SEA_EMO[id]}</span><div class="sb">
+      ${big?`<p class="kicker">${t("sea.cur")}</p>`:""}<h2>${esc(t("sea.t."+id))}</h2>
+      ${big?`<p>${esc(d.desc)}</p><p class="hint">${t("sea.r."+id)}</p>`:`<p>${esc(d.desc)}</p>`}
+      <div class="sact"><button class="btn ${big?"pri":"sm"}" data-sea="${id}" ${n?"":"disabled"}>${IC.play}<span>${big?t("sea.start"):t("sea.startS")}</span></button><span class="tagp">${n?(big?t("sea.n",{n:fN(n),k:Math.min(SEA_N,n)}):t("sea.nS",{n:fN(n)})):t("sea.prep")}</span></div></div></section>`};
+  return `<div class="seasons">${box(cur,true)}<div class="sothers"><p class="kicker">${t("sea.other")}</p>${oth.map(o=>box(o,false)).join("")}</div></div>`;
+}
+const memItems=()=>Array.isArray(DATA&&DATA.memoryitems)?DATA.memoryitems:[];
+const memQs=a=>DATA.fragen.filter(q=>q.thema==="memory-items"&&q.flugzeug===a);
+/* Q accessors in current language */
+const QF=q=>L(q,"frage"), QE=q=>L(q,"erklaerung");
+const QA=(q,i)=>{const en=LANG==="en"&&Array.isArray(q.antworten_en)&&q.antworten_en.length===q.antworten.length;return (en?q.antworten_en:q.antworten)[i]};
+
+/* ---------- nav ---------- */
+function renderNav(){
+  const items=[["home",t("nav.home"),IC.home],["memory",t("nav.mem"),ms("psychology"),"Memory"],["lib",t("nav.lib"),IC.book],["profil",t("nav.prof"),IC.user],["compliance",t("nav.comp"),IC.info]];
+  const sc=S.screen, fromMem=S.quiz&&S.quiz.from==="memory";
+  const cur=sc.startsWith("lib")||sc==="artikel"?"lib":sc==="profil"?"profil":sc==="compliance"?"compliance":sc==="memory"||((sc==="quiz"||sc==="done")&&fromMem)?"memory":["home","rubrik","setup","quiz","done"].includes(sc)?"home":"";
+  $("#nav").setAttribute("aria-label","Navigation");
+  $("#nav").innerHTML=items.map(([k,l,i,sh])=>`<button class="navbtn" data-go="${k}" ${cur===k?'aria-current="page"':""}>${i}${sh?`<span class="nl">${esc(l)}</span><span class="ns" aria-hidden="true">${esc(sh)}</span>`:`<span>${esc(l)}</span>`}</button>`).join("");
+  $("#nav").querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
+}
+let SLIDE_T=null;
+function stopSlides(){if(SLIDE_T){clearInterval(SLIDE_T);SLIDE_T=null}}
+function go(screen,extra){stopTimer();stopSlides();S.pmsg=null;Object.assign(S,{screen},extra||{});render();window.scrollTo({top:0,behavior:"instant"in window?"instant":"auto"})}
+$("#home").onclick=()=>go("home");
+
+function acBar(hint){
+  return `<div class="acbar"><span class="lbl">${t("ac.label")}</span><div class="seg" role="group" aria-label="${t("ac.aria")}">${[["alle","E2 + E1"],["E2","E2"],["E1","E1"]].map(([k,l])=>`<button data-ac="${k}" aria-pressed="${S.ac===k}">${l}</button>`).join("")}</div>${hint?`<p class="hint">${S.ac==="alle"?t("ac.hintAll"):t("ac.hintOne",{a:S.ac})}</p>`:""}</div>`;
+}
+const acVis=x=>S.ac==="alle"||!x.flugzeug||x.flugzeug===S.ac;
+const acSort=(a,b)=>(a.flugzeug==="E2"?0:a.flugzeug==="E1"?1:-1)-(b.flugzeug==="E2"?0:b.flugzeug==="E1"?1:-1);
+function bindAc(){$$("[data-ac]").forEach(b=>b.onclick=()=>{S.ac=b.dataset.ac;store.set("ac",S.ac);render()})}
+
+/* ---------- home ---------- */
+const MIXR=["ops","rules","airlaw","proc","daily","command","zrh"];
+const tb=f=>f==="E1"||f==="E2"?`<span class="tbadge">${f}</span>`:"";
+const qb=q=>MIXR.includes(q.rubrik)?tb(q.flugzeug):"";
+function greet(){const h=new Date().getHours();const g=t(h<5?"hello.n":h<11?"hello.m":h<17?"hello.d":h<22?"hello.e":"hello.n");const nm=S.profile&&S.profile.name;return nm?`${g}, ${esc(nm)}.`:`${g}.`}
+const SLIDES=[["aircraft-e2.jpg","HB-AZI","Embraer E195-E2","center 45%"],["aircraft-e1.jpg","HB-JVP","Embraer E190","center 45%"],["cockpit-e2.jpg","E2","cap.cockpit E190-E2 / E195-E2","center 40%"],["cockpit-e1.jpg","E1","cap.cockpit E190 / E195","center 50%"]];
+function rubTile(r,count,extra){
+  const p=Math.round(rubProgress(r.id)*100);
+  return `<button class="rub" data-r="${r.id}" style="--c:${rc(r.id)}"><span class="rtop">${emo(r.id)}<span class="rn">${count}</span></span><h3>${esc(L(r,"name"))}</h3><p>${esc(L(r,"beschreibung"))}</p>${extra?`<span class="rfoot"><span class="progress" role="img" aria-label="${t("prog.aria",{p:fP(p/100)})}"><i style="width:${p}%"></i></span><span class="rp">${t("rub.sure",{p:fP(p/100)})}</span></span>`:""}</button>`;
+}
+function statsHTML(){
+  const rows=RUBS().map(r=>{const qs=DATA.fragen.filter(q=>q.rubrik===r.id);const e2=qs.filter(q=>q.flugzeug==="E2").length,e1=qs.filter(q=>q.flugzeug==="E1").length;return {r,n:qs.length,e2,e1,b:qs.length-e2-e1,f:factsOf(r)}});
+  const sum=k=>rows.reduce((s,x)=>s+x[k],0);
+  const kc=DATA.rubriken.reduce((s,r)=>s+r.themen.reduce((a,x)=>a+(x.komponenten||[]).length,0),0);
+  const z=n=>n?fN(n):`<span class="z">–</span>`;
+  return `<div class="shead"><h2>${t("stats.title")}</h2><small>${t("stats.sub")}</small></div>
+  <div class="kpis"><div><b>${fN(DATA.fragen.length)}</b><span>${t("k.q")}</span></div><div><b>${fN(sum("f"))}</b><span>${t("k.f")}</span></div><div><b>${fN(kc)}</b><span>${t("k.k")}</span></div><div><b>${fN(memItems().length)}</b><span>${t("k.m")}</span></div></div>
+  <div class="tblwrap"><table class="stat"><thead><tr><th scope="col">${t("st.rub")}</th><th scope="col">${t("st.q")}</th><th scope="col">E2</th><th scope="col">E1</th><th scope="col">${t("st.both")}</th><th scope="col">${t("st.f")}</th></tr></thead>
+  <tbody>${rows.map(x=>`<tr><td>${emo(x.r.id)}${esc(L(x.r,"name"))}</td><td>${z(x.n)}</td><td>${z(x.e2)}</td><td>${z(x.e1)}</td><td>${z(x.b)}</td><td>${z(x.f)}</td></tr>`).join("")}</tbody>
+  <tfoot><tr><td>${t("st.total")}</td><td>${fN(sum("n"))}</td><td>${fN(sum("e2"))}</td><td>${fN(sum("e1"))}</td><td>${fN(sum("b"))}</td><td>${fN(sum("f"))}</td></tr></tfoot></table></div>`;
+}
+function renderHome(){
+  const fehler=pool({special:"fehler"}).length, mi=memItems();
+  const reg=!!(S.profile&&S.profile.name);
+  $("#app").innerHTML=`
+  <section class="hero">
+    <div class="herotext">
+      <div class="brand"><span class="lg"><img class="lgl" src="jetq-logo-v3.png" alt="JetQ" width="640" height="608"><img class="lgd" src="jetq-logo-v3-dark.png" alt="" width="640" height="608"></span><div><p class="kicker">${t("hero.kicker")}</p><h1>${t("hero.title")}</h1></div></div>
+      <p class="hello">${greet()}</p>
+      <p class="lead">${t("hero.lead")}</p>
+      <ul class="docs" aria-label="AFM, AOM, OM-A, OM-B, MEL">${["AFM","AOM","OM-A","OM-B","MEL"].map(d=>`<li>${d}</li>`).join("")}</ul>
+      <div class="ctas"><button class="btn pri" id="cr">${IC.play}<span>${t("hero.cr")}</span></button><button class="btn" id="lb">${IC.book}<span>${t("hero.lib")}</span></button></div>
+    </div>
+    <div class="slides" role="region" aria-label="${t("slides")}">
+      ${SLIDES.map(([src,reg2,cap,pos],i)=>`<figure class="${i===S.slide?"on":""}" ${i===S.slide?"":'aria-hidden="true"'}><img src="${src}" alt="${esc(reg2+" · "+cap.replace("cap.cockpit",t("cap.cockpit")))}" style="object-position:${pos}" ${i?'loading="lazy"':""}><figcaption><b>${esc(reg2)}</b><span>${esc(cap.replace("cap.cockpit",t("cap.cockpit")))}</span></figcaption></figure>`).join("")}
+      <div class="sdots">${SLIDES.map((_,i)=>`<button data-sl="${i}" aria-label="${t("slide.go",{n:i+1})}" aria-current="${i===S.slide}"></button>`).join("")}</div>
+    </div>
+  </section>
+  ${seasonsHTML()}
+  <button class="membar" id="mem"><span class="mi">${emo("memory")}</span><span class="mt"><b>Memory Items</b><span>${t("mem.bar.s")}</span></span><span class="mg"><span>${mi.length?t("mem.bar.n",{n:mi.length}):""}</span>${ms("arrow_forward")}</span></button>
+  <div class="shead"><h2>${t("sec.train")}</h2></div>
+  ${acBar(true)}
+  <div class="specials">
+    <button class="special" id="sp-cr" style="--c:var(--red)"><span class="si">${IC.clock}</span><span><b>${t("sp.cr.t")}</b><span>${t("sp.cr.s")}</span></span></button>
+    <button class="special" id="sp-f" style="--c:var(--bad)" ${fehler?"":"disabled"}><span class="si">${IC.redo}</span><span><b>${t("sp.f.t")}</b><span>${fehler?t("sp.f.s",{n:fN(fehler)}):t("sp.f.none")}</span></span></button>
+    <button class="special" id="sp-z" style="--c:var(--c-sys)"><span class="si">${IC.mix}</span><span><b>${t("sp.z.t")}</b><span>${t("sp.z.s")}</span></span></button>
+  </div>
+  <div class="shead"><h2>${t("sec.rub")}</h2><small>${t("sec.rub.s")}</small></div>
+  <div class="rubriken">${RUBS().map(r=>rubTile(r,t("n.q",{n:fN(pool({rubrik:r.id}).length)}),true)).join("")}</div>
+  ${statsHTML()}
+  <p class="note">${t("disclaimer")} <button class="linkbtn" id="tocomp">${t("comp.link")}</button></p>`;
+  bindAc(); {const b=$("#tocomp"); if(b) b.onclick=()=>go("compliance");}
+  $$("[data-sea]").forEach(b=>b.onclick=()=>{const id=b.dataset.sea;startQuiz({title:t("sea.t."+id),qs:shuffle(seasonQs(id)).slice(0,SEA_N),mode:"lern",rid:null})});
+    const crf=()=>startQuiz({title:t("sp.cr.t"),qs:shuffle(pool()).slice(0,30),mode:"pruefung",rid:null});
+  $("#cr").onclick=crf; $("#sp-cr").onclick=crf;
+  $("#lb").onclick=()=>go("lib"); $("#mem").onclick=()=>go("memory");
+  $("#sp-f").onclick=()=>startQuiz({title:t("sp.f.t"),qs:shuffle(pool({special:"fehler"})).slice(0,20),mode:"lern",rid:null});
+  $("#sp-z").onclick=()=>startQuiz({title:t("sp.z.t"),qs:shuffle(pool()).slice(0,10),mode:"lern",rid:null});
+  $$("#app .rubriken [data-r]").forEach(b=>b.onclick=()=>go("rubrik",{rubrik:b.dataset.r}));
+  /* slideshow */
+  const show=i=>{S.slide=(i+SLIDES.length)%SLIDES.length;$$(".slides figure").forEach((f,k)=>{f.classList.toggle("on",k===S.slide);if(k===S.slide)f.removeAttribute("aria-hidden");else f.setAttribute("aria-hidden","true")});$$(".sdots button").forEach((b,k)=>b.setAttribute("aria-current",k===S.slide))};
+  $$("[data-sl]").forEach(b=>b.onclick=()=>{show(+b.dataset.sl);stopSlides();SLIDE_T=setInterval(()=>show(S.slide+1),7000)});
+  stopSlides(); SLIDE_T=setInterval(()=>{if(!document.hidden)show(S.slide+1)},7000);
+}
+
+function crumbs(list){return `<nav class="crumbs" aria-label="${t("crumbs")}">${list.map((c,i)=>i===list.length-1?`<span class="crumb cur">${esc(c[0])}</span>`:`<button class="crumb" data-cr="${i}">${esc(c[0])}</button><span class="sep">/</span>`).join("")}</nav>`}
+function bindCrumbs(list){$$("[data-cr]").forEach(b=>b.onclick=list[+b.dataset.cr][1])}
+const phead=(icon,title,sub,c)=>`<div class="phead"${c?` style="--c:${c}"`:""}><span class="pi">${icon}</span><div><h1>${title}</h1>${sub?`<p>${sub}</p>`:""}</div></div>`;
+
+/* ---------- rubric ---------- */
+function renderRubrik(){
+  const r=rub(S.rubrik); if(!r){go("home");return}
+  const cl=[[t("nav.home"),()=>go("home")],[L(r,"name")]];
+  const themen=r.themen.map(x=>({t:x,n:pool({rubrik:r.id,thema:x.id}).length})).filter(x=>x.n>0);
+  const tile=({t:x,n})=>`<button class="thema" data-t="${esc(x.id)}"><span class="ti">${ticon(x.id)}</span><b>${esc(L(x,"name"))}</b><span class="t">${esc(L(x,"beschreibung"))}</span><span class="meta"><span class="tagp">${t("n.q",{n:fN(n)})}</span>${x.flugzeug?`<span class="tagp">${x.flugzeug}</span>`:""}</span></button>`;
+  $("#app").innerHTML=crumbs(cl)+phead(emo(r.id),esc(L(r,"name")),esc(L(r,"beschreibung")))+acBar()+`
+  <div class="themen">
+    <button class="thema all" data-t=""><span class="ti">${IC.mix}</span><b>${t("rub.all")}</b><span class="t">${t("rub.all.s")}</span><span class="meta"><span class="tagp">${t("n.q",{n:fN(pool({rubrik:r.id}).length)})}</span></span></button>
+    ${themen.filter(x=>!x.t.flugzeug).map(tile).join("")}
+  </div>
+  ${["E2","E1"].map(a=>{const g=themen.filter(x=>x.t.flugzeug===a);return g.length?`<div class="acgroup"><img src="cockpit-${a.toLowerCase()}.jpg" alt="${esc(t("cockpit.alt",{a}))}" loading="lazy"><div><h2><span class="tbadge">${a}</span>${ACSUB[a]}</h2><p>${t("rub.acgroup",{n:g.length,a})}</p></div></div><div class="themen">${g.map(tile).join("")}</div>`:""}).join("")}`;
+  setC($("#app"),r.id); bindCrumbs(cl); bindAc();
+  $$("[data-t]").forEach(b=>b.onclick=()=>go("setup",{thema:b.dataset.t||null}));
+}
+
+/* ---------- setup ---------- */
+function renderSetup(){
+  const r=rub(S.rubrik), th=themaOf(r,S.thema); if(!r){go("home");return}
+  const cl=[[t("nav.home"),()=>go("home")],[L(r,"name"),()=>go("rubrik")],[th?L(th,"name"):t("rub.all")]];
+  const avail=pool({rubrik:r.id,thema:S.thema,stufe:S.setup.stufe});
+  const max=Math.max(1,avail.length); if(S.setup.n>max) S.setup.n=max; if(S.setup.n<1) S.setup.n=1;
+  const m=S.setup.mode, fa=th&&th.flugzeug;
+  $("#app").innerHTML=crumbs(cl)+phead(th?ticon(th.id):emo(r.id),esc(th?L(th,"name"):L(r,"name")),esc(th?L(th,"beschreibung"):L(r,"beschreibung")))+`
+  ${fa==="E1"||fa==="E2"?`<div class="acbanner"><img src="cockpit-${fa.toLowerCase()}.jpg" alt="${esc(t("cockpit.alt",{a:fa}))}"><div><h2><span class="tbadge">${fa}</span>${ACSUB[fa]}</h2><p>${t("setup.only")}</p></div></div>`:""}
+  <div class="setup">
+    <div><h3>${t("setup.mode")}</h3><div class="modes">
+      <button class="mode" data-m="lern" aria-pressed="${m==="lern"}"><b>${IC.learn} ${t("setup.lern")}</b><span>${t("setup.lern.s")}</span></button>
+      <button class="mode" data-m="pruefung" aria-pressed="${m==="pruefung"}"><b>${IC.clock} ${t("setup.pr")}</b><span>${t("setup.pr.s",{s:SEC_PER_Q,p:fP(PASS)})}</span></button>
+    </div></div>
+    <div><h3>${t("setup.diff")}</h3><div class="seg" role="group" aria-label="${t("setup.diff")}">${[0,1,2,3].map(k=>`<button data-s="${k}" aria-pressed="${S.setup.stufe===k}">${t("diff."+k)}</button>`).join("")}</div></div>
+    <div><h3>${t("setup.n")}</h3>
+      <div class="slider"><output id="nOut">${S.setup.n}</output><label class="hint" for="nIn">${t("setup.avail",{n:fN(avail.length)})}</label><input type="range" id="nIn" min="1" max="${max}" value="${S.setup.n}" style="--p:${max>1?(S.setup.n-1)/(max-1)*100:100}%"><div class="scale"><span>1</span><span>${max}</span></div></div></div>
+    <div class="center"><button class="btn ${m==="pruefung"?"dark":"pri"}" id="go" ${avail.length?"":"disabled"}>${m==="pruefung"?IC.clock+" "+t("setup.go.pr"):IC.play+" "+t("setup.go.l")}</button><button class="btn" id="libt">${IC.book} ${t("setup.learn")}</button></div>
+  </div>`;
+  setC($("#app"),r.id); bindCrumbs(cl);
+  $$("[data-m]").forEach(b=>b.onclick=()=>{S.setup.mode=b.dataset.m;renderSetup()});
+  $$("[data-s]").forEach(b=>b.onclick=()=>{S.setup.stufe=+b.dataset.s;renderSetup()});
+  const nIn=$("#nIn"); nIn.oninput=()=>{S.setup.n=+nIn.value;$("#nOut").textContent=nIn.value;nIn.style.setProperty("--p",(max>1?(nIn.value-1)/(max-1)*100:100)+"%")};
+  $("#go").onclick=()=>startQuiz({title:th?L(th,"name"):L(r,"name"),qs:shuffle(avail).slice(0,S.setup.n),mode:m,rid:r.id});
+  $("#libt").onclick=()=>go(th?"libthema":"librubrik",{});
+}
+
+/* ---------- quiz ---------- */
+let TIMER=null;
+function stopTimer(){if(TIMER){clearInterval(TIMER);TIMER=null}}
+function startQuiz({title,qs,mode,rid}){
+  if(!qs.length) return;
+  stopSlides();
+  S.quiz={title,mode,rid,items:qs.map(q=>({q,order:shuffle([0,1,2,3]),pick:null})),i:0,answered:false,
+    deadline:mode==="pruefung"?Date.now()+qs.length*SEC_PER_Q*1000:null,from:S.screen};
+  S.screen="quiz"; render(); window.scrollTo(0,0);
+  if(mode==="pruefung"){TIMER=setInterval(tick,1000)}
+}
+function tick(){const el=$("#timer");if(!S.quiz||!S.quiz.deadline){stopTimer();return}const left=Math.max(0,Math.round((S.quiz.deadline-Date.now())/1000));
+  if(el){el.innerHTML=IC.clock+" "+fmt(left);el.classList.toggle("warn",left<60)} if(left<=0){stopTimer();finish(true)}}
+const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+function renderQuiz(){
+  const Z=S.quiz, it=Z.items[Z.i], q=it.q, r=rub(q.rubrik), th=themaOf(r,q.thema);
+  const n=Z.items.length, lern=Z.mode==="lern", done=it.pick!=null, nAns=Z.items.filter(x=>x.pick!=null).length;
+  $("#app").innerHTML=`
+  <div class="qtop"><button class="btn sm ghost" id="quit">${IC.bad}<span>${t("quiz.quit")}</span></button><div class="bar" aria-hidden="true"><i style="width:${nAns/n*100}%"></i></div><span class="count">${Z.i+1} / ${n}</span>${Z.deadline?`<span class="timer" id="timer">${IC.clock} ${fmt(Math.max(0,Math.round((Z.deadline-Date.now())/1000)))}</span>`:""}</div>
+  <nav class="qnav" aria-label="${esc(t("quiz.nav"))}">${Z.items.map((x,k)=>`<button data-qi="${k}" class="${x.pick!=null?"ans-d":""}${x.flag?" flg":""}${lern&&x.pick!=null?(x.pick===x.q.richtig?" q-ok":" q-bad"):""}" ${k===Z.i?'aria-current="step"':""} aria-label="${esc(t("quiz.goto",{n:k+1}))}${x.flag?" · "+esc(t("quiz.flagged")):""}">${k+1}</button>`).join("")}</nav>
+  <p class="qlegend"><span><i class="lg-a"></i>${t("quiz.lg.ans")}</span><span><i class="lg-o"></i>${t("quiz.lg.open")}</span><span><i class="lg-f"></i>${t("quiz.lg.flag")}</span></p>
+  <div class="card" id="card">
+    <div class="qmeta">${r?`<span class="tagp">${esc(L(r,"name"))}</span>`:""}${th?`<span class="tagp">${esc(L(th,"name"))}</span>`:""}${q.flugzeug&&q.flugzeug!=="beide"?`<span class="tagp">${q.flugzeug}</span>`:""}${q.stufe?`<span class="tagp">${stufeName(q.stufe)}</span>`:""}${it.flag?`<span class="tagp flagtag">${ms("flag",1)} ${t("quiz.flagged")}</span>`:""}</div>
+    <h2 class="question">${qb(q)}${esc(QF(q))}</h2>
+    <div class="answers" id="answers">${it.order.map((oi,k)=>`<button class="ans" data-o="${oi}"><span class="key">${"ABCD"[k]}</span><span>${esc(QA(q,oi))}</span></button>`).join("")}</div>
+    ${lern&&!done?`<div class="peekrow"><button class="peekbtn" id="peek" aria-expanded="${!!it.peek}">${IC.book} ${t("quiz.peek")}</button></div><div id="peekbox">${it.peek?peekHTML(q):""}</div>`:""}
+    <div id="fb"></div>
+    <div class="qbar">
+      <button class="btn" id="prev" ${Z.i===0?"disabled":""}>${ms("arrow_back")}<span>${t("quiz.prev")}</span></button>
+      <button class="btn ghost flagbtn" id="flag" aria-pressed="${!!it.flag}">${ms("flag",it.flag?1:0)}<span>${it.flag?t("quiz.unflag"):t("quiz.flag")}</span></button>
+      ${Z.i+1<n?`<button class="btn ${done?"pri":""}" id="nextq"><span>${t("quiz.next")}</span>${IC.next}</button>`:`<button class="btn pri" id="fin">${IC.ok}<span>${lern?t("quiz.result"):t("quiz.eval")}</span></button>`}
+    </div>
+    <div id="confirm"></div>
+  </div>`;
+  setC($("#app"),q.rubrik);
+  $("#quit").onclick=()=>{if(Z.mode==="pruefung"&&Z.items.some(x=>x.pick!=null)){finish(false)}else go(["quiz","done"].includes(Z.from)?"home":Z.from)};
+  $$(".ans").forEach(b=>b.onclick=()=>answer(+b.dataset.o));
+  $$("[data-qi]").forEach(b=>b.onclick=()=>gotoQ(+b.dataset.qi));
+  $("#prev").onclick=()=>gotoQ(Z.i-1);
+  const nx=$("#nextq"); if(nx) nx.onclick=()=>gotoQ(Z.i+1);
+  const fn=$("#fin"); if(fn) fn.onclick=askFinish;
+  $("#flag").onclick=()=>{it.flag=!it.flag;renderQuiz()};
+  const pk=$("#peek"); if(pk) pk.onclick=()=>{it.peek=!it.peek;pk.setAttribute("aria-expanded",it.peek);$("#peekbox").innerHTML=it.peek?peekHTML(q):""};
+  if(done){ if(lern) showFeedback(); else examPicked(); }
+}
+function gotoQ(i){const Z=S.quiz;if(!Z||i<0||i>=Z.items.length)return;Z.i=i;renderQuiz();window.scrollTo(0,0)}
+function askFinish(){
+  const Z=S.quiz, open=Z.items.filter(x=>x.pick==null).length, fl=Z.items.filter(x=>x.flag).length;
+  if(!open&&!fl){finish(false);return}
+  const first=Z.items.findIndex(x=>x.pick==null), ff=Z.items.findIndex(x=>x.flag);
+  $("#confirm").innerHTML=`<div class="qconfirm" role="alert"><p>${open?plu("quiz.open",open):""}${open&&fl?" ":""}${fl?plu("quiz.flags",fl):""}</p>
+    <div class="nextrow">${first>=0?`<button class="btn" id="goopen">${t("quiz.toopen")}</button>`:""}${ff>=0?`<button class="btn" id="goflag">${ms("flag",1)}<span>${t("quiz.toflag")}</span></button>`:""}<button class="btn pri" id="finyes">${Z.mode==="lern"?t("quiz.result"):t("quiz.eval")}</button></div></div>`;
+  const a=$("#goopen"); if(a) a.onclick=()=>gotoQ(first);
+  const b=$("#goflag"); if(b) b.onclick=()=>gotoQ(ff);
+  $("#finyes").onclick=()=>finish(false);
+  $("#confirm").scrollIntoView({block:"nearest"});
+}
+function peekHTML(q){return `<div class="explain" style="margin-top:14px"><p>${esc(QE(q))}</p>${refHTML(q,true)}</div><p class="peeknote">${t("quiz.peeknote")}</p>`}
+function examPicked(){
+  const Z=S.quiz,it=Z.items[Z.i];
+  $$(".ans").forEach(b=>b.classList.toggle("picked",+b.dataset.o===it.pick));
+}
+function answer(o){
+  const Z=S.quiz, it=Z.items[Z.i];
+  if(Z.mode==="lern"){ if(it.pick!=null) return; it.pick=o; if(!it.peek)record(it.q,o===it.q.richtig); renderQuiz(); }
+  else { it.pick=o; renderQuiz(); const nx=$("#nextq")||$("#fin"); if(nx) nx.focus({preventScroll:true}); }
+}
+function showFeedback(){
+  const Z=S.quiz,it=Z.items[Z.i],q=it.q,ok=it.pick===q.richtig;
+  $$(".ans").forEach(b=>{const oi=+b.dataset.o;b.disabled=true;if(oi===q.richtig){b.classList.add("right");b.insertAdjacentHTML("beforeend",'<span class="mark">'+IC.ok+'</span>')}else if(oi===it.pick){b.classList.add("wrong");b.insertAdjacentHTML("beforeend",'<span class="mark">'+IC.bad+'</span>')}});
+  $("#fb").innerHTML=`<div class="feedback"><div class="verdict ${ok?"ok":"bad"}">${ok?t("quiz.ok"):t("quiz.bad")}${it.peek?t("quiz.peeked"):""}</div>
+    <div class="explain"><p>${esc(QE(q))}</p>${refHTML(q,true)}</div></div>`;
+}
+document.addEventListener("keydown",e=>{
+  if(S.screen!=="quiz"||!S.quiz||e.altKey||e.ctrlKey||e.metaKey) return;
+  const tg=e.target&&e.target.tagName; if(tg==="INPUT"||tg==="TEXTAREA") return;
+  if(e.key==="ArrowRight"){gotoQ(S.quiz.i+1)} else if(e.key==="ArrowLeft"){gotoQ(S.quiz.i-1)}
+});
+function record(q,ok){const x=S.st.q[q.id]||[0,0,0];x[0]++;if(ok){x[1]++;S.st.punkte+=10*(q.stufe||1)}x[2]=ok?1:0;S.st.q[q.id]=x}
+function finish(timeUp){
+  stopTimer(); const Z=S.quiz; if(!Z) return;
+  if(Z.mode==="pruefung") Z.items.forEach(it=>{if(it.pick!=null) record(it.q,it.pick===it.q.richtig)});
+  const sc=Z.items.filter(it=>!it.peek), ok=sc.filter(it=>it.pick===it.q.richtig).length, n=Math.max(1,sc.length), pct=sc.length?ok/n:0;
+  const passed=Z.mode==="pruefung"&&pct>=PASS; if(passed) S.st.punkte+=50;
+  S.st.tests=[{d:new Date().toISOString().slice(0,10),t:Z.title,m:Z.mode,ok,n}].concat(S.st.tests||[]).slice(0,40);
+  Z.result={ok,n,pct,passed,timeUp}; save(); S.screen="done"; render(); window.scrollTo(0,0);
+}
+function renderDone(){
+  const Z=S.quiz,R=Z.result, pk=Z.items.filter(it=>it.peek).length;
+  $("#app").innerHTML=`<div class="card done">
+    <p class="kicker">${Z.mode==="pruefung"?t("setup.pr"):t("setup.lern")}</p>
+    <h1>${esc(Z.title)}</h1>
+    <div class="score">${R.ok} / ${R.n}</div>${pk?`<p>${t("done.peeked",{n:pk})}</p>`:""}
+    ${Z.mode==="pruefung"?`<div class="badge ${R.passed?"ok":"bad"}">${R.passed?t("done.pass"):t("done.fail")} · ${fP(R.pct)}</div>`:`<div class="badge ${R.pct>=PASS?"ok":"bad"}">${t("done.pct",{p:fP(R.pct)})}</div>`}
+    ${R.timeUp?`<p>${t("done.timeup")}</p>`:""}
+    <p>${S.uid?t("done.saved.db"):t("done.saved.local")}</p>
+    <div class="center"><button class="btn pri" id="again">${IC.redo} ${t("done.again")}</button><button class="btn" id="home2">${t("done.home")}</button></div>
+    <div class="review">${Z.items.map((it,i)=>{const q=it.q,ok=it.pick===q.richtig;return `<div class="rev ${ok?"r-ok":"r-bad"}"><b>${i+1}. ${qb(q)}${esc(QF(q))}</b>
+      ${ok?`<span class="a-ok">${IC.ok} ${esc(QA(q,q.richtig))}</span>`:`${it.pick!=null?`<span class="a-bad">${esc(QA(q,it.pick))}</span>`:`<span class="m">${t("done.na")}</span>`}<span class="a-ok">${IC.ok} ${esc(QA(q,q.richtig))}</span>`}
+      <span class="m">${esc(QE(q))}</span>${refHTML(q,false)}</div>`}).join("")}</div></div>`;
+  $("#again").onclick=()=>startQuiz({title:Z.title,qs:shuffle(Z.items.map(x=>x.q)),mode:Z.mode,rid:Z.rid});
+  $("#again").onclick=(f=>()=>{const from=Z.from;f();if(S.quiz)S.quiz.from=from})($("#again").onclick);
+  $("#home2").onclick=()=>go("home");
+}
+
+/* ---------- library ---------- */
+function renderLib(){
+  const cl=[[t("lib.title")]];
+  $("#app").innerHTML=crumbs(cl)+phead(IC.book,t("lib.title"),t("lib.sub"),"var(--char)")+acBar()+`
+  <div class="searchbox"><input id="q" type="search" placeholder="${esc(t("lib.ph"))}" value="${esc(S.query)}" aria-label="${esc(t("lib.aria"))}"></div>
+  <div id="res"></div>`;
+  bindAc(); const inp=$("#q"); inp.oninput=()=>{S.query=inp.value;libResults()}; libResults();
+}
+function libResults(){
+  const q=S.query.trim().toLowerCase(), el=$("#res");
+  if(q.length<2){
+    el.innerHTML=artLibBlock()+`<div class="rubriken">${RUBS().map(r=>rubTile(r,t("n.t",{n:r.themen.filter(acVis).length}),false)).join("")}</div>`;
+    el.querySelectorAll("[data-r]").forEach(b=>b.onclick=()=>go("librubrik",{rubrik:b.dataset.r}));bindArts(el);return;
+  }
+  const hl=s=>{const e=esc(s),eq=esc(q),i=e.toLowerCase().indexOf(eq);return i<0?e:e.slice(0,i)+'<mark class="hl">'+e.slice(i,i+eq.length)+"</mark>"+e.slice(i+eq.length)};
+  const facts=[];RUBS().forEach(r=>r.themen.filter(acVis).forEach(th=>(th.bibliothek&&th.bibliothek.fakten||[]).forEach(f=>{if([f.titel,f.text,f.titel_en,f.text_en].join(" ").toLowerCase().includes(q))facts.push({r,th,f})})));
+  const qs=pool().filter(x=>[x.frage,x.antworten[x.richtig],x.erklaerung,x.frage_en,(x.antworten_en||[])[x.richtig],x.erklaerung_en].join(" ").toLowerCase().includes(q));
+  const arts=ARTS().filter(a=>artVis(a)&&artBlob(a).includes(q));
+  el.innerHTML=`${arts.length?`<p class="label">${t("art.title")} <small>${t("lib.hits",{n:fN(arts.length)})}</small></p><div class="arts">${arts.slice(0,30).map(artCard).join("")}</div>`:""}<p class="label">${t("lib.facts")} <small>${t("lib.hits",{n:fN(facts.length)})}</small></p><div class="facts">${facts.slice(0,60).map(({r,th,f})=>`<div class="fact" style="--c:${rc(r.id)}"><span><span class="tagp">${esc(L(r,"name"))} · ${esc(L(th,"name"))}</span></span><b>${tb(f.flugzeug)}${hl(L(f,"titel"))}</b><p>${hl(L(f,"text"))}</p><p class="src">${IC.doc}<span>${esc(f.quelle)}</span></p></div>`).join("")||`<p class="hint">${t("lib.nofacts")}</p>`}</div>
+  <p class="label">${t("lib.qs")} <small>${t("lib.hits",{n:fN(qs.length)})}</small></p><div class="qlist">${qs.slice(0,80).map(qItem).join("")||`<p class="hint">${t("lib.noq")}</p>`}</div>`;
+  bindArts(el);
+}
+function passageHTML(q,d){
+  const k=q.kontext, A="\u0001", B="\u0002";
+  const raw=k[0]+A+k[1]+B+k[2];
+  let inM=false;
+  const seg=s=>{let o=inM?"<mark>":"";s.split(/([\u0001\u0002])/).forEach(x=>{if(x===A){o+="<mark>";inM=true}else if(x===B){o+="</mark>";inM=false}else o+=esc(x)});return o+(inM?"</mark>":"")};
+  const BUL=/^([•▪●◦\-–—]|[a-z]\)|\(?\d{1,2}[.)]|\([a-z0-9]{1,3}\))\s/;
+  const NOTE=/^(NOTE|CAUTION|WARNING)\b/;
+  const isHead=s=>{const l=s.replace(/[^A-Za-z]/g,"");return s.length<=70&&((l.length>=4&&l===l.toUpperCase())||(/^\d{1,2}(\.\d{1,2}){1,4}\.?\s+[A-Z][A-Za-z]/.test(s)&&!/[.,;]$/.test(s)))};
+  const paras=raw.split(/\n{2,}/).map(par=>{
+    const lines=par.split("\n"); let html="", buf=[];
+    const flush=()=>{if(buf.length){html+=`<p>${buf.join("")}</p>`;buf=[]}};
+    lines.forEach(line=>{
+      const plain=line.replace(/[\u0001\u0002]/g,"").trim();
+      if(!plain||(/^(AOM-\d+-\d+|EM\w+\.IDR|\d{1,2}-\d{2}(-\d{2})?|Page \d+(\/\d+)?.*REVISION \d+.*|REVISION \d+.*|Page \d+(\/\d+)?)$/.test(plain)&&!/[\u0001\u0002]/.test(line)&&!inM)){seg(line);return}
+      if(isHead(plain)){flush();html+=`<div class="ph">${seg(line)}</div>`}
+      else if(NOTE.test(plain)){buf.push(`<span class="pn">${seg(line).replace(/^((?:<mark>)?)(NOTE|CAUTION|WARNING):?/,"$1<b>$2:</b>")}</span>`)}
+      else if(BUL.test(plain)){buf.push(`<span class="pl">${seg(line)}</span>`)}
+      else buf.push((buf.length&&!/<\/span>$/.test(buf[buf.length-1])?"<br>":"")+seg(line));
+    });
+    flush(); return html;
+  }).join("");
+  return `<div class="passage"><div class="pdoc"><span>${esc(d?d.name:q.dok||"")}</span><span>${q.pdfseite?t("ref.page",{n:q.pdfseite}):""}</span></div>${q.kstart?'<span class="ell">… </span>':""}${paras}${q.kend?'<span class="ell"> …</span>':""}</div>`;
+}
+document.addEventListener("toggle",e=>{const x=e.target;if(x.classList&&x.classList.contains("pdet")&&x.open){const m=x.querySelector(".passage mark"),b=x.querySelector(".passage");if(m&&b)b.scrollTop=Math.max(0,m.offsetTop-b.offsetTop-60)}},true);
+function refHTML(q,open){
+  const d=q.dok&&DATA.dokumente&&DATA.dokumente[q.dok];
+  const k=q.kontext;
+  return `<div class="ref"><div class="refhead">${IC.doc}<span>${esc(q.quelle)}</span></div>
+    ${d?`<div class="refpdf">${esc(d.name)} · ${esc(d.pdf)}${q.pdfseite?` · ${t("ref.page",{n:q.pdfseite})}`:""}</div>`:""}
+    ${k?`<details class="pdet" ${open?"open":""}><summary>${t("ref.passage")}</summary>${passageHTML(q,d)}</details>`:(q.zitat?`<p class="quote"><b>${t("ref.orig")}</b>${esc(q.zitat)}</p>`:"")}</div>`;
+}
+function qItem(q){return `<details class="qi"><summary><span>${qb(q)}${esc(QF(q))}</span></summary><div class="body"><span class="a-ok">${IC.ok} ${esc(QA(q,q.richtig))}</span><span>${esc(QE(q))}</span>${refHTML(q,false)}</div></details>`}
+function renderLibRubrik(){
+  const r=rub(S.rubrik); if(!r){go("lib");return}
+  const cl=[[t("lib.title"),()=>go("lib")],[L(r,"name")]];
+  const rarts=ARTS().filter(a=>artVis(a)&&(a.themen||[]).some(id=>r.themen.some(x=>x.id===id)));
+  $("#app").innerHTML=crumbs(cl)+phead(emo(r.id),esc(L(r,"name")),esc(L(r,"beschreibung")))+acBar()+`
+  ${rarts.length?`<section class="artblock"><p class="label">${t("art.title")} <small>${plu("art.n",rarts.length)}</small></p><div class="arts">${rarts.map(artCard).join("")}</div></section>`:""}
+  <div class="themen">${r.themen.filter(acVis).sort(acSort).map(th=>`<button class="thema" data-t="${esc(th.id)}"><span class="ti">${ticon(th.id)}</span><b>${esc(L(th,"name"))}</b><span class="t">${esc(L(th,"beschreibung"))}</span><span class="meta"><span class="tagp">${t("n.f",{n:(th.bibliothek&&th.bibliothek.fakten||[]).length})}</span><span class="tagp">${t("n.q",{n:pool({rubrik:r.id,thema:th.id}).length})}</span>${(n=>n?`<span class="tagp">${plu("art.n",n)}</span>`:"")(artOfThema(th.id).length)}${th.flugzeug?`<span class="tagp">${th.flugzeug}</span>`:""}</span></button>`).join("")}</div>`;
+  setC($("#app"),r.id); bindCrumbs(cl); bindAc();
+  $$("[data-art]").forEach(b=>b.onclick=()=>{const a=artById(b.dataset.art);openArt(b.dataset.art,(a.themen||[]).find(id=>r.themen.some(x=>x.id===id)))});
+  $$("[data-t]").forEach(b=>b.onclick=()=>go("libthema",{thema:b.dataset.t}));
+}
+function sysThema(id){for(const r of DATA.rubriken){const x=r.themen.find(y=>y.id===id);if(x)return[r,x]}return[null,null]}
+function kTerms(k){const m=k.name.match(/\(([^)]+)\)/);const out=[];if(m)m[1].split(/[\/,]| and /).forEach(x=>{x=x.trim();if(x.length>=2)out.push(x)});const base=k.name.replace(/\(.*?\)/g,"").trim();if(base.length>=4)out.push(base);return out}
+function renderLibKomp(){
+  const r=rub(S.rubrik), th=themaOf(r,S.thema), ks=(th&&th.komponenten)||[], k=ks[S.komp];
+  if(!k){go("libthema");return}
+  const cl=[[t("lib.title"),()=>go("lib")],[L(r,"name"),()=>go("librubrik")],[L(th,"name"),()=>go("libthema")],[k.name]];
+  const terms=kTerms(k).map(x=>x.toLowerCase());
+  const rel=DATA.fragen.filter(q=>q.thema===th.id&&terms.some(w=>(q.frage+" "+q.erklaerung+" "+q.antworten[q.richtig]).toLowerCase().includes(w))).slice(0,10);
+  const vb=(k.verbunden||[]).map(n=>ks.findIndex(x=>x.name===n)).filter(i=>i>=0);
+  const sy=(k.systeme||[]).map(sysThema).filter(x=>x[1]);
+  const desc=L(k,"beschreibung");
+  $("#app").innerHTML=crumbs(cl)+phead(ticon(th.id),esc(k.name),`${tb(th.flugzeug)}${esc(L(th,"name"))} · ${t("komp.of",{i:S.komp+1,n:ks.length})}`)+`
+  <div class="kdetail">
+    <div class="kmain">
+      <p class="kfun">${esc(L(k,"funktion"))}</p>
+      ${desc?`<div class="kdesc">${desc.split(/(?<=[.!?])\s+(?=[A-ZÄÖÜ])/).reduce((a,x,i)=>{const j=Math.floor(i/3);(a[j]=a[j]||[]).push(x);return a},[]).map(p=>`<p>${esc(p.join(" "))}</p>`).join("")}</div>`:""}
+      <p class="src">${IC.doc}<span>${esc((k.quellen||[k.quelle]).join(" · "))}</span></p>
+    </div>
+    <aside class="kside">
+      ${vb.length?`<h3>${t("komp.conn")}</h3><div class="kchips">${vb.map(i=>`<button class="kchip" data-kk="${i}">${ms("link")}${esc(ks[i].name)}</button>`).join("")}</div>`:""}
+      ${sy.length?`<h3>${t("komp.sys")}</h3><div class="kchips">${sy.map(([rr,tt])=>`<button class="kchip sys" data-st="${esc(tt.id)}">${ticon(tt.id)}${esc(L(tt,"name"))}</button>`).join("")}</div>`:""}
+      <h3>${t("komp.more")}</h3><div class="kchips">${ks.map((x,i)=>i===S.komp||vb.includes(i)?"":`<button class="kchip dim" data-kk="${i}">${esc(x.name)}</button>`).join("")}</div>
+    </aside>
+  </div>
+  <div class="knav">${S.komp>0?`<button class="btn sm ghost" id="kprev">${ms("chevron_left")}<span>${esc(ks[S.komp-1].name)}</span></button>`:"<span></span>"}${S.komp<ks.length-1?`<button class="btn sm ghost" id="knext"><span>${esc(ks[S.komp+1].name)}</span>${ms("chevron_right")}</button>`:""}</div>
+  ${rel.length?`<p class="label">${t("komp.rel")} <small>${t("komp.rel.s",{n:rel.length})}</small></p><div class="qlist">${rel.map(qItem).join("")}</div>`:""}`;
+  setC($("#app"),r.id); bindCrumbs(cl);
+  $$("[data-kk]").forEach(x=>x.onclick=()=>go("libkomp",{komp:+x.dataset.kk}));
+  $$("[data-st]").forEach(x=>x.onclick=()=>go("libthema",{rubrik:"sys",thema:x.dataset.st}));
+  if($("#kprev"))$("#kprev").onclick=()=>go("libkomp",{komp:S.komp-1});
+  if($("#knext"))$("#knext").onclick=()=>go("libkomp",{komp:S.komp+1});
+}
+function renderLibThema(){
+  const r=rub(S.rubrik), th=themaOf(r,S.thema); if(!th){go(r?"librubrik":"lib");return}
+  const b=th.bibliothek||{fakten:[]}, qs=pool({rubrik:r.id,thema:th.id});
+  const cl=[[t("lib.title"),()=>go("lib")],[L(r,"name"),()=>go("librubrik")],[L(th,"name")]];
+  const kp=th.komponenten||[], arts=artOfThema(th.id);
+  $("#app").innerHTML=crumbs(cl)+phead(ticon(th.id),esc(L(th,"name")),esc(L(th,"beschreibung")))+`
+  <div class="acbar"><span class="lbl">${t("ac.label")}</span><div class="seg" role="group" aria-label="${t("ac.aria")}">${(th.flugzeug?[["E2","E2"],["E1","E1"]]:[["alle","E2 + E1"],["E2","E2"],["E1","E1"]]).map(([k,l])=>`<button data-lac="${k}" aria-pressed="${th.flugzeug?th.flugzeug===k:S.ac===k}">${l}</button>`).join("")}</div></div>
+  ${L(b,"einleitung")?`<p class="intro">${esc(L(b,"einleitung"))}</p>`:""}
+  ${arts.length?`<p class="label">${t("art.title")} <small>${plu("art.n",arts.length)}</small></p><div class="arts">${arts.map(artCard).join("")}</div>`:""}
+  ${kp.length?`<p class="label">${t("lib.komp")} <small>${t("lib.komp.s",{n:kp.length,src:esc((kp[0].quelle||"").split(",")[0])})}</small></p>
+  <ol class="komp">${kp.map((k,i)=>`<li><button class="kbtn" data-k="${i}"><span class="kn">${esc(k.name)}</span><span class="kf">${esc(L(k,"funktion"))}</span><span class="kq">${IC.doc}${esc(k.quelle)}<span class="kmore">${t("lib.details")} ${ms("chevron_right")}</span></span></button></li>`).join("")}</ol>`:""}
+  <p class="label">${t("lib.kf")} <small>${t("lib.kf.s",{n:(b.fakten||[]).length})}</small></p>
+  <div class="facts">${(b.fakten||[]).filter(f=>S.ac==="alle"||!f.flugzeug||f.flugzeug===S.ac).map(f=>`<div class="fact"><b>${tb(f.flugzeug)}${esc(L(f,"titel"))}</b><p>${esc(L(f,"text"))}</p><p class="src">${IC.doc}<span>${esc(f.quelle)}</span></p></div>`).join("")}</div>
+  <div class="center" style="margin-bottom:8px"><button class="btn pri" id="lq" ${qs.length?"":"disabled"}>${IC.play} ${t("lib.quiz")}</button></div>
+  <p class="label">${t("lib.cat")} <small>${t("lib.cat.s",{n:qs.length})}</small></p>
+  <div class="qlist">${qs.map(qItem).join("")}</div>`;
+  setC($("#app"),r.id); bindCrumbs(cl);
+  $("#lq").onclick=()=>go("setup");
+  $$("[data-k]").forEach(x=>x.onclick=()=>go("libkomp",{komp:+x.dataset.k}));
+  bindArts($("#app"),th.id);
+  $$("[data-lac]").forEach(x=>x.onclick=()=>{
+    const k=x.dataset.lac; S.ac=k; store.set("ac",k);
+    if(!th.flugzeug||th.flugzeug===k){render();return}
+    const twin=r.themen.find(o=>o.id===th.id.replace(/^e[12]-/,k.toLowerCase()+"-"))||r.themen.find(o=>o.flugzeug===k&&o.name.replace(/\s*\((E1|E2)\)/,"")===th.name.replace(/\s*\((E1|E2)\)/,""));
+    if(twin) go("libthema",{thema:twin.id}); else go("librubrik");
+  });
+}
+
+/* ---------- articles (Fachartikel) ---------- */
+const ARTS=()=>Array.isArray(DATA&&DATA.artikel)?DATA.artikel.filter(a=>a&&a.id&&Array.isArray(a.abschnitte)):[];
+const artById=id=>ARTS().find(a=>a.id===id);
+const artVis=a=>S.ac==="alle"||!a.flugzeug||a.flugzeug===S.ac;
+const artRub=a=>sysThema((a.themen||[])[0])[0];
+const artOfThema=id=>ARTS().filter(a=>artVis(a)&&(a.themen||[]).includes(id));
+const plu=(k,n)=>n===1?t(k+"1"):t(k,{n:fN(n)});
+const KL=["a","b","c","ok","warn","crit","info","e1","e2"];
+const kcls=k=>KL.includes(k)?"k-"+k:"";
+const md=s=>esc(s).replace(/\*\*([^*]+?)\*\*/g,"<strong>$1</strong>");
+const paras=s=>String(s??"").split(/\n\s*\n/).map(p=>p.trim()).filter(Boolean).map(p=>`<p>${md(p).replace(/\n/g,"<br>")}</p>`).join("");
+function artBlob(a){if(a._blob)return a._blob;const out=[];const walk=v=>{if(typeof v==="string")out.push(v);else if(Array.isArray(v))v.forEach(walk);else if(v&&typeof v==="object")Object.entries(v).forEach(([k,x])=>{if(k!=="klasse"&&k!=="typ"&&k!=="stil")walk(x)})};
+  walk([a.titel,a.titel_en,a.kurz,a.kurz_en,a.abschnitte]);return a._blob=out.join(" ").toLowerCase()}
+function artCard(a){
+  const r=artRub(a), n=a.abschnitte.length, nt=a.abschnitte.filter(x=>x&&x.typ==="tabelle").length;
+  return `<button class="acard" data-art="${esc(a.id)}" style="--c:${r?rc(r.id):"var(--red)"}"><span class="ak">${ms("article")}${t("art.title")}</span><b>${tb(a.flugzeug)}${esc(L(a,"titel"))}</b>${L(a,"kurz")?`<span class="t">${md(L(a,"kurz"))}</span>`:""}<span class="meta"><span class="tagp">${plu("art.secs",n)}</span>${nt?`<span class="tagp">${plu("art.tbls",nt)}</span>`:""}${a.flugzeug?"":`<span class="tagp">${t("art.both")}</span>`}<span class="more">${t("art.read")}${ms("chevron_right")}</span></span></button>`;
+}
+function bindArts(root,thema){(root||document).querySelectorAll("[data-art]").forEach(b=>b.onclick=()=>{let th=thema;const g=b.closest("[data-grp]"),rr=g&&g.dataset.grp&&rub(g.dataset.grp);if(!th&&rr){const a=artById(b.dataset.art);th=(a&&a.themen||[]).find(id=>rr.themen.some(x=>x.id===id))}openArt(b.dataset.art,th)})}
+function openArt(id,thema){
+  const a=artById(id); if(!a) return;
+  const th=thema&&(a.themen||[]).includes(thema)?thema:(a.themen||[])[0];
+  const [r]=sysThema(th);
+  go("artikel",{art:id,thema:th||null,rubrik:r?r.id:S.rubrik});
+}
+function artLibBlock(){
+  const list=ARTS().filter(artVis); if(!list.length) return "";
+  const groups=new Map(); RUBS().forEach(r=>groups.set(r.id,{r,a:[]})); const rest={r:null,a:[]};
+  list.forEach(a=>{const rs=[...new Set((a.themen||[]).map(id=>{const [r]=sysThema(id);return r&&r.id}).filter(Boolean))];if(!rs.length)rest.a.push(a);rs.forEach(id=>{const g=groups.get(id);(g||rest).a.push(a)})});
+  const gs=[...groups.values(),rest].filter(g=>g.a.length);
+  return `<section class="artblock"><p class="label">${t("art.title")} <small>${t("art.lib.s")} · ${plu("art.n",list.length)}</small></p>
+  ${gs.map(g=>`<h3 class="rg">${g.r?emo(g.r.id)+esc(L(g.r,"name")):ms("article")+t("art.title")}<span class="tagp">${g.a.length}</span></h3><div class="arts" data-grp="${g.r?g.r.id:""}">${g.a.map(artCard).join("")}</div>`).join("")}</section>`;
+}
+function artSection(x,i){
+  if(!x||typeof x!=="object") return "";
+  const id=`as-${i}`, h=L(x,"titel"), H=h?`<h2>${esc(h)}</h2>`:"";
+  if(x.typ==="hinweis"){const st=["info","warn","merke"].includes(x.stil)?x.stil:"info";
+    const icn={info:"info",warn:"warning",merke:"priority_high"}[st];
+    return `<aside class="callout ${st}" id="${id}"><p class="ch">${ms(icn,1)}${esc(h||t("art."+st))}</p>${paras(L(x,"text"))}</aside>`}
+  if(x.typ==="liste"){const pts=L(x,"punkte")||[];return `<section class="asec" id="${id}">${H}<div class="prose"><ul>${pts.map(p=>`<li>${md(p)}</li>`).join("")}</ul></div></section>`}
+  if(x.typ==="tabelle"){
+    const kopf=L(x,"kopf")||[], rows=Array.isArray(x.zeilen)?x.zeilen:[], leg=Array.isArray(x.legende)?x.legende:[];
+    const cells=z=>{const de=z.zellen||[],en=z.zellen_en;return LANG==="en"&&Array.isArray(en)&&en.length===de.length?en:de};
+    return `<section class="asec tsec" id="${id}">${H}
+    ${leg.length?`<div class="legend" role="list" aria-label="${t("art.legend")}">${leg.map(l=>`<span class="lchip ${kcls(l.klasse)}" role="listitem"><i aria-hidden="true"></i>${md(L(l,"text"))}</span>`).join("")}</div>`:""}
+    <div class="atblwrap${rows.length>12?" long":""}" tabindex="0" role="region" aria-label="${esc(h||t("art.title"))}"><table class="atbl">
+    ${kopf.length?`<thead><tr>${kopf.map(k=>`<th scope="col">${md(k)}</th>`).join("")}</tr></thead>`:""}
+    <tbody>${rows.map(z=>`<tr class="${kcls(z.klasse)}">${cells(z).map((c,j)=>`<td>${md(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>
+    ${L(x,"fussnote")?`<div class="fnote">${paras(L(x,"fussnote"))}</div>`:""}</section>`}
+  return `<section class="asec" id="${id}">${H}<div class="prose">${paras(L(x,"text"))}</div></section>`;
+}
+function renderArtikel(){
+  const a=artById(S.art); if(!a){go("lib");return}
+  const [r,th]=sysThema(S.thema);
+  const cl=[[t("lib.title"),()=>go("lib")]];
+  if(r) cl.push([L(r,"name"),()=>go("librubrik",{rubrik:r.id})]);
+  if(r&&th) cl.push([L(th,"name"),()=>go("libthema",{rubrik:r.id,thema:th.id})]);
+  cl.push([L(a,"titel")]);
+  const secs=a.abschnitte, toc=secs.map((x,i)=>[x,i]).filter(([x])=>x&&x.typ!=="hinweis"&&L(x,"titel"));
+  const nt=secs.filter(x=>x&&x.typ==="tabelle").length, qu=Array.isArray(a.quellen)?a.quellen:[];
+  const themen=a.themen||[];
+  const qs=DATA.fragen.filter(q=>themen.includes(q.thema)&&acOk(q)&&(!a.flugzeug||!q.flugzeug||q.flugzeug==="beide"||q.flugzeug===a.flugzeug));
+  const sib=th?ARTS().filter(x=>(x.themen||[]).includes(th.id)&&(x.id===a.id||artVis(x))):[a], ix=sib.findIndex(x=>x.id===a.id);
+  const prev=ix>0?sib[ix-1]:null, nxt=ix>=0&&ix<sib.length-1?sib[ix+1]:null;
+  $("#app").innerHTML=crumbs(cl)+`<article class="article">
+  <header class="ahead"><p class="kicker">${ms("article")}<span>${t("art.title")}</span>${th?`<span>· ${esc(L(th,"name"))}</span>`:""}</p>
+    <h1>${tb(a.flugzeug)}${esc(L(a,"titel"))}</h1>
+    ${L(a,"kurz")?`<p class="lead">${md(L(a,"kurz"))}</p>`:""}
+    <div class="ameta"><span class="tagp">${a.flugzeug?esc(a.flugzeug+" · "+(ACSUB[a.flugzeug]||"")):t("art.both")}</span><span class="tagp">${plu("art.secs",secs.length)}</span>${nt?`<span class="tagp">${plu("art.tbls",nt)}</span>`:""}</div></header>
+  ${toc.length>1?`<nav class="toc" aria-label="${t("art.toc")}"><p class="kicker">${t("art.toc")}</p><ol>${toc.map(([x,i])=>`<li><button data-toc="${i}">${esc(L(x,"titel"))}</button></li>`).join("")}${qu.length?`<li><button data-toc="src">${t("art.src")}</button></li>`:""}</ol></nav>`:""}
+  ${secs.map(artSection).join("")}
+  ${qu.length?`<section class="asec" id="as-src"><p class="label">${t("art.src")} <small>${t("art.src.s",{n:qu.length})}</small></p><div class="srcs">${qu.map(s=>`<div class="srcitem"><p class="src">${IC.doc}<span>${esc(s.quelle)}</span></p>${s.zitat?`<details><summary>${t("art.zitat")}</summary><p class="quote">${esc(s.zitat)}</p></details>`:""}</div>`).join("")}</div></section>`:""}
+  </article>
+  <p class="label">${t("art.qs")}</p>
+  <div class="aquiz"><p>${qs.length?t("art.qs.s",{n:fN(qs.length)}):t("art.qs.none")}</p><button class="btn pri" id="aq" ${qs.length?"":"disabled"}>${IC.play}<span>${t("art.quiz")}</span></button></div>
+  ${prev||nxt?`<nav class="anav">${prev?`<button data-art="${esc(prev.id)}"><small>${ms("chevron_left")}${t("art.prev")}</small><b>${esc(L(prev,"titel"))}</b></button>`:""}${nxt?`<button class="nx" data-art="${esc(nxt.id)}"><small>${t("art.next")}${ms("chevron_right")}</small><b>${esc(L(nxt,"titel"))}</b></button>`:""}</nav>`:""}`;
+  if(r)setC($("#app"),r.id);else $("#app").style.setProperty("--c","var(--red)");
+  bindCrumbs(cl); bindArts($("#app"),th&&th.id);
+  const smooth=!matchMedia("(prefers-reduced-motion: reduce)").matches;
+  $$("[data-toc]").forEach(b=>b.onclick=()=>{const el=document.getElementById("as-"+b.dataset.toc);if(el)el.scrollIntoView({behavior:smooth?"smooth":"auto",block:"start"})});
+  $("#aq").onclick=()=>startQuiz({title:L(a,"titel"),qs:shuffle(qs).slice(0,10),mode:"lern",rid:r?r.id:null});
+}
+
+/* ---------- compliance ---------- */
+function renderCompliance(){
+  const c=DATA.compliance||{dokumente:[]}, en=LANG==="en";
+  const rows=c.dokumente.map(x=>`<tr><td><b>${esc(x.kurz)}</b><br><span class="csub">${esc(x.titel)}</span></td><td>${esc(x.herausgeber)}</td><td>${esc(x.nr)}</td><td><b>${esc(x.revision)}</b></td><td>${esc(x.datum)}</td><td class="cscope">${esc(en&&x.umfang_en?x.umfang_en:x.umfang)}</td></tr>`).join("");
+  const miss=(en&&c.nicht_en?c.nicht_en:c.nicht)||[];
+  $("#app").innerHTML=crumbs([[t("nav.home"),()=>go("home")],[t("nav.comp")]])+phead('<span class="emo" aria-hidden="true">ℹ️</span>',t("nav.comp"),t("comp.sub"),"var(--c-sys)")+`
+  <p class="cstand">${t("comp.stand",{d:esc(c.stand||"")})}</p>
+  <div class="tblwrap"><table class="stat comp"><thead><tr><th>${t("comp.doc")}</th><th>${t("comp.pub")}</th><th>${t("comp.nr")}</th><th>${t("comp.rev")}</th><th>${t("comp.date")}</th><th>${t("comp.scope")}</th></tr></thead><tbody>${rows}</tbody></table></div>
+  ${miss.length?`<div class="shead"><h2>${t("comp.missing")}</h2></div><ul class="cmiss">${miss.map(m=>`<li>${esc(m)}</li>`).join("")}</ul>`:""}
+  <p class="note">${t("comp.note")}</p>`;
+  bindCrumbs([[t("nav.home"),()=>go("home")]]);
+}
+/* ---------- memory items ---------- */
+function renderMemory(){
+  const all=memItems(), ac=S.mac, items=all.filter(m=>m.flugzeug===ac), qs=memQs(ac);
+  const cl=[[t("nav.home"),()=>go("home")],[t("mem.title")]];
+  const hide=S.mhide;
+  const row=(m,s,i)=>{
+    const key=m.id+":"+i, rev=S.mrev.has(key), has=s.aktion!=null&&String(s.aktion).trim()!=="";
+    const cond=s.bedingung?`<span class="qcond">${esc(s.bedingung)}</span>`:"";
+    if(!has) return `<li>${cond}<span class="qrow full"><span class="qi">${esc(s.item)}</span></span></li>`;
+    const act=hide&&!rev?`<span class="qa masked">${t("mem.tap")}</span>`:`<span class="qa${hide?" revealed":""}">${esc(s.aktion)}</span>`;
+    return `<li>${cond}<button class="qrow" data-rv="${esc(key)}" ${hide?"":'tabindex="-1"'} aria-label="${esc(s.item)}${hide&&!rev?" – "+t("mem.tap"):": "+esc(s.aktion)}"><span class="qi">${esc(s.item)}</span><span class="ql" aria-hidden="true"></span>${act}</button></li>`;
+  };
+  const card=m=>{const st=Array.isArray(m.schritte)?m.schritte:[];const hw=L(m,"hinweis");
+    return `<article class="qrh">
+    <header class="qrh-h"><span class="tbadge">${esc(m.flugzeug)}</span><h2>${esc(m.titel)}</h2></header>
+    ${L(m,"ausloeser")?`<p class="qrh-trig"><b>${t("mem.trig")}</b>${esc(L(m,"ausloeser"))}</p>`:""}
+    ${st.length?`<ol class="qsteps">${st.map((s,i)=>row(m,s,i)).join("")}</ol>`:`<p class="qrh-empty">${t("mem.nosteps")}</p>`}
+    ${hw?`<p class="qrh-note"><b>${t("mem.note")}:</b> ${esc(hw)}</p>`:""}
+    <div class="qrh-src"><span>${IC.doc} ${esc(m.quelle||"")}</span>${m.zitat?`<details><summary>${t("mem.zitat")}</summary><p class="quote">${esc(m.zitat)}</p></details>`:""}</div>
+  </article>`};
+  $("#app").innerHTML=crumbs(cl)+phead(emo("memory"),t("mem.title"),t("mem.sub"),"var(--c-mem)")+`
+  <div class="memtools">
+    <div class="seg" role="group" aria-label="${t("ac.aria")}">${["E2","E1"].map(a=>`<button data-mac="${a}" aria-pressed="${ac===a}">${a} <span class="hint" style="display:inline">${all.filter(m=>m.flugzeug===a).length||""}</span></button>`).join("")}</div>
+    <button class="btn sm ${hide?"dark":""}" id="mhide" aria-pressed="${hide}" ${items.length?"":"hidden"}>${hide?IC.vis:IC.visoff}<span>${hide?t("mem.show"):t("mem.hide")}</span></button>
+    ${hide&&S.mrev.size?`<button class="btn sm ghost" id="mre">${IC.redo}<span>${t("mem.rehide")}</span></button>`:""}
+    <span class="sp"></span>
+    <button class="btn sm pri" id="mquiz" ${qs.length?"":"disabled"}>${IC.quiz}<span>${t("mem.quiz")} ${ac}</span><span class="tagp" style="background:transparent;color:inherit;border-color:rgba(255,255,255,.5)">${t("mem.quiz.s",{n:qs.length})}</span></button>
+  </div>
+  <p class="memhint">${hide&&items.length?t("mem.hidehint"):""}</p>
+  ${items.length?`<div class="qrhs ${hide?"hiding":""}">${items.map(card).join("")}</div>`:`<div class="prep">${emo("memory")}${t("mem.prep",{a:ac})}</div>`}`;
+  setC($("#app"),"mem"); bindCrumbs(cl);
+  $$("[data-mac]").forEach(b=>b.onclick=()=>{S.mac=b.dataset.mac;S.mrev.clear();renderMemory()});
+  $("#mhide").onclick=()=>{S.mhide=!S.mhide;S.mrev.clear();renderMemory()};
+  if($("#mre")) $("#mre").onclick=()=>{S.mrev.clear();renderMemory()};
+  $$("[data-rv]").forEach(b=>b.onclick=()=>{if(!S.mhide)return;const k=b.dataset.rv;S.mrev.has(k)?S.mrev.delete(k):S.mrev.add(k);
+    const y=window.scrollY;renderMemory();window.scrollTo(0,y);const nb=document.querySelector(`[data-rv="${CSS.escape(k)}"]`);if(nb)nb.focus({preventScroll:true})});
+  $("#mquiz").onclick=()=>startQuiz({title:"Memory Items "+ac,qs:shuffle(qs),mode:"lern",rid:"proc"});
+}
+
+/* ---------- profile ---------- */
+const EMAIL_RE=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+function renderProfil(){
+  const P=S.profile||{}, reg=!!P.name;
+  const qv=Object.values(S.st.q), seen=qv.length, ok=qv.filter(x=>x[2]===1).length, tests=S.st.tests||[];
+  $("#app").innerHTML=phead(IC.user,reg?esc(P.name):t("prof.login"),reg?t("prof.sub"):t("prof.login.sub"),"var(--red)")+`
+  <div class="pgrid">
+    <section class="panel">
+      <h2>${reg?t("prof.title"):t("prof.login")}</h2>
+      <form class="form" id="pform" novalidate>
+        <div class="field"><label for="pn">${t("prof.name")}</label><input id="pn" name="name" autocomplete="name" required maxlength="80" value="${esc(P.name||"")}" aria-describedby="pn-e"><p class="err" id="pn-e" aria-live="polite"></p></div>
+        <div class="field"><label for="pe">${t("prof.email")}</label><input id="pe" name="email" type="email" autocomplete="email" required maxlength="120" value="${esc(P.email||"")}" aria-describedby="pe-e"><p class="err" id="pe-e" aria-live="polite"></p></div>
+        <div class="field"><label for="pc">${t("prof.crew")} <small>${t("prof.opt")} ${t("prof.crew.hint")}</small></label><input id="pc" name="crew" autocomplete="off" maxlength="12" value="${esc(P.crew||"")}" style="text-transform:uppercase;font-family:var(--f-mono)"></div>
+        <p class="nopw">${IC.info}<span>${t("prof.nopw")}</span></p>
+        ${!S.db&&!S.pmsg?`<p class="hint">${t("prof.local.note")}</p>`:""}
+        <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><button class="btn pri" type="submit" id="psave">${reg?t("prof.save"):t("prof.create")}</button><p class="saved ${S.pmsg?S.pmsg[0]:""}" id="pmsg" role="status">${S.pmsg?esc(S.pmsg[1]):""}</p></div>
+      </form>
+    </section>
+    ${reg?`<section>
+      <div class="shead"><h2>${t("prof.progress")}</h2><small>${S.uid?t("prof.st.db"):t("prof.st.local")}</small></div>
+      <div class="statgrid"><div class="num"><b>${fN(S.st.punkte)}</b><span>${t("st.pts")}</span></div><div class="num"><b>${fN(seen)}</b><span>${t("st.seen")}</span></div><div class="num"><b>${fN(ok)}</b><span>${t("st.ok")}</span></div><div class="num"><b>${fN(tests.length)}</b><span>${t("st.runs")}</span></div></div>
+    </section>`:`<section class="panel"><h2>${t("prof.progress")}</h2><p class="hint">${t("prof.nostats")}</p></section>`}
+  </div>
+  ${reg?`<p class="label">${t("prof.perrub")} <small>${t("prof.perrub.s")}</small></p>
+  <div class="rubstats">${RUBS().map(r=>{const p=rubProgress(r.id);return `<div class="rs" style="--c:${rc(r.id)}"><b>${emo(r.id)}${esc(L(r,"name"))}</b><div class="bar"><i style="width:${Math.round(p*100)}%"></i></div><span class="pct">${fP(p)}</span></div>`}).join("")}</div>
+  <p class="label">${t("prof.last")}</p>
+  <div class="review" style="margin-top:0">${tests.length?tests.slice(0,15).map(x=>`<div class="rev ${x.ok/x.n>=PASS?"r-ok":"r-bad"}"><b>${esc(x.t)} · ${x.m==="pruefung"?t("mode.pr"):t("mode.l")}</b><span class="m">${esc(fD(x.d))} · ${t("prof.okof",{ok:x.ok,n:x.n,p:fP(x.ok/x.n)})}</span></div>`).join(""):`<p class="hint">${t("prof.none")}</p>`}</div>
+  <p class="note">${t("prof.ptsnote")}</p>`:""}`;
+  $("#pform").onsubmit=async e=>{
+    e.preventDefault();
+    const name=$("#pn").value.trim(), email=$("#pe").value.trim(), crew=$("#pc").value.trim().toUpperCase();
+    const en=!name, ee=!EMAIL_RE.test(email);
+    $("#pn").setAttribute("aria-invalid",en); $("#pn-e").textContent=en?t("err.name"):"";
+    $("#pe").setAttribute("aria-invalid",ee); $("#pe-e").textContent=ee?t("err.email"):"";
+    if(en){$("#pn").focus();return} if(ee){$("#pe").focus();return}
+    $("#psave").disabled=true; $("#pmsg").className="saved"; $("#pmsg").textContent=t("prof.saving");
+    const p={name,email,crew,upd:new Date().toISOString()};
+    const where=await saveProfile(p);
+    S.pmsg=where==="db"?["ok",t("prof.saved.db")]:["warn",t("prof.saved.local")];
+    paintChrome(); renderProfil();
+  };
+}
+async function saveProfile(p){
+  S.profile=p;
+  if(S.db&&S.uid){try{await S.db.doc(`data/users/${S.uid}/profile`).set(p);S.profileSrc="db";store.set("profile",null);try{localStorage.removeItem("ep.profile")}catch(e){}return "db"}catch(e){}}
+  store.set("profile",p); S.profileSrc="local"; return "local";
+}
+
+/* ---------- render ---------- */
+function render(){
+  if(!DATA) return; renderNav(); paintChrome();
+  ({home:renderHome,rubrik:renderRubrik,setup:renderSetup,quiz:renderQuiz,done:renderDone,lib:renderLib,librubrik:renderLibRubrik,libthema:renderLibThema,libkomp:renderLibKomp,artikel:renderArtikel,memory:renderMemory,profil:renderProfil,compliance:renderCompliance}[S.screen]||renderHome)();
+}
+
+/* ---------- persistence ---------- */
+let saveT=null;
+function save(){
+  store.set("stats",S.st);
+  if(!S.db||!S.uid) return;
+  clearTimeout(saveT); saveT=setTimeout(async()=>{
+    try{await S.db.doc(`data/users/${S.uid}/stats/main`).set(S.st)}catch(e){}
+  },400);
+}
+function mergeStats(remote){
+  if(!remote||!remote.q) return;
+  const Lc=S.st; // keep the richer record per question
+  for(const [k,v] of Object.entries(remote.q)){const l=Lc.q[k];if(!l||v[0]>l[0])Lc.q[k]=v}
+  Lc.punkte=Math.max(Lc.punkte||0,remote.punkte||0);
+  const seen=new Set();Lc.tests=[...(Lc.tests||[]),...(remote.tests||[])].filter(x=>{const k=x.d+x.t+x.ok+x.n;if(seen.has(k))return false;seen.add(k);return true}).sort((a,b)=>a.d<b.d?1:-1).slice(0,40);
+}
+
+/* ---------- boot ---------- */
+(async function boot(){
+  try{const r=await fetch("fragen.json");DATA=await r.json()}catch(e){$("#app").innerHTML=`<div class="loading">${t("loadfail")}</div>`;return}
+  if(!Array.isArray(DATA.rubriken))DATA.rubriken=[]; if(!Array.isArray(DATA.fragen))DATA.fragen=[];
+  if(S.ac==="E1") S.mac="E1";
+  if(S.profile) S.profileSrc="local";
+  render();
+  if(!window.claude||!window.claude.use) return;
+  try{
+    const [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);
+    S.user=user; if(!db) return; S.db=db;
+    S.uid=user?await user.id():null;
+    if(S.uid){
+      try{const s=await db.doc(`data/users/${S.uid}/stats/main`).get();mergeStats(s.data());store.set("stats",S.st);save()}catch(e){}
+      try{const pd=await db.doc(`data/users/${S.uid}/profile`).get();const pv=pd&&pd.data&&pd.data();
+        if(pv&&pv.name){S.profile=pv;S.profileSrc="db"}
+        else if(S.profile&&S.profile.name){await saveProfile(S.profile)}
+      }catch(e){}
+      if(["home","profil","rubrik","memory"].includes(S.screen)) render(); else paintChrome();
+    }
+  }catch(e){}
+})();
+</script>
+
+</body>
+</html>
