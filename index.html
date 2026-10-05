@@ -62,7 +62,7 @@ h1,h2,h3{font-family:var(--f-body);font-weight:600;line-height:1.2;margin:0;text
 .kicker{font-family:var(--f-cond);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-.phead,.crumbs,.acbar,.nav,.hero,.season,.special,.rub,.kpis,.tblwrap,.thema,.acgroup,.acbanner,.setup,.card,.fact,details.qi,.komp,.kmain,.kside,.qrh,.prep,.panel,.statgrid,.rubstats,.artblock,.toc,.aquiz,.membar,.searchbox input,.who.login,.langsw,.themebtn{-webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1)}
+.phead,.crumbs,.acbar,.nav,.hero,.season,.special,.rub,.kpis,.tblwrap,.thema,.acgroup,.acbanner,.setup,.card,.fact,details.qi,.komp,.kmain,.kside,.qrh,.prep,.panel,.statgrid,.rubstats,.artblock,.toc,.aquiz,.membar,.infos,.searchbox input,.who.login,.langsw,.themebtn{-webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1)}
 .phead{background:var(--surface);padding:16px;border:1px solid var(--line2)}
 .crumbs{background:var(--surface);padding:0 10px;width:fit-content;max-width:100%;border:1px solid var(--line2)}
 .acbar{background:var(--surface);padding:8px 12px;width:fit-content;max-width:100%;border:1px solid var(--line2)}
@@ -154,6 +154,75 @@ h1,h2,h3{font-family:var(--f-body);font-weight:600;line-height:1.2;margin:0;text
 .sdots button[aria-current="true"]::before{background:#fff}
 @media (max-width:860px){.hero{grid-template-columns:minmax(0,1fr)}.slides{border-left:0;border-top:1px solid var(--line2);min-height:0;aspect-ratio:16/10}}
 @media (prefers-reduced-motion:reduce){.slides figure{transition:none}}
+
+/* differences */
+.dv{display:inline-flex;font-family:var(--f-mono);font-weight:700;font-style:normal;font-size:.95rem;letter-spacing:.04em;line-height:1}
+.dv i{font-style:normal;padding:5px 6px;color:#fff}.dv i:first-child{background:var(--k-e2)}.dv i:last-child{background:var(--k-e1)}
+.membar.difbar .mi{background:var(--char);border-right:1px solid rgba(255,255,255,.18)}
+.membar.difbar .mt b{letter-spacing:.14em}
+.dv.big{font-size:.78rem}.dv.big i{padding:4px 4px}
+.dlead{max-width:70ch;color:var(--soft);margin:0 0 14px}
+.dchips{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 18px}
+.dchip{display:inline-flex;gap:8px;align-items:baseline;border:1px solid var(--rule);background:var(--surface);padding:7px 12px;font-weight:600;font-size:.9rem;color:var(--ink)}
+.dchip small{font-family:var(--f-mono);font-size:.74rem;color:var(--soft)}
+.dchip[aria-pressed="true"]{background:var(--sel);color:var(--onsel);border-color:var(--sel)}
+.dchip[aria-pressed="true"] small{color:inherit;opacity:.8}
+.dlist{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.drow{background:var(--surface);border:1px solid var(--line2);border-left:5px solid var(--pc,var(--line2));padding:14px 16px;display:grid;gap:8px;min-width:0;-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.drow.p-hoch{--pc:var(--k-crit)}.drow.p-mittel{--pc:var(--k-warn)}.drow.p-tief{--pc:var(--k-info)}
+.dtop{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+.drk{font-weight:700;color:var(--ink);min-width:2ch}
+.dpr{background:var(--pc);color:#fff;padding:1px 7px;font-weight:600}
+.dbe{border:1px solid var(--line2);padding:0 7px;color:var(--soft)}
+.drow h3{font-family:var(--f-cond);font-weight:700;font-size:1.15rem;line-height:1.2;margin:0;text-wrap:balance}
+.dcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.dc{border-top:3px solid var(--k-e2);padding:8px 10px;background:color-mix(in srgb,var(--k-e2) var(--tint-z),transparent);min-width:0}
+.dc.e1{border-top-color:var(--k-e1);background:color-mix(in srgb,var(--k-e1) var(--tint-z),transparent)}
+.dc .dl{font-family:var(--f-mono);font-weight:700;font-size:.74rem;color:var(--k-e2)}.dc.e1 .dl{color:var(--k-e1)}
+.dc p{margin:2px 0 0;font-size:.93rem;line-height:1.45;overflow-wrap:anywhere}
+.dwhy{margin:0;color:var(--soft);font-size:.9rem}
+.dfoot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 12px;align-items:center}
+.dsrc{font-family:var(--f-mono);font-size:.74rem;color:var(--soft);overflow-wrap:anywhere}
+@media (max-width:600px){.dcols{grid-template-columns:minmax(0,1fr)}}
+
+/* info boxes (home) */
+.infos{position:relative;display:grid;border-left:1px solid var(--line2);background:var(--surface);min-width:0}
+.ibox{grid-area:1/1;display:flex;flex-direction:column;gap:10px;align-items:stretch;text-align:left;border:0;background:transparent;color:var(--ink);padding:22px 22px 18px;opacity:0;visibility:hidden;transition:opacity 1.2s ease,visibility 0s 1.2s;min-width:0;cursor:pointer;font:inherit;border-top:5px solid var(--kc,var(--red))}
+.ibox.on{opacity:1;visibility:visible;transition:opacity 1.2s ease}
+.ibox.k-diff{--kc:var(--k-e2)}.ibox.k-nice{--kc:var(--k-b)}.ibox.k-hot{--kc:var(--k-warn)}
+.ibox .ik{display:flex;align-items:center;gap:10px}
+.ibox .ik b{font-family:var(--f-mono);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;background:var(--kc);color:#fff;padding:2px 8px}
+.ibox .ie{font-size:1.5rem;line-height:1}
+.ibox .ih{font-family:var(--f-cond);font-weight:700;font-size:clamp(1.25rem,2.4vw,1.6rem);line-height:1.15;text-wrap:balance}
+.ibox .ix{color:var(--soft);font-size:.93rem;line-height:1.45}
+.icmp{border-collapse:collapse;width:100%;font-size:.88rem;font-variant-numeric:tabular-nums}
+.icmp th,.icmp td{padding:6px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+.icmp thead th{font-family:var(--f-mono);font-size:.74rem;letter-spacing:.06em}
+.icmp thead th.e2{color:var(--k-e2)}.icmp thead th.e1{color:var(--k-e1)}
+.icmp tbody th{font-weight:500;color:var(--soft)}
+.icmp td{font-weight:600}
+.irows{margin:0;display:grid;gap:0}
+.irows div{display:grid;grid-template-columns:minmax(0,9rem) minmax(0,1fr);gap:10px;padding:7px 0;border-bottom:1px solid var(--line)}
+.irows dt{color:var(--soft);font-size:.88rem}.irows dd{margin:0;font-weight:600;font-variant-numeric:tabular-nums}
+.ibars{display:grid;gap:8px}
+.ib{display:grid;grid-template-columns:5.2rem minmax(0,1fr) 4.6rem;gap:10px;align-items:center;font-size:.86rem;font-variant-numeric:tabular-nums}
+.ib .il{font-family:var(--f-mono);font-size:.76rem}
+.ib .it{height:12px;background:var(--line)}.ib .it span{display:block;height:100%;background:var(--k-e2)}
+.ib.e1 .it span{background:var(--k-e1)}
+.ib .iv{text-align:right;font-weight:600}
+.inum{display:grid;gap:2px;padding:10px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.inum b{font-family:var(--f-mono);font-size:clamp(1.8rem,4vw,2.5rem);font-weight:600;color:var(--kc)}
+.inum span{color:var(--soft);font-size:.86rem}
+.ibox .igo{margin-top:auto;display:flex;align-items:center;gap:6px;font-weight:600;font-size:.9rem;color:var(--kc)}
+.ibox:hover .ih{text-decoration:underline;text-underline-offset:3px}
+.ibox:focus-visible{outline:2px solid var(--kc);outline-offset:-4px}
+.infos .sdots{top:auto;bottom:12px;right:12px}
+.infos .sdots button::before{background:var(--line2);border-color:transparent}
+.infos .sdots button[aria-current="true"]::before{background:var(--ink)}
+@media (max-width:860px){.infos{border-left:0;border-top:1px solid var(--line2)}.ibox{padding:18px 16px 16px}}
+@media (max-width:560px){.ibox{padding-bottom:46px}}
+@media (prefers-reduced-motion:reduce){.ibox,.ibox.on{transition:none}}
+
 
 /* seasonal tests */
 .seasons{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin:0 0 14px}
@@ -663,7 +732,7 @@ const ms=(n,f)=>`<span class="ic${f?" f":""}" aria-hidden="true">${n}</span>`;
 /* ---------- i18n ---------- */
 const I18N={
 de:{
-  "nav.home":"Start","nav.mem":"Memory Items","nav.lib":"Bibliothek","nav.prof":"Profil","nav.comp":"Compliance","comp.sub":"Welche Dokumente und Revisionen JetQ verwendet.","comp.stand":"Stand der Inhalte: {d}","comp.doc":"Dokument","comp.nr":"Dokument-Nr.","comp.rev":"Revision","comp.date":"Datum","comp.scope":"Umfang","comp.pub":"Herausgeber","comp.missing":"Nicht verwendet oder nicht vorhanden","comp.note":"JetQ ist eine Lernhilfe und ersetzt keine Handbücher. Massgebend sind immer die aktuell gültigen Revisionen. Prüfe vor dem Lernen, ob eine neuere Revision erschienen ist; dann können einzelne Werte abweichen.","comp.link":"Compliance: verwendete Dokumente und Revisionen",
+  "dif.bar.s":"Alle relevanten Unterschiede E2 zu E1, von Ops bis Systems","dif.bar.n":"{n} Punkte","dif.sub":"Unterschiede E2 zu E1, nach Wichtigkeit geordnet.","dif.lead":"Von wichtig zu weniger wichtig: zuerst was sich im Cockpit und in den Verfahren ändert, dann Limitations und Performance, am Schluss die Systeme. Jeder Punkt mit Quelle aus OM-B, AFM, AOM oder MEL.","dif.filter":"Bereich filtern","dif.all":"Alle","dif.b.ops":"Ops","dif.b.limits":"Limitations","dif.b.perf":"Performance","dif.b.proc":"Procedures","dif.b.sys":"Systems","dif.p.hoch":"Wichtig","dif.p.mittel":"Mittel","dif.p.tief":"Nice to know","nav.home":"Start","nav.mem":"Memory Items","nav.lib":"Bibliothek","nav.prof":"Profil","nav.comp":"Compliance","comp.sub":"Welche Dokumente und Revisionen JetQ verwendet.","comp.stand":"Stand der Inhalte: {d}","comp.doc":"Dokument","comp.nr":"Dokument-Nr.","comp.rev":"Revision","comp.date":"Datum","comp.scope":"Umfang","comp.pub":"Herausgeber","comp.missing":"Nicht verwendet oder nicht vorhanden","comp.note":"JetQ ist eine Lernhilfe und ersetzt keine Handbücher. Massgebend sind immer die aktuell gültigen Revisionen. Prüfe vor dem Lernen, ob eine neuere Revision erschienen ist; dann können einzelne Werte abweichen.","comp.link":"Compliance: verwendete Dokumente und Revisionen",
   "top.theme":"Tag- und Nachtmodus wechseln","top.login":"Anmelden / Registrieren","top.login.s":"Anmelden","prof.login":"Anmelden oder registrieren","prof.login.sub":"Melde dich an, damit JetQ deinen Fortschritt speichert und dir zuordnet. Statistiken erscheinen erst nach der Anmeldung.","prof.nostats":"Deine Statistik erscheint hier, sobald du angemeldet bist.","top.day":"Tagmodus","top.night":"Nachtmodus","top.home":"JetQ Startseite","top.lang":"Sprache","top.prof":"Profil öffnen",
   "loading":"Fragen werden geladen…","loadfail":"Die Fragen konnten nicht geladen werden. Bitte Seite neu laden.",
   "hero.kicker":"Refresher for Embraer Pilots",
@@ -671,7 +740,7 @@ de:{
   "hero.lead":"JetQ ist die Selbsttest- und Lernseite für Pilotinnen und Piloten auf <b>Embraer E1</b> (E190/E195) und <b>E2</b> (E190-E2/E195-E2). Fragen, Fakten und Memory Items stammen aus den Handbüchern, jeweils mit Fundstelle und Originalzitat.",
   "hero.lang":"Sprache · Language","hero.cr":"Checkride starten","hero.lib":"Zur Bibliothek","hero.reg":"Registrieren","hero.edit":"Profil bearbeiten",
   "hello.m":"Guten Morgen","hello.d":"Guten Tag","hello.e":"Guten Abend","hello.n":"Gute Nacht",
-  "slides":"Fotos der Flotte","slide.go":"Foto {n} zeigen","cap.cockpit":"Cockpit",
+  "slides":"Fotos der Flotte","infos":"Infoboxen","info.k.hot":"Hotspot","info.k.nice":"Nice to know","info.k.diff":"E2 vs E1","info.go":"Zum Artikel","slide.go":"Infobox {n} zeigen","cap.cockpit":"Cockpit",
   "sea.cur":"Aktuelle Saison","sea.t.fruehling":"Frühlingstest","sea.t.sommer":"Sommertest","sea.t.herbst":"Herbsttest","sea.t.winter":"Wintertest","sea.nS":"{n} Fragen","sea.other":"Weitere Saisons","sea.r.fruehling":"Frühling: März bis Mai","sea.r.sommer":"Sommer: Juni bis August","sea.r.herbst":"Herbst: September bis November","sea.r.winter":"Winter: Dezember bis Februar","sea.start":"Saisontest starten","sea.startS":"Starten","sea.n":"{n} Fragen im Pool · {k} pro Test","sea.prep":"Fragen in Vorbereitung","sea.title":"{s}-Test","winter.name":"Winter","winter.desc":"De-icing und Anti-icing, Cold Weather Operations, Low Visibility Procedures und kontaminierte Pisten.","sommer.name":"Sommer","sommer.desc":"Density Altitude, reduzierte Performance bei Hitze, Thunderstorm Avoidance, Windshear und Turbulenzen.",
   "mem.bar.s":"E2 und E1 im QRH-Format · verdecken, aufsagen, abfragen","mem.bar.n":"{n} Items",
   "ac.label":"Flugzeug","ac.aria":"Flugzeugtyp","ac.hintAll":"Fragen beider Typen. Wähle E2 oder E1, um nur dessen Fragen und die allgemeinen zu sehen.","ac.hintOne":"Nur {a}-Fragen und allgemeine Fragen.",
@@ -704,7 +773,7 @@ de:{
   "art.prev":"Vorheriger Artikel","art.next":"Nächster Artikel","art.info":"Hinweis","art.warn":"Achtung","art.merke":"Merke","art.legend":"Legende"
 },
 en:{
-  "nav.home":"Home","nav.mem":"Memory Items","nav.lib":"Library","nav.prof":"Profile","nav.comp":"Compliance","comp.sub":"Which documents and revisions JetQ is based on.","comp.stand":"Content as of: {d}","comp.doc":"Document","comp.nr":"Document no.","comp.rev":"Revision","comp.date":"Date","comp.scope":"Scope","comp.pub":"Publisher","comp.missing":"Not used or not available","comp.note":"JetQ is a study aid and does not replace the manuals. The currently valid revisions are always authoritative. Check whether a newer revision has been published; individual values may then differ.","comp.link":"Compliance: documents and revisions used",
+  "dif.bar.s":"All relevant differences E2 vs E1, from ops to systems","dif.bar.n":"{n} items","dif.sub":"Differences E2 vs E1, ranked by importance.","dif.lead":"From most to least important: first what changes on the flight deck and in the procedures, then limitations and performance, finally the systems. Every item with its source from OM-B, AFM, AOM or MEL.","dif.filter":"Filter by area","dif.all":"All","dif.b.ops":"Ops","dif.b.limits":"Limitations","dif.b.perf":"Performance","dif.b.proc":"Procedures","dif.b.sys":"Systems","dif.p.hoch":"High","dif.p.mittel":"Medium","dif.p.tief":"Nice to know","nav.home":"Home","nav.mem":"Memory Items","nav.lib":"Library","nav.prof":"Profile","nav.comp":"Compliance","comp.sub":"Which documents and revisions JetQ is based on.","comp.stand":"Content as of: {d}","comp.doc":"Document","comp.nr":"Document no.","comp.rev":"Revision","comp.date":"Date","comp.scope":"Scope","comp.pub":"Publisher","comp.missing":"Not used or not available","comp.note":"JetQ is a study aid and does not replace the manuals. The currently valid revisions are always authoritative. Check whether a newer revision has been published; individual values may then differ.","comp.link":"Compliance: documents and revisions used",
   "top.theme":"Toggle day and night mode","top.login":"Sign in / Register","top.login.s":"Sign in","prof.login":"Sign in or register","prof.login.sub":"Sign in so JetQ can save your progress and link it to you. Statistics appear only after you sign in.","prof.nostats":"Your statistics will appear here once you are signed in.","top.day":"Day mode","top.night":"Night mode","top.home":"JetQ home","top.lang":"Language","top.prof":"Open profile",
   "loading":"Loading questions…","loadfail":"The questions could not be loaded. Please reload the page.",
   "hero.kicker":"Refresher for Embraer Pilots",
@@ -712,7 +781,7 @@ en:{
   "hero.lead":"JetQ is the self-test and learning site for pilots on the <b>Embraer E1</b> (E190/E195) and <b>E2</b> (E190-E2/E195-E2). Questions, facts and memory items are taken from the manuals, each with its reference and the original quote.",
   "hero.lang":"Sprache · Language","hero.cr":"Start checkride","hero.lib":"Open library","hero.reg":"Create profile","hero.edit":"Edit profile",
   "hello.m":"Good morning","hello.d":"Good afternoon","hello.e":"Good evening","hello.n":"Good night",
-  "slides":"Fleet photos","slide.go":"Show photo {n}","cap.cockpit":"Flight deck",
+  "slides":"Fleet photos","infos":"Info boxes","info.k.hot":"Hotspot","info.k.nice":"Nice to know","info.k.diff":"E2 vs E1","info.go":"Read article","slide.go":"Show info box {n}","cap.cockpit":"Flight deck",
   "sea.cur":"Current season","sea.t.fruehling":"Spring test","sea.t.sommer":"Summer test","sea.t.herbst":"Autumn test","sea.t.winter":"Winter test","sea.nS":"{n} questions","sea.other":"Other seasons","sea.r.fruehling":"Spring: March to May","sea.r.sommer":"Summer: June to August","sea.r.herbst":"Autumn: September to November","sea.r.winter":"Winter: December to February","sea.start":"Start seasonal test","sea.startS":"Start","sea.n":"{n} questions in the pool · {k} per test","sea.prep":"Questions in preparation","sea.title":"{s} test","winter.name":"Winter","winter.desc":"De-icing and anti-icing, cold weather operations, low visibility procedures and contaminated runways.","sommer.name":"Summer","sommer.desc":"Density altitude, reduced performance in hot weather, thunderstorm avoidance, windshear and turbulence.",
   "mem.bar.s":"E2 and E1 in QRH format · hide, recite, test yourself","mem.bar.n":"{n} items",
   "ac.label":"Aircraft","ac.aria":"Aircraft type","ac.hintAll":"Questions for both types. Choose E2 or E1 to see only its questions plus the general ones.","ac.hintOne":"Only {a} questions and general questions.",
@@ -853,7 +922,7 @@ const QA=(q,i)=>{const en=LANG==="en"&&Array.isArray(q.antworten_en)&&q.antworte
 function renderNav(){
   const items=[["home",t("nav.home"),IC.home],["memory",t("nav.mem"),ms("psychology"),"Memory"],["lib",t("nav.lib"),IC.book],["profil",t("nav.prof"),IC.user],["compliance",t("nav.comp"),IC.info]];
   const sc=S.screen, fromMem=S.quiz&&S.quiz.from==="memory";
-  const cur=sc.startsWith("lib")||sc==="artikel"?"lib":sc==="profil"?"profil":sc==="compliance"?"compliance":sc==="memory"||((sc==="quiz"||sc==="done")&&fromMem)?"memory":["home","rubrik","setup","quiz","done"].includes(sc)?"home":"";
+  const cur=sc==="diff"?"diff":sc.startsWith("lib")||sc==="artikel"?"lib":sc==="profil"?"profil":sc==="compliance"?"compliance":sc==="memory"||((sc==="quiz"||sc==="done")&&fromMem)?"memory":["home","rubrik","setup","quiz","done"].includes(sc)?"home":"";
   $("#nav").setAttribute("aria-label","Navigation");
   $("#nav").innerHTML=items.map(([k,l,i,sh])=>`<button class="navbtn" data-go="${k}" ${cur===k?'aria-current="page"':""}>${i}${sh?`<span class="nl">${esc(l)}</span><span class="ns" aria-hidden="true">${esc(sh)}</span>`:`<span>${esc(l)}</span>`}</button>`).join("");
   $("#nav").querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
@@ -875,6 +944,28 @@ const MIXR=["ops","rules","airlaw","proc","daily","command","zrh","samba"];
 const tb=f=>f==="E1"||f==="E2"?`<span class="tbadge">${f}</span>`:"";
 const qb=q=>MIXR.includes(q.rubrik)?tb(q.flugzeug):"";
 function greet(){const h=new Date().getHours();const g=t(h<5?"hello.n":h<11?"hello.m":h<17?"hello.d":h<22?"hello.e":"hello.n");const nm=S.profile&&S.profile.name;return nm?`${g}, ${esc(nm)}.`:`${g}.`}
+const INFOS=[
+ {k:"diff",e:"🌀",art:"art-wake",t:["Wake Category: E2 vs E1","Wake category: E2 vs E1"],x:["ICAO: beide Medium. RECAT-EU: die E2 ist CAT-D (Upper Medium), die E1 CAT-E (Lower Medium). Hinter Heavies bekommt die E2 weniger Abstand.","ICAO: both medium. RECAT-EU: the E2 is CAT-D (upper medium), the E1 CAT-E (lower medium). Behind heavies the E2 gets less spacing."],
+  g:{c:[["Hinter B777/A350","Behind B777/A350","4 NM · 100 s","5 NM · 120 s"],["Hinter B767/B757","Behind B767/B757","3 NM · 80 s","4 NM · 100 s"],["Hinter A388","Behind A388","5 NM · 140 s","6 NM · 160 s"]]}},
+ {k:"nice",e:"⛽",art:"art-fuel-policy",t:["Final Reserve Fuel pro Typ","Final reserve fuel per type"],x:["30 min Holding auf 1500 ft über Destination. Taxi Fuel Standardwert E-Jet: 200 kg. Contingency 5 % (mit Fuel-ERA 3 %).","30 min holding at 1500 ft above destination. Standard E-Jet taxi fuel: 200 kg. Contingency 5 % (with fuel-ERA 3 %)."],
+  g:{b:{u:"kg",max:900,r:[["E190-E2",800,"e2"],["E195-E2",800,"e2"],["E190-E1",800,"e1"],["E195-E1",900,"e1"]]}}},
+ {k:"nice",e:"🔀",art:"art-planning-minima",t:["Planning Minima Destination Alternate","Planning minima destination alternate"],x:["Zuschläge auf die publizierten Minima für Destination Alternate und Fuel-ERA. Wind: Mean Wind max. 40 kt, Crosswind OM-B minus 10 kt, Tailwind minus 5 kt.","Increments on the published minima for destination alternate and fuel-ERA. Wind: mean wind max 40 kt, crosswind OM-B minus 10 kt, tailwind minus 5 kt."],
+  g:{r:[["Type B","Type B","DA/H +200 ft · RVR +800 m"],["Type A","Type A","+400 ft · RVR +1500 m"],["Circling","Circling","MDA/H +400 ft · VIS +1500 m"]]}},
+ {k:"diff",e:"💨",art:"art-wind",t:["Max Crosswind: E2 vs E1","Max crosswind: E2 vs E1"],x:["Bei der E2 inklusive Gusts, getrennt für Takeoff und Landing. Auf nasser Piste hat die E2 deutlich mehr Reserve.","On the E2 gusts included, separate for takeoff and landing. On a wet runway the E2 has clearly more margin."],
+  g:{c:[["Dry (RWYCC 6)","Dry (RWYCC 6)","T/O 36 · LDG 35 kt","38 kt"],["Wet (RWYCC 5)","Wet (RWYCC 5)","T/O 36 · LDG 35 kt","31 kt"],["Tailwind","Tailwind","15 kt","15 kt"]]}},
+ {k:"diff",e:"🧊",art:"art-contaminated",t:["Contaminated Takeoff: maximale Tiefe","Contaminated takeoff: maximum depth"],x:["Die E2 hat pro Contaminant eigene Grenzen, die E1 eine gemeinsame Grenze als Water Equivalent Depth.","The E2 has its own limit per contaminant, the E1 one common limit as water equivalent depth."],
+  g:{c:[["Standing Water","Standing water","19.05 mm","25.4 mm WED"],["Slush","Slush","22.41 mm","25.4 mm WED"],["Wet Snow","Wet snow","38.10 mm","25.4 mm WED"],["Dry Snow","Dry snow","95.25 mm","25.4 mm WED"]]}},
+ {k:"hot",e:"🛫",art:"art-planning-minima",t:["Take-off Alternate: maximale Distanz","Take-off alternate: maximum distance"],x:["Ein Take-off Alternate muss innerhalb 1 h Flugzeit mit einem Engine inoperative (Still Air) liegen.","A take-off alternate must be within 1 h flight time with one engine inoperative (still air)."],
+  g:{b:{u:"NM",max:400,r:[["E190-E2",380,"e2"],["E195-E2",355,"e2"],["E190-E1",380,"e1"],["E195-E1",380,"e1"]]}}},
+ {k:"hot",e:"🌡️",art:"art-cold-temp",t:["Cold Temperature Correction","Cold temperature correction"],x:["Bei Kälte zeigt der Altimeter zu hoch. Unter 0 °C am Aerodrome korrigieren, Faustregel 4 % pro 10 °C unter ISA. Beispiel: −20 °C, 1000 ft über Station ergibt +140 ft.","In cold air the altimeter over-reads. Correct below 0 °C at the aerodrome, rule of thumb 4 % per 10 °C below ISA. Example: −20 °C, 1000 ft above station gives +140 ft."],
+  g:{n:["1 hPa = 27 ft","QNH-Korrektur im Cruise","QNH correction in cruise"]}},
+ {k:"hot",e:"🛬",art:"art-contaminated",t:["Landing Distance: Faktoren","Landing distance: factors"],x:["Für den Dispatch zählt die Required Landing Distance, im Flug die Operational Landing Distance mit Sicherheitsmarge.","For dispatch the required landing distance counts, in flight the operational landing distance with a safety margin."],
+  g:{r:[["Dispatch Dry","Dispatch dry","ALD × 1.67"],["Dispatch Wet/Contam.","Dispatch wet/contam.","ALD × 1.92"],["In-flight","In-flight","+15 %"]]}},
+ {k:"diff",e:"🌫️",art:"art-wind",t:["CAT II Wind Limits: E2 vs E1","CAT II wind limits: E2 vs E1"],x:["Für CAT II gelten engere Wind Limits als im Normalbetrieb. Beim Headwind ist die E2 deutlich strenger.","CAT II has tighter wind limits than normal operations. For headwind the E2 is clearly stricter."],
+  g:{c:[["Headwind","Headwind","25 kt","37 kt"],["Tailwind","Tailwind","15 kt","15 kt"],["Crosswind","Crosswind","18 kt","16 kt"]]}},
+ {k:"diff",e:"🏔️",art:"art-wind",t:["Operating Envelope: E2 vs E1","Operating envelope: E2 vs E1"],x:["Beide fliegen bis 41000 ft. Die E2 verträgt höhere Temperaturen, bei hoch gelegenen Airports gilt für sie eine Supplementary Procedure.","Both fly up to 41000 ft. The E2 tolerates higher temperatures; at high-elevation airports a supplementary procedure applies to it."],
+  g:{c:[["Max. Temperatur","Max temperature","ISA + 39 °C","ISA + 35 °C"],["Max. Altitude","Max altitude","41000 ft","41000 ft"],["Airport Altitude","Airport altitude","> 9200 ft: Suppl. Proc.","bis 10000 ft"]]}}
+];
 const SLIDES=[["aircraft-e2.jpg","HB-AZI","Embraer E195-E2","center 45%"],["aircraft-e1.jpg","HB-JVP","Embraer E190","center 45%"],["cockpit-e2.jpg","E2","cap.cockpit E190-E2 / E195-E2","center 40%"],["cockpit-e1.jpg","E1","cap.cockpit E190 / E195","center 50%"]];
 function rubTile(r,count,extra){
   const p=Math.round(rubProgress(r.id)*100);
@@ -891,6 +982,18 @@ function statsHTML(){
   <tbody>${rows.map(x=>`<tr><td>${emo(x.r.id)}${esc(L(x.r,"name"))}</td><td>${z(x.n)}</td><td>${z(x.e2)}</td><td>${z(x.e1)}</td><td>${z(x.b)}</td><td>${z(x.f)}</td></tr>`).join("")}</tbody>
   <tfoot><tr><td>${t("st.total")}</td><td>${fN(sum("n"))}</td><td>${fN(sum("e2"))}</td><td>${fN(sum("e1"))}</td><td>${fN(sum("b"))}</td><td>${fN(sum("f"))}</td></tr></tfoot></table></div>`;
 }
+function infoCard(f,i){
+  const on=i===S.slide%INFOS.length, en=LANG==="en", tx=a=>esc(en?a[1]:a[0]);
+  let g="";
+  if(f.g.c) g=`<table class="icmp"><thead><tr><th></th><th class="e2">E2</th><th class="e1">E1</th></tr></thead><tbody>${f.g.c.map(r=>`<tr><th scope="row">${esc(en?r[1]:r[0])}</th><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join("")}</tbody></table>`;
+  else if(f.g.r) g=`<dl class="irows">${f.g.r.map(r=>`<div><dt>${esc(en?r[1]:r[0])}</dt><dd>${esc(r[2])}</dd></div>`).join("")}</dl>`;
+  else if(f.g.b) g=`<div class="ibars">${f.g.b.r.map(r=>`<div class="ib ${r[2]}"><span class="il">${esc(r[0])}</span><span class="it"><span style="width:${Math.round(r[1]/f.g.b.max*100)}%"></span></span><span class="iv">${fN(r[1])} ${esc(f.g.b.u)}</span></div>`).join("")}</div>`;
+  else if(f.g.n) g=`<div class="inum"><b>${esc(f.g.n[0])}</b><span>${esc(en?f.g.n[2]:f.g.n[1])}</span></div>`;
+  return `<button class="ibox k-${f.k}${on?" on":""}" data-ia="${esc(f.art)}" ${on?"":'aria-hidden="true" tabindex="-1"'}>
+    <span class="ik"><b>${t("info.k."+f.k)}</b><span class="ie" aria-hidden="true">${f.e}</span></span>
+    <span class="ih">${tx(f.t)}</span><span class="ix">${tx(f.x)}</span>${g}
+    <span class="igo">${t("info.go")} ${ms("arrow_forward")}</span></button>`;
+}
 function renderHome(){
   const fehler=pool({special:"fehler"}).length, mi=memItems();
   const reg=!!(S.profile&&S.profile.name);
@@ -903,12 +1006,13 @@ function renderHome(){
       <ul class="docs" aria-label="AFM, AOM, OM-A, OM-B, MEL">${["AFM","AOM","OM-A","OM-B","MEL"].map(d=>`<li>${d}</li>`).join("")}</ul>
       <div class="ctas"><button class="btn pri" id="cr">${IC.play}<span>${t("hero.cr")}</span></button><button class="btn" id="lb">${IC.book}<span>${t("hero.lib")}</span></button></div>
     </div>
-    <div class="slides" role="region" aria-label="${t("slides")}">
-      ${SLIDES.map(([src,reg2,cap,pos],i)=>`<figure class="${i===S.slide?"on":""}" ${i===S.slide?"":'aria-hidden="true"'}><img src="${src}" alt="${esc(reg2+" · "+cap.replace("cap.cockpit",t("cap.cockpit")))}" style="object-position:${pos}" ${i?'loading="lazy"':""}><figcaption><b>${esc(reg2)}</b><span>${esc(cap.replace("cap.cockpit",t("cap.cockpit")))}</span></figcaption></figure>`).join("")}
-      <div class="sdots">${SLIDES.map((_,i)=>`<button data-sl="${i}" aria-label="${t("slide.go",{n:i+1})}" aria-current="${i===S.slide}"></button>`).join("")}</div>
+    <div class="infos" role="region" aria-roledescription="carousel" aria-label="${t("infos")}">
+      ${INFOS.map((f,i)=>infoCard(f,i)).join("")}
+      <div class="sdots">${INFOS.map((_,i)=>`<button data-sl="${i}" aria-label="${t("slide.go",{n:i+1})}" aria-current="${i===S.slide%INFOS.length}"></button>`).join("")}</div>
     </div>
   </section>
   ${seasonsHTML()}
+  <button class="membar difbar" id="dif"><span class="mi"><span class="dv"><i>E2</i><i>E1</i></span></span><span class="mt"><b>DIFFERENCES</b><span>${t("dif.bar.s")}</span></span><span class="mg"><span>${difs().length?t("dif.bar.n",{n:difs().length}):""}</span>${ms("arrow_forward")}</span></button>
   <button class="membar" id="mem"><span class="mi">${emo("memory")}</span><span class="mt"><b>Memory Items</b><span>${t("mem.bar.s")}</span></span><span class="mg"><span>${mi.length?t("mem.bar.n",{n:mi.length}):""}</span>${ms("arrow_forward")}</span></button>
   <div class="shead"><h2>${t("sec.train")}</h2></div>
   ${acBar(true)}
@@ -925,14 +1029,15 @@ function renderHome(){
   $$("[data-sea]").forEach(b=>b.onclick=()=>{const id=b.dataset.sea;startQuiz({title:t("sea.t."+id),qs:shuffle(seasonQs(id)).slice(0,SEA_N),mode:"lern",rid:null})});
     const crf=()=>startQuiz({title:t("sp.cr.t"),qs:shuffle(pool()).slice(0,30),mode:"pruefung",rid:null});
   $("#cr").onclick=crf; $("#sp-cr").onclick=crf;
-  $("#lb").onclick=()=>go("lib"); $("#mem").onclick=()=>go("memory");
+  $("#lb").onclick=()=>go("lib"); $("#mem").onclick=()=>go("memory"); $("#dif").onclick=()=>go("diff");
   $("#sp-f").onclick=()=>startQuiz({title:t("sp.f.t"),qs:shuffle(pool({special:"fehler"})).slice(0,20),mode:"lern",rid:null});
   $("#sp-z").onclick=()=>startQuiz({title:t("sp.z.t"),qs:shuffle(pool()).slice(0,10),mode:"lern",rid:null});
   $$("#app .rubriken [data-r]").forEach(b=>b.onclick=()=>go("rubrik",{rubrik:b.dataset.r}));
   /* slideshow */
-  const show=i=>{S.slide=(i+SLIDES.length)%SLIDES.length;$$(".slides figure").forEach((f,k)=>{f.classList.toggle("on",k===S.slide);if(k===S.slide)f.removeAttribute("aria-hidden");else f.setAttribute("aria-hidden","true")});$$(".sdots button").forEach((b,k)=>b.setAttribute("aria-current",k===S.slide))};
-  $$("[data-sl]").forEach(b=>b.onclick=()=>{show(+b.dataset.sl);stopSlides();SLIDE_T=setInterval(()=>show(S.slide+1),7000)});
-  stopSlides(); SLIDE_T=setInterval(()=>{if(!document.hidden)show(S.slide+1)},7000);
+  $$(".infos [data-ia]").forEach(b=>b.onclick=()=>openArt(b.dataset.ia));
+  const show=i=>{S.slide=(i+INFOS.length)%INFOS.length;$$(".infos .ibox").forEach((f,k)=>{f.classList.toggle("on",k===S.slide);if(k===S.slide){f.removeAttribute("aria-hidden");f.removeAttribute("tabindex")}else{f.setAttribute("aria-hidden","true");f.setAttribute("tabindex","-1")}});$$(".sdots button").forEach((b,k)=>b.setAttribute("aria-current",k===S.slide))};
+  $$("[data-sl]").forEach(b=>b.onclick=()=>{show(+b.dataset.sl);stopSlides();SLIDE_T=setInterval(()=>show(S.slide+1),9000)});
+  stopSlides(); SLIDE_T=setInterval(()=>{if(!document.hidden)show(S.slide+1)},9000);
 }
 
 function crumbs(list){return `<nav class="crumbs" aria-label="${t("crumbs")}">${list.map((c,i)=>i===list.length-1?`<span class="crumb cur">${esc(c[0])}</span>`:`<button class="crumb" data-cr="${i}">${esc(c[0])}</button><span class="sep">/</span>`).join("")}</nav>`}
@@ -1326,6 +1431,28 @@ function renderArtikel(){
 }
 
 /* ---------- compliance ---------- */
+const difs=()=>Array.isArray(DATA&&DATA.differences)?DATA.differences:[];
+const DIF_B=["ops","limits","perf","proc","sys"];
+function renderDiff(){
+  const all=difs(), f=S.difF||"alle", en=LANG==="en", D=(o,k)=>esc(L(o,k)||"");
+  const has=DIF_B.filter(b=>all.some(x=>x.bereich===b));
+  const list=all.filter(x=>f==="alle"||x.bereich===f);
+  const chip=(k,l,n)=>`<button class="dchip" data-df="${k}" aria-pressed="${f===k}">${l}<small>${n}</small></button>`;
+  $("#app").innerHTML=crumbs([[t("nav.home"),()=>go("home")],["Differences"]])+phead('<span class="dv big" aria-hidden="true"><i>E2</i><i>E1</i></span>',"DIFFERENCES",t("dif.sub"),"var(--k-e2)")+`
+  <p class="dlead">${t("dif.lead")}</p>
+  <div class="dchips" role="group" aria-label="${t("dif.filter")}">${chip("alle",t("dif.all"),all.length)}${has.map(b=>chip(b,t("dif.b."+b),all.filter(x=>x.bereich===b).length)).join("")}</div>
+  <ol class="dlist">${list.map(x=>`<li class="drow p-${esc(x.prio)}">
+    <div class="dtop"><span class="drk">${x.rank}</span><span class="dpr">${t("dif.p."+x.prio)}</span><span class="dbe">${t("dif.b."+x.bereich)}</span></div>
+    <h3>${D(x,"titel")}</h3>
+    <div class="dcols"><div class="dc e2"><span class="dl">E2</span><p>${D(x,"e2")}</p></div><div class="dc e1"><span class="dl">E1</span><p>${D(x,"e1")}</p></div></div>
+    ${L(x,"warum")?`<p class="dwhy">${D(x,"warum")}</p>`:""}
+    <div class="dfoot"><span class="dsrc">${esc(x.quelle||"")}</span>${x.art&&artById(x.art)?`<button class="linkbtn" data-art="${esc(x.art)}">${t("info.go")} ${ms("arrow_forward")}</button>`:""}</div>
+  </li>`).join("")}</ol>
+  <p class="note">${t("comp.note")}</p>`;
+  bindCrumbs([[0,()=>go("home")]]);
+  $$("[data-df]").forEach(b=>b.onclick=()=>{S.difF=b.dataset.df;renderDiff()});
+  $$(".dlist [data-art]").forEach(b=>b.onclick=()=>openArt(b.dataset.art));
+}
 function renderCompliance(){
   const c=DATA.compliance||{dokumente:[]}, en=LANG==="en";
   const rows=c.dokumente.map(x=>`<tr><td><b>${esc(x.kurz)}</b><br><span class="csub">${esc(x.titel)}</span></td><td>${esc(x.herausgeber)}</td><td>${esc(x.nr)}</td><td><b>${esc(x.revision)}</b></td><td>${esc(x.datum)}</td><td class="cscope">${esc(en&&x.umfang_en?x.umfang_en:x.umfang)}</td></tr>`).join("");
@@ -1427,7 +1554,7 @@ async function saveProfile(p){
 /* ---------- render ---------- */
 function render(){
   if(!DATA) return; renderNav(); paintChrome();
-  ({home:renderHome,rubrik:renderRubrik,setup:renderSetup,quiz:renderQuiz,done:renderDone,lib:renderLib,librubrik:renderLibRubrik,libthema:renderLibThema,libkomp:renderLibKomp,artikel:renderArtikel,memory:renderMemory,profil:renderProfil,compliance:renderCompliance}[S.screen]||renderHome)();
+  ({home:renderHome,rubrik:renderRubrik,setup:renderSetup,quiz:renderQuiz,done:renderDone,lib:renderLib,librubrik:renderLibRubrik,libthema:renderLibThema,libkomp:renderLibKomp,artikel:renderArtikel,memory:renderMemory,profil:renderProfil,compliance:renderCompliance,diff:renderDiff}[S.screen]||renderHome)();
 }
 
 /* ---------- persistence ---------- */
