@@ -62,7 +62,7 @@ h1,h2,h3{font-family:var(--f-body);font-weight:600;line-height:1.2;margin:0;text
 .kicker{font-family:var(--f-cond);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);margin:0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-.phead,.crumbs,.acbar,.nav,.hero,.season,.special,.rub,.kpis,.tblwrap,.thema,.acgroup,.acbanner,.setup,.card,.fact,details.qi,.komp,.kmain,.kside,.qrh,.prep,.panel,.statgrid,.rubstats,.artblock,.toc,.aquiz,.membar,.infos,.searchbox input,.who.login,.langsw,.themebtn{-webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1)}
+.phead,.crumbs,.acbar,.nav,.hero,.season,.special,.rub,.kpis,.tblwrap,.thema,.acgroup,.acbanner,.setup,.card,.fact,details.qi,.komp,.kmain,.kside,.qrh,.prep,.panel,.statgrid,.rubstats,.artblock,.toc,.aquiz,.membar,.infos,.trainer,.myt,.wpc,.rttopic,.searchbox input,.who.login,.langsw,.themebtn{-webkit-backdrop-filter:blur(10px) saturate(1.1);backdrop-filter:blur(10px) saturate(1.1)}
 .phead{background:var(--surface);padding:16px;border:1px solid var(--line2)}
 .crumbs{background:var(--surface);padding:0 10px;width:fit-content;max-width:100%;border:1px solid var(--line2)}
 .acbar{background:var(--surface);padding:8px 12px;width:fit-content;max-width:100%;border:1px solid var(--line2)}
@@ -216,7 +216,11 @@ h1,h2,h3{font-family:var(--f-body);font-weight:600;line-height:1.2;margin:0;text
 .ibox .igo{margin-top:auto;display:flex;align-items:center;gap:6px;font-weight:600;font-size:.9rem;color:var(--kc)}
 .ibox:hover .ih{text-decoration:underline;text-underline-offset:3px}
 .ibox:focus-visible{outline:2px solid var(--kc);outline-offset:-4px}
-.infos .sdots{top:auto;bottom:12px;right:12px}
+.infos .sdots{top:auto;bottom:14px;right:12px}
+.iprog{position:absolute;left:0;right:0;bottom:0;height:4px;background:var(--line);z-index:2}
+.iprog i{display:block;height:100%;width:0;background:var(--red);animation:ifill 10s linear forwards}
+@keyframes ifill{to{width:100%}}
+@media (prefers-reduced-motion:reduce){.iprog i{animation-duration:10s}}
 .infos .sdots button::before{background:var(--line2);border-color:transparent}
 .infos .sdots button[aria-current="true"]::before{background:var(--ink)}
 @media (max-width:860px){.infos{border-left:0;border-top:1px solid var(--line2)}.ibox{padding:18px 16px 16px}}
@@ -279,8 +283,9 @@ h1,h2,h3{font-family:var(--f-body);font-weight:600;line-height:1.2;margin:0;text
 .seg button[aria-pressed="true"]{background:var(--sel);color:var(--onsel)}
 
 /* special tiles */
-.specials{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
-@media (max-width:760px){.specials{grid-template-columns:minmax(0,1fr)}}
+.specials{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+@media (max-width:1100px){.specials{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:620px){.specials{grid-template-columns:minmax(0,1fr)}}
 .special{display:flex;align-items:center;gap:14px;text-align:left;min-height:84px;border:1px solid var(--line2);border-left:3px solid var(--c);background:var(--surface);padding:12px 16px}
 .special .si{flex:none;width:40px;height:40px;display:grid;place-items:center;border:1px solid var(--line2);color:var(--c)}
 .special b{display:block;font-weight:600;font-size:1.02rem}
@@ -379,6 +384,175 @@ table.stat.comp .cscope{min-width:220px;color:var(--soft)}
 .slider input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:var(--surface);border:2px solid var(--rule)}
 .slider input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:0;background:var(--surface);border:2px solid var(--rule)}
 .scale{display:flex;justify-content:space-between;width:100%;color:var(--soft);font-family:var(--f-mono);font-size:.8rem}
+
+
+/* road to command route */
+.membar.rtbar{margin:0 0 16px}
+.membar.rtbar .mi{background:var(--red);color:#fff}
+.rttop{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.rtprog{flex:1 1 260px;display:grid;gap:6px;font-size:.9rem;color:var(--soft)}
+.rtprog .bar{flex:none;height:6px}
+.rtnav{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 22px;padding:10px 12px;background:var(--char);color:#fff}
+.rtnav a{display:grid;color:#fff;text-decoration:none;padding:4px 8px;border:1px solid rgba(255,255,255,.25);min-width:0}
+.rtnav a:hover{background:rgba(255,255,255,.12)}
+.rtnav a b{font-family:var(--f-mono);font-size:.85rem;letter-spacing:.06em;color:#FF5A5F}
+.rtnav a span{font-size:.75rem;opacity:.85}
+.rtnav i{font-style:normal;opacity:.6;display:flex}
+@media (max-width:620px){.rtnav a span{display:none}.rtnav i{display:none}}
+.route{list-style:none;margin:0;padding:0;position:relative}
+.wp{display:grid;grid-template-columns:110px minmax(0,1fr);gap:0 18px;position:relative;scroll-margin-top:16px}
+.wp::before{content:"";position:absolute;left:54px;top:0;bottom:0;border-left:2px dashed var(--line2)}
+.wp:first-child::before{top:22px}.wp:last-child::before{bottom:auto;height:22px}
+.wpk{position:relative;display:grid;justify-items:center;align-content:start;gap:2px;padding-top:8px;text-align:center;z-index:1}
+.wpm{width:22px;height:22px;background:var(--surface);border:3px solid var(--red);transform:rotate(45deg);margin-bottom:8px}
+.wp:last-child .wpm{background:var(--red)}
+.wpk b{font-family:var(--f-mono);font-weight:700;font-size:.95rem;letter-spacing:.06em;background:var(--bg);padding:0 4px}
+.wpk small{font-size:.72rem;color:var(--soft);text-transform:uppercase;letter-spacing:.08em;background:var(--bg);padding:0 4px}
+.wpc{background:var(--surface);border:1px solid var(--line2);border-left:3px solid var(--red);padding:clamp(14px,2.6vw,22px);margin-bottom:16px;min-width:0;display:grid;gap:10px}
+.wpc>*{margin:0;min-width:0}
+.wpn{font-family:var(--f-cond);font-weight:700;font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.wpc h2{font-size:1.3rem}
+.wps{color:var(--soft)}
+@media (max-width:560px){.wp{grid-template-columns:62px minmax(0,1fr);gap:0 10px}.wp::before{left:30px}.wpk b{font-size:.78rem}.wpk small{display:none}}
+.rtt{width:100%;border-collapse:collapse;font-size:.9rem;min-width:520px}
+.rtt th,.rtt td{border:1px solid var(--line2);padding:8px 10px;text-align:left;vertical-align:top}
+.rtt thead th{background:var(--char);color:#fff;font-weight:600}
+.rtt tbody th{background:var(--surface2);font-weight:600;white-space:nowrap}
+.rtsteps{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.rtsteps li{display:grid;gap:4px;padding:10px 12px;background:var(--surface2);border-left:3px solid var(--line2)}
+.rtsteps span{font-size:.93rem}
+.rth{font-family:var(--f-cond);font-weight:700;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft)}
+.rtreq{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.rtreq label{display:flex;gap:10px;align-items:flex-start;padding:6px 8px;cursor:pointer;border:1px solid transparent}
+.rtreq label:hover{border-color:var(--line2)}
+.rtreq input{width:18px;height:18px;flex:none;margin:2px 0 0;accent-color:var(--red)}
+.rtreq label:has(input:checked) span{color:var(--soft);text-decoration:line-through;text-decoration-color:var(--line2)}
+.rtinfo{display:flex;gap:8px;align-items:flex-start;font-size:.9rem;padding:8px 10px;border:1px dashed var(--line2)}
+.rtsrc{display:flex;gap:6px;align-items:center;font-family:var(--f-mono);font-size:.8rem;color:var(--soft)}
+.rtls{display:flex;flex-wrap:wrap;gap:6px}
+.rtl{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:4px 10px;border:1px solid var(--line2);background:var(--surface);font-size:.85rem;font-weight:600;text-align:left}
+.rtl:hover{border-color:var(--rule)}
+.rtl.a .ic{color:var(--red)}
+.rttopics{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+@media (max-width:520px){.rttopics{grid-template-columns:minmax(0,1fr)}}
+.rttopic{background:var(--surface);border:1px solid var(--line2);border-top:3px solid var(--char);padding:14px 16px;display:grid;gap:8px;align-content:start;min-width:0}
+.rttopic h3{display:flex;gap:8px;align-items:center;font-size:1.05rem;margin:0}
+.rttopic ul{margin:0;padding-left:18px;display:grid;gap:4px;font-size:.92rem}
+.rtcols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
+@media (max-width:760px){.rtcols{grid-template-columns:minmax(0,1fr)}}
+.rtskills{margin:10px 0 0;padding-left:18px;display:grid;gap:6px}
+.rtplan{list-style:none;margin:10px 0;padding:0;display:grid;gap:8px;counter-reset:p}
+.rtplan li{display:grid;gap:2px;padding-left:14px;border-left:3px solid var(--red)}
+
+/* duel */
+.membar.duelbar .mi{background:var(--red);color:#fff}
+.duelmodes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+@media (max-width:760px){.duelmodes{grid-template-columns:minmax(0,1fr)}}
+.dmode{background:var(--surface);border:1px solid var(--line2);border-top:3px solid var(--red);padding:clamp(16px,3vw,22px);display:grid;gap:12px;align-content:start;min-width:0}
+.dmode h2{display:flex;align-items:center;gap:8px;font-size:1.15rem;margin:0}.dmode>p{margin:0;color:var(--soft)}
+.dnames{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media (max-width:420px){.dnames{grid-template-columns:1fr}}
+.bt{display:flex;gap:10px;align-items:flex-start;margin-top:16px;padding:12px 14px;border:1px dashed var(--line2);color:var(--soft);font-size:.92rem}
+.duel{display:grid;gap:12px}
+.dbar{display:flex;align-items:center;gap:10px 14px;flex-wrap:wrap}
+.dcount{font-family:var(--f-mono);font-weight:600}
+.dclock{display:flex;align-items:center;gap:4px;font-family:var(--f-mono);margin-left:auto}
+.dtbar{flex-basis:100%;height:6px;background:var(--line)}.dtbar i{display:block;height:100%;background:var(--red);transition:width .1s linear}
+.dgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.duel.one .dgrid{grid-template-columns:minmax(0,1fr);max-width:820px;margin-inline:auto;width:100%}
+.dpl{background:var(--surface);border:1px solid var(--line2);border-top:4px solid var(--red);padding:14px;display:grid;gap:12px;align-content:start;min-width:0}
+.dpl.p2{border-top-color:var(--char)}
+.dpl header{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+.dpl header b{font-size:1.05rem}.dsc{font-family:var(--f-mono);font-weight:700;font-size:1.4rem;font-variant-numeric:tabular-nums}
+.dq{font-size:1.08rem;line-height:1.4;margin:0}
+.dansw{display:grid;gap:8px}
+.dans{display:flex;align-items:center;gap:10px;min-height:52px;padding:8px 12px;border:1px solid var(--line2);background:var(--surface);text-align:left;font-size:.96rem;width:100%}
+.dans:hover:not([disabled]){border-color:var(--rule)}
+.dans .key{font-family:var(--f-mono);font-weight:700;width:26px;height:26px;display:grid;place-items:center;border:1px solid var(--line2);flex:none}
+.dans span:nth-child(2){flex:1;min-width:0}
+.dans kbd{font-family:var(--f-mono);font-size:.75rem;color:var(--soft);border:1px solid var(--line2);padding:0 5px}
+.dans.mine{border-color:var(--rule);background:var(--surface2);box-shadow:inset 3px 0 0 var(--rule)}
+.dans.ok{border-color:var(--ok,#1E8E3E);box-shadow:inset 4px 0 0 var(--ok,#1E8E3E)}
+.dans.bad{border-color:var(--bad);box-shadow:inset 4px 0 0 var(--bad)}
+.dans[disabled]{cursor:default;opacity:1}
+.dpl.locked .dans:not(.mine):not(.ok){opacity:.6}
+.dstat{margin:0;min-height:1.4em;font-weight:600;display:flex;align-items:center;gap:6px}
+.dfb{background:var(--surface);border:1px solid var(--line2);padding:14px;display:grid;gap:8px;justify-items:start}.dfb p{margin:0}
+@media (hover:none),(max-width:760px){.dans kbd{display:none}}
+@media (max-width:760px){.duel.two .dgrid{grid-template-columns:minmax(0,1fr)}.duel.two .dpl.p2{order:-1;transform:rotate(180deg)}}
+.dwin{text-align:center;display:grid;justify-items:center;gap:6px;margin-bottom:12px}.dwin .emo{font-size:2.6rem}.dwin h2{margin:0}.dwin p{margin:0}
+.dvs{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;margin:8px 0 16px}
+.dvs>div{display:grid;justify-items:center;gap:2px;padding:12px;border:1px solid var(--line2);background:var(--surface2);min-width:0;text-align:center}
+.dvs>div.w{border-color:var(--red);box-shadow:inset 0 3px 0 var(--red)}
+.dvs b{overflow-wrap:anywhere}.dvs span{font-family:var(--f-mono);font-size:1.8rem;font-weight:700}.dvs small{color:var(--soft)}
+.dvs i{font-style:normal;font-family:var(--f-cond);font-weight:700;color:var(--red);font-size:1.2rem}
+.dtab td.ok{color:var(--ok,#1E8E3E);font-weight:600;white-space:nowrap}.dtab td.bad{color:var(--bad);white-space:nowrap}
+.duelin{display:grid;gap:14px}
+/* trainer + test builder */
+.trainer{background:var(--surface);border:1px solid var(--line2);border-top:3px solid var(--c,var(--red));margin:0 0 20px}
+.trainer>summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap;padding:14px clamp(16px,3vw,24px);min-height:56px}
+.trainer>summary::-webkit-details-marker{display:none}
+.trainer>summary>.ic:last-child{margin-left:auto;transition:transform .2s}
+.trainer[open]>summary>.ic:last-child{transform:rotate(180deg)}
+.trainer>summary:hover{background:var(--surface2)}
+.trh{display:flex;align-items:center;gap:10px;font-size:1.08rem}.trh .ic{color:var(--c,var(--red))}.trh b{font-weight:700}
+.trs{color:var(--soft);font-size:.9rem}
+.trbody{display:grid;gap:20px;padding:4px clamp(16px,3vw,24px) clamp(16px,3vw,24px)}
+.trainer.bld .trbody{padding-top:clamp(16px,3vw,24px)}
+.trainer>summary+.trbody{border-top:1px solid var(--line2);padding-top:18px}
+.trbody>*,.trsec{min-width:0}
+.trbody h3{font-family:var(--f-cond);font-weight:700;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);margin:0 0 10px}
+.trhead{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}.trhead h3{margin-bottom:10px}
+.trall{display:flex;gap:16px;font-size:.92rem}
+.trchips{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px}
+@media (max-width:520px){.trchips{grid-template-columns:minmax(0,1fr)}}
+.trc{display:flex;align-items:center;gap:10px;min-height:44px;padding:6px 12px;border:1px solid var(--line2);background:var(--surface);cursor:pointer;font-size:.93rem;line-height:1.3}
+.trc:hover{border-color:var(--rule)}
+.trc:has(input:checked){border-color:var(--rule);box-shadow:inset 3px 0 0 var(--c,var(--red));background:var(--surface2)}
+.trc input,.trgl input{width:18px;height:18px;flex:none;accent-color:var(--red);margin:0}
+.trcn{flex:1;min-width:0}
+.trc small{font-family:var(--f-mono);font-size:.76rem;color:var(--soft);font-variant-numeric:tabular-nums}
+.trg{border:1px solid var(--line2);border-left:3px solid var(--c);margin-bottom:6px}
+.trgh{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;padding:6px 10px 6px 12px;min-height:48px}
+.trgl{display:flex;align-items:center;gap:10px;flex:1 1 220px;min-width:0;font-weight:600;cursor:pointer}
+.trgl span{display:flex;align-items:center;gap:8px;min-width:0}
+.trgx{border:1px solid var(--line2);background:var(--surface);min-height:36px;padding:2px 8px 2px 12px;display:inline-flex;align-items:center;gap:4px;font-size:.88rem;font-weight:600}
+.trgx[aria-expanded="true"] .ic{transform:rotate(180deg)}
+.trg .trchips{padding:4px 10px 10px 12px}
+.trrow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 28px}
+@media (max-width:700px){.trrow{grid-template-columns:minmax(0,1fr)}}
+.trn{display:flex;align-items:center;gap:14px}
+.trn input[type=range]{-webkit-appearance:none;appearance:none;flex:1;min-width:0;height:6px;background:linear-gradient(var(--red),var(--red)) 0/var(--p,50%) 100% no-repeat,var(--line);cursor:pointer;margin:10px 0}
+.trn input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;background:var(--surface);border:2px solid var(--rule)}
+.trn input[type=range]::-moz-range-thumb{width:20px;height:20px;border-radius:0;background:var(--surface);border:2px solid var(--rule)}
+.trn input[type=number]{width:92px;min-height:48px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);font-family:var(--f-mono);font-weight:600;font-size:1.3rem;text-align:center;padding:4px 6px;font-variant-numeric:tabular-nums}
+.trn input:disabled{opacity:.5}
+.trrow .hint{margin-top:6px}
+.tract{display:flex;gap:10px;flex-wrap:wrap}
+.trcode{margin-top:8px}
+.shrow{display:flex;gap:10px;flex-wrap:wrap}
+.shrow input{flex:1 1 260px;min-width:0;min-height:48px;border:1px solid var(--line2);background:var(--surface);color:var(--ink);padding:8px 12px;font-family:var(--f-mono);font-size:.86rem}
+.shrow2{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.shbox{border:1px solid var(--rule);background:var(--surface2);padding:4px 16px 14px}
+.shbox .label{margin-top:12px}
+.shbox .hint{margin-top:10px}
+.mytests{display:grid;gap:6px}
+.myt{display:flex;align-items:center;gap:10px;flex-wrap:wrap;border:1px solid var(--line2);background:var(--surface);padding:8px 12px}
+.myt>div{flex:1 1 220px;min-width:0;display:grid}.myt b{font-weight:600}
+.shrubs{list-style:none;margin:16px 0;padding:0;display:grid;gap:6px}
+.shrubs li{display:flex;align-items:center;gap:10px;border-left:3px solid var(--c);padding:6px 12px;background:var(--surface2)}
+.shrubs li span{flex:1}.shrubs small{font-family:var(--f-mono);color:var(--soft)}
+/* social sign-in */
+.social{display:grid;gap:10px;margin-bottom:18px}
+.sohead{margin:0;font-weight:600;font-size:.92rem}
+.sbtns{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:460px){.sbtns{grid-template-columns:minmax(0,1fr)}}
+.sbtn{display:flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:8px 14px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);font-weight:600;font-size:.95rem}
+.sbtn:hover{background:var(--surface2)}
+.sbtn svg,.provline svg{width:20px;height:20px;flex:none}
+.or{display:flex;align-items:center;gap:12px;color:var(--soft);font-size:.86rem;margin-top:6px}
+.or::before,.or::after{content:"";flex:1;border-top:1px solid var(--line2)}
+.provline{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px;padding:8px 12px;border:1px solid var(--line2);background:var(--surface2)}
+.provline span{flex:1}
 
 /* quiz */
 .qtop{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
@@ -746,6 +920,9 @@ de:{
   "ac.label":"Flugzeug","ac.aria":"Flugzeugtyp","ac.hintAll":"Fragen beider Typen. Wähle E2 oder E1, um nur dessen Fragen und die allgemeinen zu sehen.","ac.hintOne":"Nur {a}-Fragen und allgemeine Fragen.",
   "sec.train":"Training","sec.rub":"Rubriken","sec.rub.s":"Wähle ein Gebiet",
   "sp.cr.t":"Checkride","sp.cr.s":"30 gemischte Fragen aus allen Rubriken, mit Zeitlimit","sp.f.t":"Fehler wiederholen","sp.f.s":"{n} Fragen, die zuletzt falsch waren","sp.f.none":"Noch keine falschen Antworten","sp.z.t":"Zufällige 10","sp.z.s":"Schnelles Training im Lernmodus",
+  "du.bar":"DUELL","du.bar.s":"Tritt gegen Kollegen an, am selben Gerät oder per Link","du.bar.n":"1 gegen 1","du.title":"Duell","du.sub":"Gleiche Fragen, gleiche Zeit. Wer richtig und schneller antwortet, holt mehr Punkte.","du.avail":"{n} Fragen im Pool","du.per":"Zeit pro Frage","du.local":"Am selben Gerät","du.local.s":"Zwei Piloten, ein Bildschirm. Auf dem Handy sitzt ihr euch gegenüber, die obere Hälfte steht für dein Gegenüber auf dem Kopf.","du.p1":"Spieler 1","du.p2":"Spieler 2","du.start":"Duell starten","du.keys":"Am PC: Spieler 1 mit Q W E R, Spieler 2 mit U I O P. Weiter mit Enter.","du.link":"Herausfordern per Link","du.link.s":"Du spielst zuerst, danach schickst du den Link. Dein Gegner bekommt dieselben Fragen und sieht dein Resultat erst am Schluss.","du.you":"Dein Name","du.chal":"Herausforderung spielen","du.link.h":"Der Link enthält die Fragen und dein Resultat. Die Antwort kommt ebenfalls als Link zurück.","du.bt":"In der späteren App verbindet ihr euch per Bluetooth und spielt live auf zwei Geräten. Das Duell ist bereits so gebaut, dass diese Verbindung nur noch angeschlossen werden muss.","du.q":"Frage {n} von {k}","du.locked":"Antwort eingeloggt","du.timeout":"Zeit abgelaufen","du.result":"Resultat","du.wins":"{n} gewinnt!","du.draw":"Unentschieden","du.ok":"{n} von {k} richtig","du.qcol":"Frage","du.rematch":"Revanche","du.new":"Neues Duell","du.chal.done":"Deine Herausforderung: {s} Punkte","du.chal.t":"JetQ Duell","du.chal.l":"Schicke diesen Link an deinen Gegner","du.reply.t":"JetQ Duell Antwort","du.reply.l":"Schicke den Link zurück, damit dein Gegner das Resultat sieht","du.mail.s":"JetQ Duell: {n} fordert dich heraus","du.mail.b":"{n} fordert dich zu einem JetQ Duell heraus und hat {s} Punkte geholt. Kannst du das schlagen?\n\n{u}","du.in.t":"{n} fordert dich heraus","du.in.s":"{k} Fragen, {p} Sekunden pro Frage. Gleiche Fragen, Resultat erst am Schluss.","du.hidden":"Resultat verdeckt","du.ready":"Bereit?","du.accept":"Duell annehmen",
+  "rt.bar.s":"Requirements, Selektion, Command Course und alle Topics für angehende Captains, auch als PDF","rt.bar.n":"{n} Waypoints","rt.wp":"Waypoint {n} von {k}","rt.check":"Checkliste","rt.prog":"{n} von {k} Punkten abgehakt","rt.pdf":"Guide als PDF","rt.pdf.wait":"PDF wird vorbereitet…","rt.pdf.fail":"Download hier nicht möglich. Das PDF liegt auch in den Projektdateien.","rt.reset":"Zurücksetzen","rt.nav":"Waypoints der Route","rt.topics":"Was ein Captain beherrschen muss","rt.topics.s":"Jedes Topic mit Artikel und Quiz","rt.skills":"Persönliches Profil","rt.skills.s":"Was Helvetic von einem Commander erwartet (OM-A 5.2.1).","rt.plan":"Vorbereitungsplan","rt.quiz":"20 Fragen Road to Command","rt.rub":"Alle Themen der Rubrik",
+  "sp.b.t":"Eigener Test","sp.b.s":"Themen und Anzahl wählen, als Link verschicken","tr.title":"Trainingsgang zusammenstellen","tr.sub":"Themen ankreuzen, Anzahl wählen, starten","tr.themes":"Themen","tr.rubs":"Rubriken und Themen","tr.all":"Alle","tr.none":"Keine","tr.pick":"Themen","tr.gsel":"{k} von {n}","tr.avail":"{n} Fragen in {k} gewählten Themen","tr.empty":"Kein Thema gewählt","tr.start":"Training starten","tr.tobld":"Als Test teilen","tr.single":"Oder ein einzelnes Thema","bld.title":"Eigener Test","bld.sub":"Stelle einen Test aus beliebigen Themen zusammen und schicke ihn als Link weiter.","bld.name":"Name des Tests","bld.name.ph":"z.B. Recurrent Vorbereitung Winter","bld.start":"Test starten","bld.share":"Link zum Verschicken erstellen","bld.ready":"Test mit {n} Fragen ist bereit","bld.link":"Link zum Test","bld.copy":"Link kopieren","bld.copied":"Link kopiert. Alle, die ihn öffnen, bekommen genau dieselben Fragen.","bld.copyman":"Kopieren nicht erlaubt. Der Link ist markiert, kopiere ihn mit Ctrl+C oder lange drücken.","bld.sys":"Teilen","bld.mail":"E-Mail","bld.mail.subj":"JetQ Test: {t}","bld.mail.body":"Hier ist ein JetQ Test für dich: {t} ({n} Fragen).\n\n{u}","bld.note.art":"Der Link öffnet JetQ in claude.ai. Empfänger brauchen Zugriff auf das Artefakt. In der GitHub-Version funktioniert der Link für alle.","bld.note.web":"Alle mit dem Link bekommen dieselben Fragen in derselben Auswahl.","bld.code":"Test-Code oder Link laden","bld.code.ph":"Link oder Code einfügen","bld.load":"Laden","bld.code.bad":"Dieser Code enthält keinen gültigen Test.","bld.mine":"Meine erstellten Tests","bld.mine.s":"{n} Fragen · {m} · {d}","bld.open":"Öffnen","bld.del":"Test entfernen","bld.shared":"Geteilter Test","bld.from":"Geteilter Test von {f}","bld.qs":"Fragen","bld.rubs":"Rubriken","bld.lost":"{n} Fragen gibt es in dieser Version nicht mehr, sie wurden weggelassen.","bld.own":"Eigenen Test bauen","auth.with":"Schnell anmelden mit","auth.cont":"Weiter mit {p}","auth.or":"oder mit Name und E-Mail","auth.art":"Hier in claude.ai bist du bereits über dein Claude-Konto erkannt, dein Fortschritt wird automatisch gespeichert. Die Anmeldung mit Apple, Google, Microsoft und Facebook ist in der GitHub-Version aktiv.","auth.nocfg":"Die Anmeldung über diesen Anbieter ist noch nicht eingerichtet. Bitte melde dich vorerst mit Name und E-Mail an.","auth.wait":"Anmeldung mit {p} läuft, bitte im Fenster bestätigen.","auth.ok":"Angemeldet mit {p}.","auth.fail":"Anmeldung abgebrochen oder fehlgeschlagen","auth.via":"Angemeldet mit {p}","auth.out":"Abmelden",
   "n.q":"{n} Fragen","n.t":"{n} Themen","n.f":"{n} Fakten","rub.sure":"{p} sicher","prog.aria":"{p} sicher beantwortet",
   "stats.title":"Inhalt","stats.sub":"Fragen pro Rubrik und Flugzeugtyp","st.rub":"Rubrik","st.q":"Fragen","st.both":"Beide","st.f":"Fakten","st.total":"Total",
   "k.q":"Fragen","k.f":"Bibliothekseinträge","k.k":"Komponenten","k.m":"Memory Items",
@@ -765,7 +942,7 @@ de:{
   "prof.save":"Speichern","prof.create":"Registrieren und anmelden","err.name":"Bitte gib deinen Namen ein.","err.email":"Bitte gib eine gültige E-Mail-Adresse ein.",
   "prof.saved.db":"Gespeichert in deinem Konto.","prof.saved.local":"Gespeichert in diesem Browser. Die Kontospeicherung ist in dieser Ansicht nicht verfügbar.","prof.local.note":"Die Kontospeicherung ist in dieser Ansicht nicht verfügbar. Dein Profil wird nur in diesem Browser gespeichert.","prof.saving":"Wird gespeichert…",
   "prof.progress":"Fortschritt","prof.st.db":"Gespeichert in deinem Konto, auf allen Geräten.","prof.st.local":"Gespeichert in diesem Browser.",
-  "st.pts":"Punkte","st.seen":"Fragen gesehen","st.ok":"zuletzt richtig","st.runs":"Durchgänge","prof.perrub":"Sicher beantwortet pro Rubrik","prof.perrub.s":"Anteil der Fragen, die zuletzt richtig waren","prof.last":"Letzte Durchgänge","prof.none":"Noch keine Durchgänge. Starte mit einer Rubrik oder dem Checkride.","prof.ptsnote":"Punkte: 10 pro richtige Antwort, mal Schwierigkeitsstufe. Eine bestandene Prüfung gibt 50 Bonuspunkte.","mode.pr":"Prüfung","mode.l":"Lernen","prof.okof":"{ok} von {n} richtig ({p})",
+  "st.pts":"Punkte","st.seen":"Fragen gesehen","st.ok":"zuletzt richtig","st.runs":"Durchgänge","prof.perrub":"Sicher beantwortet pro Rubrik","prof.perrub.s":"Anteil der Fragen, die zuletzt richtig waren","prof.last":"Letzte Durchgänge","prof.none":"Noch keine Durchgänge. Starte mit einer Rubrik oder dem Checkride.","prof.ptsnote":"Punkte: 10 pro richtige Antwort. Eine bestandene Prüfung gibt 50 Bonuspunkte.","mode.pr":"Prüfung","mode.l":"Lernen","prof.okof":"{ok} von {n} richtig ({p})",
   "art.title":"Fachartikel","art.lib.s":"Ausführliche Artikel mit Tabellen und Fundstellen, nach Rubrik","art.th.s":"{n} ausführliche Artikel zu diesem Thema","art.n":"{n} Artikel","art.n1":"1 Artikel",
   "art.secs":"{n} Abschnitte","art.secs1":"1 Abschnitt","art.tbls":"{n} Tabellen","art.tbls1":"1 Tabelle","art.read":"Lesen","art.both":"E1 + E2",
   "art.toc":"Inhalt","art.src":"Quellen","art.src.s":"{n} Fundstellen mit Originalzitat","art.zitat":"Originalzitat",
@@ -787,6 +964,9 @@ en:{
   "ac.label":"Aircraft","ac.aria":"Aircraft type","ac.hintAll":"Questions for both types. Choose E2 or E1 to see only its questions plus the general ones.","ac.hintOne":"Only {a} questions and general questions.",
   "sec.train":"Training","sec.rub":"Categories","sec.rub.s":"Choose a subject",
   "sp.cr.t":"Checkride","sp.cr.s":"30 mixed questions from all categories, timed","sp.f.t":"Review mistakes","sp.f.s":"{n} questions you last answered wrong","sp.f.none":"No wrong answers yet","sp.z.t":"Random 10","sp.z.s":"Quick practice in learning mode",
+  "du.bar":"DUEL","du.bar.s":"Compete against colleagues, on one device or via link","du.bar.n":"1 vs 1","du.title":"Duel","du.sub":"Same questions, same time. Whoever answers correctly and faster scores more.","du.avail":"{n} questions in the pool","du.per":"Time per question","du.local":"On one device","du.local.s":"Two pilots, one screen. On a phone you sit face to face; the top half is upside down for your opponent.","du.p1":"Player 1","du.p2":"Player 2","du.start":"Start duel","du.keys":"On a computer: player 1 uses Q W E R, player 2 uses U I O P. Continue with Enter.","du.link":"Challenge via link","du.link.s":"You play first, then send the link. Your opponent gets the same questions and sees your result only at the end.","du.you":"Your name","du.chal":"Play the challenge","du.link.h":"The link contains the questions and your result. The reply also comes back as a link.","du.bt":"In the later app you will connect via Bluetooth and play live on two devices. The duel is already built so that this connection only needs to be plugged in.","du.q":"Question {n} of {k}","du.locked":"Answer locked in","du.timeout":"Time is up","du.result":"Result","du.wins":"{n} wins!","du.draw":"Draw","du.ok":"{n} of {k} correct","du.qcol":"Question","du.rematch":"Rematch","du.new":"New duel","du.chal.done":"Your challenge: {s} points","du.chal.t":"JetQ duel","du.chal.l":"Send this link to your opponent","du.reply.t":"JetQ duel reply","du.reply.l":"Send the link back so your opponent sees the result","du.mail.s":"JetQ duel: {n} challenges you","du.mail.b":"{n} challenges you to a JetQ duel and scored {s} points. Can you beat that?\n\n{u}","du.in.t":"{n} challenges you","du.in.s":"{k} questions, {p} seconds per question. Same questions, result only at the end.","du.hidden":"Result hidden","du.ready":"Ready?","du.accept":"Accept duel",
+  "rt.bar.s":"Requirements, selection, command course and every topic for future captains, also as PDF","rt.bar.n":"{n} waypoints","rt.wp":"Waypoint {n} of {k}","rt.check":"Checklist","rt.prog":"{n} of {k} items ticked","rt.pdf":"Guide as PDF","rt.pdf.wait":"Preparing PDF…","rt.pdf.fail":"Download not possible here. The PDF is also in the project files.","rt.reset":"Reset","rt.nav":"Route waypoints","rt.topics":"What a captain must master","rt.topics.s":"Each topic with article and quiz","rt.skills":"Personal profile","rt.skills.s":"What Helvetic expects from a commander (OM-A 5.2.1).","rt.plan":"Preparation plan","rt.quiz":"20 Road to Command questions","rt.rub":"All topics of the category",
+  "sp.b.t":"Custom test","sp.b.s":"Pick topics and count, send it as a link","tr.title":"Build a training run","tr.sub":"Tick topics, choose how many, start","tr.themes":"Topics","tr.rubs":"Categories and topics","tr.all":"All","tr.none":"None","tr.pick":"Topics","tr.gsel":"{k} of {n}","tr.avail":"{n} questions in {k} selected topics","tr.empty":"No topic selected","tr.start":"Start training","tr.tobld":"Share as test","tr.single":"Or a single topic","bld.title":"Custom test","bld.sub":"Put together a test from any topics and send it on as a link.","bld.name":"Test name","bld.name.ph":"e.g. Recurrent prep winter","bld.start":"Start test","bld.share":"Create link to send","bld.ready":"Test with {n} questions is ready","bld.link":"Link to the test","bld.copy":"Copy link","bld.copied":"Link copied. Everyone who opens it gets exactly the same questions.","bld.copyman":"Copying is not allowed here. The link is selected, copy it with Ctrl+C or a long press.","bld.sys":"Share","bld.mail":"Email","bld.mail.subj":"JetQ test: {t}","bld.mail.body":"Here is a JetQ test for you: {t} ({n} questions).\n\n{u}","bld.note.art":"The link opens JetQ in claude.ai. Recipients need access to the artifact. In the GitHub version the link works for everyone.","bld.note.web":"Everyone with the link gets the same set of questions.","bld.code":"Load a test code or link","bld.code.ph":"Paste link or code","bld.load":"Load","bld.code.bad":"This code does not contain a valid test.","bld.mine":"My tests","bld.mine.s":"{n} questions · {m} · {d}","bld.open":"Open","bld.del":"Remove test","bld.shared":"Shared test","bld.from":"Shared test from {f}","bld.qs":"Questions","bld.rubs":"Categories","bld.lost":"{n} questions no longer exist in this version and were left out.","bld.own":"Build your own test","auth.with":"Quick sign-in with","auth.cont":"Continue with {p}","auth.or":"or with name and email","auth.art":"Here in claude.ai you are already recognised through your Claude account and your progress is saved automatically. Sign-in with Apple, Google, Microsoft and Facebook is active in the GitHub version.","auth.nocfg":"Sign-in with this provider is not set up yet. Please sign in with name and email for now.","auth.wait":"Signing in with {p}, please confirm in the window.","auth.ok":"Signed in with {p}.","auth.fail":"Sign-in cancelled or failed","auth.via":"Signed in with {p}","auth.out":"Sign out",
   "n.q":"{n} questions","n.t":"{n} topics","n.f":"{n} facts","rub.sure":"{p} mastered","prog.aria":"{p} answered correctly",
   "stats.title":"Contents","stats.sub":"Questions per category and aircraft type","st.rub":"Category","st.q":"Questions","st.both":"Both","st.f":"Facts","st.total":"Total",
   "k.q":"Questions","k.f":"Library entries","k.k":"Components","k.m":"Memory items",
@@ -806,7 +986,7 @@ en:{
   "prof.save":"Save","prof.create":"Register and sign in","err.name":"Please enter your name.","err.email":"Please enter a valid email address.",
   "prof.saved.db":"Saved to your account.","prof.saved.local":"Saved in this browser. Account storage is not available in this view.","prof.local.note":"Account storage is not available in this view. Your profile is saved in this browser only.","prof.saving":"Saving…",
   "prof.progress":"Progress","prof.st.db":"Saved to your account, on all devices.","prof.st.local":"Saved in this browser.",
-  "st.pts":"Points","st.seen":"Questions seen","st.ok":"Last correct","st.runs":"Sessions","prof.perrub":"Mastered per category","prof.perrub.s":"Share of questions last answered correctly","prof.last":"Recent sessions","prof.none":"No sessions yet. Start with a category or the checkride.","prof.ptsnote":"Points: 10 per correct answer, times the difficulty level. A passed exam gives 50 bonus points.","mode.pr":"Exam","mode.l":"Learning","prof.okof":"{ok} of {n} correct ({p})",
+  "st.pts":"Points","st.seen":"Questions seen","st.ok":"Last correct","st.runs":"Sessions","prof.perrub":"Mastered per category","prof.perrub.s":"Share of questions last answered correctly","prof.last":"Recent sessions","prof.none":"No sessions yet. Start with a category or the checkride.","prof.ptsnote":"Points: 10 per correct answer. A passed exam gives 50 bonus points.","mode.pr":"Exam","mode.l":"Learning","prof.okof":"{ok} of {n} correct ({p})",
   "art.title":"Articles","art.lib.s":"In-depth articles with tables and references, by category","art.th.s":"{n} in-depth articles on this topic","art.n":"{n} articles","art.n1":"1 article",
   "art.secs":"{n} sections","art.secs1":"1 section","art.tbls":"{n} tables","art.tbls1":"1 table","art.read":"Read","art.both":"E1 + E2",
   "art.toc":"Contents","art.src":"Sources","art.src.s":"{n} references with the original quote","art.zitat":"Original quote",
@@ -852,7 +1032,7 @@ let DATA=null;
 const S={screen:"home",libTab:store.get("libTab",null),ac:store.get("ac","alle"),rubrik:null,thema:null,komp:0,setup:{mode:"lern",n:10,stufe:0},quiz:null,query:"",
   st:Object.assign({q:{},punkte:0,tests:[]},store.get("stats",{})),db:null,user:null,uid:null,
   profile:store.get("profile",null),profileSrc:null,pmsg:null,
-  mac:"E2",mhide:false,mrev:new Set(),slide:0};
+  mac:"E2",mhide:false,mrev:new Set(),slide:0,tr:{},shared:null};
 
 /* day / night */
 function curDark(){const th=document.documentElement.dataset.theme;return th?th==="dark":matchMedia("(prefers-color-scheme: dark)").matches}
@@ -922,7 +1102,7 @@ const QA=(q,i)=>{const en=LANG==="en"&&Array.isArray(q.antworten_en)&&q.antworte
 function renderNav(){
   const items=[["home",t("nav.home"),IC.home],["memory",t("nav.mem"),ms("psychology"),"Memory"],["lib",t("nav.lib"),IC.book],["profil",t("nav.prof"),IC.user],["compliance",t("nav.comp"),IC.info]];
   const sc=S.screen, fromMem=S.quiz&&S.quiz.from==="memory";
-  const cur=sc==="diff"?"diff":sc.startsWith("lib")||sc==="artikel"?"lib":sc==="profil"?"profil":sc==="compliance"?"compliance":sc==="memory"||((sc==="quiz"||sc==="done")&&fromMem)?"memory":["home","rubrik","setup","quiz","done"].includes(sc)?"home":"";
+  const cur=sc==="diff"?"diff":sc.startsWith("lib")||sc==="artikel"?"lib":sc==="profil"?"profil":sc==="compliance"?"compliance":sc==="memory"||((sc==="quiz"||sc==="done")&&fromMem)?"memory":["home","rubrik","setup","quiz","done","builder","shared","route","duel","duelplay","dueldone","duelin"].includes(sc)?"home":"";
   $("#nav").setAttribute("aria-label","Navigation");
   $("#nav").innerHTML=items.map(([k,l,i,sh])=>`<button class="navbtn" data-go="${k}" ${cur===k?'aria-current="page"':""}>${i}${sh?`<span class="nl">${esc(l)}</span><span class="ns" aria-hidden="true">${esc(sh)}</span>`:`<span>${esc(l)}</span>`}</button>`).join("");
   $("#nav").querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>go(b.dataset.go));
@@ -982,14 +1162,19 @@ function statsHTML(){
   <tbody>${rows.map(x=>`<tr><td>${emo(x.r.id)}${esc(L(x.r,"name"))}</td><td>${z(x.n)}</td><td>${z(x.e2)}</td><td>${z(x.e1)}</td><td>${z(x.b)}</td><td>${z(x.f)}</td></tr>`).join("")}</tbody>
   <tfoot><tr><td>${t("st.total")}</td><td>${fN(sum("n"))}</td><td>${fN(sum("e2"))}</td><td>${fN(sum("e1"))}</td><td>${fN(sum("b"))}</td><td>${fN(sum("f"))}</td></tr></tfoot></table></div>`;
 }
+/* info cards: from DATA.infos, the current month's set, so all cards circulate once in 12 months */
+let IS=INFOS;
+function infoSet(){const a=Array.isArray(DATA&&DATA.infos)?DATA.infos:[];const m=new Date().getMonth()+1;const cur=a.filter(x=>x.m===m);IS=cur.length>=3?cur:(a.length?a:INFOS);return IS}
+const infoLink=f=>f.art?"a:"+f.art:f.th?"t:"+f.th:"";
+function openInfo(v){if(v.startsWith("a:")){openArt(v.slice(2));return}if(v.startsWith("t:")){const [r,th]=v.slice(2).split("/");go("libthema",{rubrik:r,thema:th})}}
 function infoCard(f,i){
-  const on=i===S.slide%INFOS.length, en=LANG==="en", tx=a=>esc(en?a[1]:a[0]);
+  const on=i===S.slide%IS.length, en=LANG==="en", tx=a=>esc(en?a[1]:a[0]);
   let g="";
   if(f.g.c) g=`<table class="icmp"><thead><tr><th></th><th class="e2">E2</th><th class="e1">E1</th></tr></thead><tbody>${f.g.c.map(r=>`<tr><th scope="row">${esc(en?r[1]:r[0])}</th><td>${esc(r[2])}</td><td>${esc(r[3])}</td></tr>`).join("")}</tbody></table>`;
   else if(f.g.r) g=`<dl class="irows">${f.g.r.map(r=>`<div><dt>${esc(en?r[1]:r[0])}</dt><dd>${esc(r[2])}</dd></div>`).join("")}</dl>`;
   else if(f.g.b) g=`<div class="ibars">${f.g.b.r.map(r=>`<div class="ib ${r[2]}"><span class="il">${esc(r[0])}</span><span class="it"><span style="width:${Math.round(r[1]/f.g.b.max*100)}%"></span></span><span class="iv">${fN(r[1])} ${esc(f.g.b.u)}</span></div>`).join("")}</div>`;
   else if(f.g.n) g=`<div class="inum"><b>${esc(f.g.n[0])}</b><span>${esc(en?f.g.n[2]:f.g.n[1])}</span></div>`;
-  return `<button class="ibox k-${f.k}${on?" on":""}" data-ia="${esc(f.art)}" ${on?"":'aria-hidden="true" tabindex="-1"'}>
+  return `<button class="ibox k-${f.k}${on?" on":""}" data-ia="${esc(infoLink(f))}" ${on?"":'aria-hidden="true" tabindex="-1"'}>
     <span class="ik"><b>${t("info.k."+f.k)}</b><span class="ie" aria-hidden="true">${f.e}</span></span>
     <span class="ih">${tx(f.t)}</span><span class="ix">${tx(f.x)}</span>${g}
     <span class="igo">${t("info.go")} ${ms("arrow_forward")}</span></button>`;
@@ -1007,12 +1192,14 @@ function renderHome(){
       <div class="ctas"><button class="btn pri" id="cr">${IC.play}<span>${t("hero.cr")}</span></button><button class="btn" id="lb">${IC.book}<span>${t("hero.lib")}</span></button></div>
     </div>
     <div class="infos" role="region" aria-roledescription="carousel" aria-label="${t("infos")}">
-      ${INFOS.map((f,i)=>infoCard(f,i)).join("")}
-      <div class="sdots">${INFOS.map((_,i)=>`<button data-sl="${i}" aria-label="${t("slide.go",{n:i+1})}" aria-current="${i===S.slide%INFOS.length}"></button>`).join("")}</div>
+      ${infoSet().map((f,i)=>infoCard(f,i)).join("")}
+      <div class="sdots">${IS.map((_,i)=>`<button data-sl="${i}" aria-label="${t("slide.go",{n:i+1})}" aria-current="${i===S.slide%IS.length}"></button>`).join("")}</div>
+      <div class="iprog" aria-hidden="true"><i></i></div>
     </div>
   </section>
   ${seasonsHTML()}
   <button class="membar difbar" id="dif"><span class="mi"><span class="dv"><i>E2</i><i>E1</i></span></span><span class="mt"><b>DIFFERENCES</b><span>${t("dif.bar.s")}</span></span><span class="mg"><span>${difs().length?t("dif.bar.n",{n:difs().length}):""}</span>${ms("arrow_forward")}</span></button>
+  <button class="membar duelbar" id="duelb"><span class="mi">${ms("swords")}</span><span class="mt"><b>${t("du.bar")}</b><span>${t("du.bar.s")}</span></span><span class="mg"><span>${t("du.bar.n")}</span>${ms("arrow_forward")}</span></button>
   <button class="membar" id="mem"><span class="mi">${emo("memory")}</span><span class="mt"><b>Memory Items</b><span>${t("mem.bar.s")}</span></span><span class="mg"><span>${mi.length?t("mem.bar.n",{n:mi.length}):""}</span>${ms("arrow_forward")}</span></button>
   <div class="shead"><h2>${t("sec.train")}</h2></div>
   ${acBar(true)}
@@ -1020,6 +1207,7 @@ function renderHome(){
     <button class="special" id="sp-cr" style="--c:var(--red)"><span class="si">${IC.clock}</span><span><b>${t("sp.cr.t")}</b><span>${t("sp.cr.s")}</span></span></button>
     <button class="special" id="sp-f" style="--c:var(--bad)" ${fehler?"":"disabled"}><span class="si">${IC.redo}</span><span><b>${t("sp.f.t")}</b><span>${fehler?t("sp.f.s",{n:fN(fehler)}):t("sp.f.none")}</span></span></button>
     <button class="special" id="sp-z" style="--c:var(--c-sys)"><span class="si">${IC.mix}</span><span><b>${t("sp.z.t")}</b><span>${t("sp.z.s")}</span></span></button>
+    <button class="special" id="sp-b" style="--c:var(--char)"><span class="si">${ms("construction")}</span><span><b>${t("sp.b.t")}</b><span>${t("sp.b.s")}</span></span></button>
   </div>
   <div class="shead"><h2>${t("sec.rub")}</h2><small>${t("sec.rub.s")}</small></div>
   <div class="rubriken">${RUBS().map(r=>rubTile(r,t("n.q",{n:fN(pool({rubrik:r.id}).length)}),true)).join("")}</div>
@@ -1029,15 +1217,17 @@ function renderHome(){
   $$("[data-sea]").forEach(b=>b.onclick=()=>{const id=b.dataset.sea;startQuiz({title:t("sea.t."+id),qs:shuffle(seasonQs(id)).slice(0,SEA_N),mode:"lern",rid:null})});
     const crf=()=>startQuiz({title:t("sp.cr.t"),qs:shuffle(pool()).slice(0,30),mode:"pruefung",rid:null});
   $("#cr").onclick=crf; $("#sp-cr").onclick=crf;
-  $("#lb").onclick=()=>go("lib"); $("#mem").onclick=()=>go("memory"); $("#dif").onclick=()=>go("diff");
+  $("#lb").onclick=()=>go("lib"); $("#mem").onclick=()=>go("memory"); $("#dif").onclick=()=>go("diff"); $("#duelb").onclick=()=>go("duel");
   $("#sp-f").onclick=()=>startQuiz({title:t("sp.f.t"),qs:shuffle(pool({special:"fehler"})).slice(0,20),mode:"lern",rid:null});
+  $("#sp-b").onclick=()=>go("builder");
   $("#sp-z").onclick=()=>startQuiz({title:t("sp.z.t"),qs:shuffle(pool()).slice(0,10),mode:"lern",rid:null});
   $$("#app .rubriken [data-r]").forEach(b=>b.onclick=()=>go("rubrik",{rubrik:b.dataset.r}));
   /* slideshow */
-  $$(".infos [data-ia]").forEach(b=>b.onclick=()=>openArt(b.dataset.ia));
-  const show=i=>{S.slide=(i+INFOS.length)%INFOS.length;$$(".infos .ibox").forEach((f,k)=>{f.classList.toggle("on",k===S.slide);if(k===S.slide){f.removeAttribute("aria-hidden");f.removeAttribute("tabindex")}else{f.setAttribute("aria-hidden","true");f.setAttribute("tabindex","-1")}});$$(".sdots button").forEach((b,k)=>b.setAttribute("aria-current",k===S.slide))};
-  $$("[data-sl]").forEach(b=>b.onclick=()=>{show(+b.dataset.sl);stopSlides();SLIDE_T=setInterval(()=>show(S.slide+1),9000)});
-  stopSlides(); SLIDE_T=setInterval(()=>{if(!document.hidden)show(S.slide+1)},9000);
+  $$(".infos [data-ia]").forEach(b=>b.onclick=()=>openInfo(b.dataset.ia));
+  const prog=()=>{const i=$(".iprog i");if(!i)return;i.style.animation="none";void i.offsetWidth;i.style.animation=""};
+  const show=i=>{S.slide=(i+IS.length)%IS.length;prog();$$(".infos .ibox").forEach((f,k)=>{f.classList.toggle("on",k===S.slide);if(k===S.slide){f.removeAttribute("aria-hidden");f.removeAttribute("tabindex")}else{f.setAttribute("aria-hidden","true");f.setAttribute("tabindex","-1")}});$$(".sdots button").forEach((b,k)=>b.setAttribute("aria-current",k===S.slide))};
+  $$("[data-sl]").forEach(b=>b.onclick=()=>{show(+b.dataset.sl);stopSlides();SLIDE_T=setInterval(()=>{if(!document.hidden)show(S.slide+1)},10000)});
+  stopSlides(); prog(); SLIDE_T=setInterval(()=>{if(!document.hidden)show(S.slide+1)},10000);
 }
 
 function crumbs(list){return `<nav class="crumbs" aria-label="${t("crumbs")}">${list.map((c,i)=>i===list.length-1?`<span class="crumb cur">${esc(c[0])}</span>`:`<button class="crumb" data-cr="${i}">${esc(c[0])}</button><span class="sep">/</span>`).join("")}</nav>`}
@@ -1050,13 +1240,15 @@ function renderRubrik(){
   const cl=[[t("nav.home"),()=>go("home")],[L(r,"name")]];
   const themen=r.themen.map(x=>({t:x,n:pool({rubrik:r.id,thema:x.id}).length})).filter(x=>x.n>0);
   const tile=({t:x,n})=>`<button class="thema" data-t="${esc(x.id)}"><span class="ti">${ticon(x.id)}</span><b>${esc(L(x,"name"))}</b><span class="t">${esc(L(x,"beschreibung"))}</span><span class="meta"><span class="tagp">${t("n.q",{n:fN(n)})}</span>${x.flugzeug?`<span class="tagp">${x.flugzeug}</span>`:""}</span></button>`;
-  $("#app").innerHTML=crumbs(cl)+phead(emo(r.id),esc(L(r,"name")),esc(L(r,"beschreibung")))+acBar()+`
+  const tg=[trGroup(r)], tk="r_"+r.id; trState(tk,tg,true);
+  $("#app").innerHTML=crumbs(cl)+phead(emo(r.id),esc(L(r,"name")),esc(L(r,"beschreibung")))+(r.id==="command"?rtBanner():"")+acBar()+trainerHTML(tk,tg,{open:true})+`
+  <p class="label">${t("tr.single")}</p>
   <div class="themen">
     <button class="thema all" data-t=""><span class="ti">${IC.mix}</span><b>${t("rub.all")}</b><span class="t">${t("rub.all.s")}</span><span class="meta"><span class="tagp">${t("n.q",{n:fN(pool({rubrik:r.id}).length)})}</span></span></button>
     ${themen.filter(x=>!x.t.flugzeug).map(tile).join("")}
   </div>
   ${["E2","E1"].map(a=>{const g=themen.filter(x=>x.t.flugzeug===a);return g.length?`<div class="acgroup"><img src="cockpit-${a.toLowerCase()}.jpg" alt="${esc(t("cockpit.alt",{a}))}" loading="lazy"><div><h2><span class="tbadge">${a}</span>${ACSUB[a]}</h2><p>${t("rub.acgroup",{n:g.length,a})}</p></div></div><div class="themen">${g.map(tile).join("")}</div>`:""}).join("")}`;
-  setC($("#app"),r.id); bindCrumbs(cl); bindAc();
+  setC($("#app"),r.id); bindCrumbs(cl); bindAc(); bindTrainer(tk,tg,{title:L(r,"name"),rid:r.id}); {const g=$("#rtgo"); if(g) g.onclick=()=>go("route");}
   $$("[data-t]").forEach(b=>b.onclick=()=>go("setup",{thema:b.dataset.t||null}));
 }
 
@@ -1064,7 +1256,7 @@ function renderRubrik(){
 function renderSetup(){
   const r=rub(S.rubrik), th=themaOf(r,S.thema); if(!r){go("home");return}
   const cl=[[t("nav.home"),()=>go("home")],[L(r,"name"),()=>go("rubrik")],[th?L(th,"name"):t("rub.all")]];
-  const avail=pool({rubrik:r.id,thema:S.thema,stufe:S.setup.stufe});
+  const avail=pool({rubrik:r.id,thema:S.thema});
   const max=Math.max(1,avail.length); if(S.setup.n>max) S.setup.n=max; if(S.setup.n<1) S.setup.n=1;
   const m=S.setup.mode, fa=th&&th.flugzeug;
   $("#app").innerHTML=crumbs(cl)+phead(th?ticon(th.id):emo(r.id),esc(th?L(th,"name"):L(r,"name")),esc(th?L(th,"beschreibung"):L(r,"beschreibung")))+`
@@ -1074,17 +1266,398 @@ function renderSetup(){
       <button class="mode" data-m="lern" aria-pressed="${m==="lern"}"><b>${IC.learn} ${t("setup.lern")}</b><span>${t("setup.lern.s")}</span></button>
       <button class="mode" data-m="pruefung" aria-pressed="${m==="pruefung"}"><b>${IC.clock} ${t("setup.pr")}</b><span>${t("setup.pr.s",{s:SEC_PER_Q,p:fP(PASS)})}</span></button>
     </div></div>
-    <div><h3>${t("setup.diff")}</h3><div class="seg" role="group" aria-label="${t("setup.diff")}">${[0,1,2,3].map(k=>`<button data-s="${k}" aria-pressed="${S.setup.stufe===k}">${t("diff."+k)}</button>`).join("")}</div></div>
     <div><h3>${t("setup.n")}</h3>
       <div class="slider"><output id="nOut">${S.setup.n}</output><label class="hint" for="nIn">${t("setup.avail",{n:fN(avail.length)})}</label><input type="range" id="nIn" min="1" max="${max}" value="${S.setup.n}" style="--p:${max>1?(S.setup.n-1)/(max-1)*100:100}%"><div class="scale"><span>1</span><span>${max}</span></div></div></div>
     <div class="center"><button class="btn ${m==="pruefung"?"dark":"pri"}" id="go" ${avail.length?"":"disabled"}>${m==="pruefung"?IC.clock+" "+t("setup.go.pr"):IC.play+" "+t("setup.go.l")}</button><button class="btn" id="libt">${IC.book} ${t("setup.learn")}</button></div>
   </div>`;
   setC($("#app"),r.id); bindCrumbs(cl);
   $$("[data-m]").forEach(b=>b.onclick=()=>{S.setup.mode=b.dataset.m;renderSetup()});
-  $$("[data-s]").forEach(b=>b.onclick=()=>{S.setup.stufe=+b.dataset.s;renderSetup()});
   const nIn=$("#nIn"); nIn.oninput=()=>{S.setup.n=+nIn.value;$("#nOut").textContent=nIn.value;nIn.style.setProperty("--p",(max>1?(nIn.value-1)/(max-1)*100:100)+"%")};
   $("#go").onclick=()=>startQuiz({title:th?L(th,"name"):L(r,"name"),qs:shuffle(avail).slice(0,S.setup.n),mode:m,rid:r.id});
   $("#libt").onclick=()=>go(th?"libthema":"librubrik",{});
+}
+
+/* ---------- trainer: own training run, test builder, shared tests ---------- */
+const ART_URL="https://claude.ai/artifact/QoTreuQKLwuFcJUeuGEoAN";
+const isArt=()=>!!(window.claude&&window.claude.use)||/claude|anthropic/.test(location.hostname);
+const shareBase=()=>isArt()?ART_URL:location.origin+location.pathname;
+const TK=(rid,tid)=>rid+"/"+tid;
+function trGroup(r){return {r,items:r.themen.filter(acVis).slice().sort(acSort).map(x=>({k:TK(r.id,x.id),x,n:pool({rubrik:r.id,thema:x.id}).length})).filter(o=>o.n>0)}}
+function trState(key,groups,defAll){
+  const all=groups.flatMap(g=>g.items.map(o=>o.k));
+  if(!S.tr[key]) S.tr[key]={sel:new Set(defAll?all:[]),n:10,mode:"lern"};
+  const st=S.tr[key]; st.sel=new Set([...st.sel].filter(k=>all.includes(k))); return st;
+}
+const trPool=st=>DATA.fragen.filter(q=>acOk(q)&&st.sel.has(TK(q.rubrik,q.thema)));
+function trainerHTML(key,groups,o){
+  const st=S.tr[key], multi=groups.length>1, tag=o.builder?"section":"details";
+  const chip=it=>`<label class="trc"><input type="checkbox" data-trk="${esc(it.k)}" ${st.sel.has(it.k)?"checked":""}><span class="trcn">${tb(it.x.flugzeug)}${esc(L(it.x,"name"))}</span><small>${fN(it.n)}</small></label>`;
+  const grp=g=>multi?`<div class="trg" style="--c:${rc(g.r.id)}"><div class="trgh"><label class="trgl"><input type="checkbox" data-trg="${esc(g.r.id)}"><span>${emo(g.r.id)}${esc(L(g.r,"name"))}</span></label><span class="tagp" data-trgn="${esc(g.r.id)}"></span><button type="button" class="trgx" data-trx="${esc(g.r.id)}" aria-expanded="false">${t("tr.pick")} ${ms("expand_more")}</button></div><div class="trchips" data-trcs="${esc(g.r.id)}" hidden>${g.items.map(chip).join("")}</div></div>`:`<div class="trchips">${g.items.map(chip).join("")}</div>`;
+  return `<${tag} class="trainer${o.builder?" bld":""}" id="tr-${key}" ${o.open?"open":""}>
+    ${o.builder?"":`<summary><span class="trh">${ms("tune")}<b>${t("tr.title")}</b></span><span class="trs">${t("tr.sub")}</span>${ms("expand_more")}</summary>`}
+    <div class="trbody">
+      ${o.builder?`<div class="field"><label for="trname">${t("bld.name")} <small>${t("prof.opt")}</small></label><input id="trname" maxlength="60" placeholder="${esc(t("bld.name.ph"))}" value="${esc(st.title||"")}"></div>`:""}
+      <div class="trsec"><div class="trhead"><h3>${multi?t("tr.rubs"):t("tr.themes")}</h3><span class="trall"><button type="button" class="linkbtn" data-tra="1">${t("tr.all")}</button><button type="button" class="linkbtn" data-tra="0">${t("tr.none")}</button></span></div>
+        ${groups.map(grp).join("")}</div>
+      <div class="trrow">
+        <div class="trsec"><h3><label for="trn-${key}">${t("setup.n")}</label></h3>
+          <div class="trn"><input type="range" id="trr-${key}" min="1" max="1" value="1" aria-label="${esc(t("setup.n"))}"><input type="number" id="trn-${key}" min="1" max="1" value="1" inputmode="numeric"></div>
+          <p class="hint" data-trav></p></div>
+        <div class="trsec"><h3>${t("setup.mode")}</h3><div class="seg" role="group" aria-label="${esc(t("setup.mode"))}"><button type="button" data-trm="lern" aria-pressed="${st.mode==="lern"}">${IC.learn} ${t("setup.lern")}</button><button type="button" data-trm="pruefung" aria-pressed="${st.mode==="pruefung"}">${IC.clock} ${t("setup.pr")}</button></div>
+          <p class="hint" data-trmh></p></div>
+      </div>
+      <div class="tract"><button type="button" class="btn pri" data-trgo>${IC.play}<span>${t(o.builder?"bld.start":"tr.start")}</span></button>
+        ${o.builder?`<button type="button" class="btn" data-trsh>${ms("share")}<span>${t("bld.share")}</span></button>`:`<button type="button" class="btn" data-trtb>${ms("ios_share")}<span>${t("tr.tobld")}</span></button>`}</div>
+      ${o.builder?`<div id="trshare" aria-live="polite"></div>`:""}
+    </div></${tag}>`;
+}
+function bindTrainer(key,groups,o){
+  const root=$("#tr-"+key), st=S.tr[key]; if(!root) return;
+  const q=s=>root.querySelector(s), qa=s=>[...root.querySelectorAll(s)];
+  const rr=q("#trr-"+key), nn=q("#trn-"+key);
+  const upd=()=>{
+    const avail=trPool(st).length, max=Math.max(1,avail);
+    if(st.n>max) st.n=max; if(st.n<1) st.n=1;
+    rr.max=nn.max=max; rr.value=nn.value=st.n; rr.disabled=nn.disabled=!avail;
+    rr.style.setProperty("--p",(max>1?(st.n-1)/(max-1)*100:100)+"%");
+    q("[data-trav]").textContent=avail?t("tr.avail",{n:fN(avail),k:st.sel.size}):t("tr.empty");
+    q("[data-trmh]").textContent=st.mode==="pruefung"?t("setup.pr.s",{s:SEC_PER_Q,p:fP(PASS)}):t("setup.lern.s");
+    qa("[data-trgo],[data-trsh],[data-trtb]").forEach(b=>b.disabled=!avail);
+    qa("[data-trk]").forEach(c=>c.checked=st.sel.has(c.dataset.trk));
+    groups.forEach(g=>{const c=q(`[data-trg="${g.r.id}"]`);if(!c)return;const k=g.items.filter(i=>st.sel.has(i.k)).length;
+      c.checked=k===g.items.length&&k>0;c.indeterminate=k>0&&k<g.items.length;const n=q(`[data-trgn="${g.r.id}"]`);if(n)n.textContent=t("tr.gsel",{k,n:g.items.length})});
+    dirty();
+  };
+  function dirty(){if(!o.builder)return;st.frozen=null;const b=$("#trshare");if(b&&b.dataset.tok){b.innerHTML="";delete b.dataset.tok}}
+  qa("[data-trk]").forEach(c=>c.onchange=()=>{c.checked?st.sel.add(c.dataset.trk):st.sel.delete(c.dataset.trk);upd()});
+  qa("[data-trg]").forEach(c=>c.onchange=()=>{const g=groups.find(x=>x.r.id===c.dataset.trg);g.items.forEach(i=>c.checked?st.sel.add(i.k):st.sel.delete(i.k));upd()});
+  qa("[data-trx]").forEach(b=>b.onclick=()=>{const l=q(`[data-trcs="${b.dataset.trx}"]`);l.hidden=!l.hidden;b.setAttribute("aria-expanded",!l.hidden)});
+  qa("[data-tra]").forEach(b=>b.onclick=()=>{groups.forEach(g=>g.items.forEach(i=>b.dataset.tra==="1"?st.sel.add(i.k):st.sel.delete(i.k)));upd()});
+  rr.oninput=()=>{dirty();st.n=+rr.value;nn.value=st.n;rr.style.setProperty("--p",(rr.max>1?(st.n-1)/(rr.max-1)*100:100)+"%")};
+  nn.oninput=()=>{const v=parseInt(nn.value,10);if(v>=1&&v<=+nn.max){dirty();st.n=v;rr.value=v;rr.style.setProperty("--p",(rr.max>1?(v-1)/(rr.max-1)*100:100)+"%")}};
+  nn.onchange=()=>{const v=parseInt(nn.value,10);st.n=isNaN(v)?1:v;upd()};
+  qa("[data-trm]").forEach(b=>b.onclick=()=>{st.mode=b.dataset.trm;qa("[data-trm]").forEach(x=>x.setAttribute("aria-pressed",x===b));upd()});
+  const nm=q("#trname"); if(nm) nm.oninput=()=>{st.title=nm.value;dirty()};
+  const title=()=>(st.title||"").trim()||o.title||t("bld.title");
+  q("[data-trgo]").onclick=()=>{const qs=o.builder&&st.frozen?st.frozen:shuffle(trPool(st)).slice(0,st.n);startQuiz({title:title(),qs,mode:st.mode,rid:o.rid||null})};
+  const tb2=q("[data-trtb]"); if(tb2) tb2.onclick=()=>{S.tr.b={sel:new Set(st.sel),n:st.n,mode:st.mode};go("builder")};
+  const sh=q("[data-trsh]"); if(sh) sh.onclick=()=>{
+    const qs=shuffle(trPool(st)).slice(0,st.n); st.frozen=qs;
+    const tok=mkToken({t:title(),m:st.mode,f:(S.profile&&S.profile.name)||"",qs});
+    const mine=store.get("mytests",[]).filter(x=>x.tok!==tok); mine.unshift({tok,t:title(),n:qs.length,m:st.mode,d:new Date().toISOString().slice(0,10)}); store.set("mytests",mine.slice(0,12));
+    shareBox($("#trshare"),tok,title(),qs.length);
+  };
+  upd();
+}
+/* share tokens: base64url JSON with 6-char hashes of the question ids */
+function qh(id){let h=2166136261;for(let i=0;i<id.length;i++){h^=id.charCodeAt(i);h=Math.imul(h,16777619)}return ((h>>>0)%2176782336).toString(36).padStart(6,"0")}
+let QH=null; const qByHash=h=>{if(!QH){QH=new Map();DATA.fragen.forEach(q=>QH.set(qh(q.id),q))}return QH.get(h)};
+const b64u=s=>btoa(unescape(encodeURIComponent(s))).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,"");
+const unb64u=s=>decodeURIComponent(escape(atob(s.replace(/-/g,"+").replace(/_/g,"/")+"===".slice((s.length+3)%4))));
+function mkToken({t:ti,m,f,qs}){return "test-"+b64u(JSON.stringify({v:1,t:ti,m:m==="pruefung"?"p":"l",f,q:qs.map(q=>qh(q.id)).join("")}))}
+function readToken(s){
+  const m=String(s||"").match(/test-([A-Za-z0-9_-]{8,})/); if(!m) return null;
+  try{const o=JSON.parse(unb64u(m[1]));const hs=(o.q||"").match(/.{6}/g)||[];const qs=hs.map(qByHash).filter(Boolean);
+    return {tok:"test-"+m[1],t:String(o.t||"").slice(0,80),m:o.m==="p"?"pruefung":"lern",f:String(o.f||"").slice(0,80),qs,lost:hs.length-qs.length}}catch(e){return null}
+}
+function shareBox(el,tok,ti,n){
+  const url=shareBase()+"#"+tok, txt=t("bld.mail.body",{t:ti,n,u:url});
+  el.dataset.tok=tok;
+  el.innerHTML=`<div class="shbox"><p class="label"><span>${ms("link")} ${t("bld.ready",{n})}</span></p>
+    <div class="shrow"><input id="shurl" readonly value="${esc(url)}" aria-label="${esc(t("bld.link"))}"><button type="button" class="btn" id="shcp">${ms("content_copy")}<span>${t("bld.copy")}</span></button></div>
+    <div class="shrow2">${navigator.share&&!isArt()?`<button type="button" class="btn sm" id="shsys">${ms("share")}<span>${t("bld.sys")}</span></button>`:""}<a class="btn sm" href="mailto:?subject=${encodeURIComponent(t("bld.mail.subj",{t:ti}))}&body=${encodeURIComponent(txt)}">${ms("mail")}<span>${t("bld.mail")}</span></a><a class="btn sm" href="https://wa.me/?text=${encodeURIComponent(txt)}" target="_blank" rel="noopener">${ms("chat")}<span>WhatsApp</span></a></div>
+    <p class="hint">${isArt()?t("bld.note.art"):t("bld.note.web")}</p>
+    <p class="hint" id="shmsg" role="status"></p></div>`;
+  $("#shcp").onclick=async()=>{const i=$("#shurl");try{await navigator.clipboard.writeText(url);$("#shmsg").textContent=t("bld.copied")}catch(e){i.focus();i.select();$("#shmsg").textContent=t("bld.copyman")}};
+  $("#shurl").onfocus=e=>e.target.select();
+  const sy=$("#shsys"); if(sy) sy.onclick=async()=>{try{await navigator.share({title:ti,text:t("bld.mail.subj",{t:ti}),url})}catch(e){}};
+}
+function renderBuilder(){
+  const groups=RUBS().map(trGroup).filter(g=>g.items.length);
+  const st=trState("b",groups,false);
+  const cl=[[t("nav.home"),()=>go("home")],[t("bld.title")]];
+  const mine=store.get("mytests",[]);
+  $("#app").innerHTML=crumbs(cl)+phead(ms("construction"),t("bld.title"),t("bld.sub"),"var(--red)")+acBar()+trainerHTML("b",groups,{builder:true,open:true})+`
+  <section class="trcode"><p class="label">${t("bld.code")}</p><form class="shrow" id="codef"><input id="codein" placeholder="${esc(t("bld.code.ph"))}" aria-label="${esc(t("bld.code"))}"><button class="btn" type="submit">${ms("download")}<span>${t("bld.load")}</span></button></form><p class="hint" id="codemsg" role="status"></p></section>
+  ${mine.length?`<p class="label">${t("bld.mine")}</p><div class="mytests">${mine.map((x,i)=>`<div class="myt"><div><b>${esc(x.t)}</b><span class="hint">${t("bld.mine.s",{n:x.n,m:x.m==="pruefung"?t("mode.pr"):t("mode.l"),d:fD(x.d)})}</span></div><button type="button" class="btn sm" data-myo="${i}">${ms("open_in_new")}<span>${t("bld.open")}</span></button><button type="button" class="btn sm ghost" data-myd="${i}" aria-label="${esc(t("bld.del"))}">${ms("delete")}</button></div>`).join("")}</div>`:""}`;
+  bindCrumbs(cl); bindAc(); bindTrainer("b",groups,{builder:true});
+  $("#codef").onsubmit=e=>{e.preventDefault();const dx=readDuel($("#codein").value);if(dx){go("duelin",{duelIn:dx});return}const s=readToken($("#codein").value);if(!s||!s.qs.length){$("#codemsg").textContent=t("bld.code.bad");return}go("shared",{shared:s})};
+  $$("[data-myo]").forEach(b=>b.onclick=()=>{const s=readToken(mine[+b.dataset.myo].tok);if(s&&s.qs.length)go("shared",{shared:s})});
+  $$("[data-myd]").forEach(b=>b.onclick=()=>{mine.splice(+b.dataset.myd,1);store.set("mytests",mine);renderBuilder()});
+}
+function renderShared(){
+  const s=S.shared; if(!s){go("builder");return}
+  const cl=[[t("nav.home"),()=>go("home")],[t("bld.shared")]];
+  const by={}; s.qs.forEach(q=>by[q.rubrik]=(by[q.rubrik]||0)+1);
+  const ok=s.qs.length>0;
+  $("#app").innerHTML=crumbs(cl)+phead(ms("assignment"),esc(s.t||t("bld.title")),s.f?t("bld.from",{f:esc(s.f)}):t("bld.shared"),"var(--red)")+`
+  <section class="panel shared" style="--c:var(--char)">
+    ${ok?`<div class="statgrid"><div class="num"><b>${fN(s.qs.length)}</b><span>${t("bld.qs")}</span></div><div class="num"><b>${s.m==="pruefung"?t("mode.pr"):t("mode.l")}</b><span>${t("setup.mode")}</span></div><div class="num"><b>${Object.keys(by).length}</b><span>${t("bld.rubs")}</span></div></div>
+    <ul class="shrubs">${Object.entries(by).map(([rid,n])=>{const r=rub(rid);return `<li style="--c:${rc(rid)}">${emo(rid)}<span>${esc(r?L(r,"name"):rid)}</span><small>${fN(n)}</small></li>`}).join("")}</ul>
+    ${s.lost?`<p class="hint">${t("bld.lost",{n:s.lost})}</p>`:""}
+    <div class="tract"><button class="btn ${s.m==="pruefung"?"dark":"pri"}" id="shgo">${s.m==="pruefung"?IC.clock:IC.play}<span>${t("bld.start")}</span></button><button class="btn" id="shbld">${ms("construction")}<span>${t("bld.own")}</span></button></div>`
+    :`<p>${t("bld.code.bad")}</p><div class="tract"><button class="btn" id="shbld">${ms("construction")}<span>${t("bld.own")}</span></button></div>`}
+  </section>`;
+  bindCrumbs(cl);
+  const g=$("#shgo"); if(g) g.onclick=()=>startQuiz({title:s.t||t("bld.title"),qs:s.qs.slice(),mode:s.m,rid:null});
+  $("#shbld").onclick=()=>go("builder");
+}
+function checkHash(){
+  let h=""; try{h=decodeURIComponent(location.hash||"")}catch(e){h=location.hash||""}
+  if(/duel-/.test(h)){const x=readDuel(h);if(!x)return;try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}go("duelin",{duelIn:x});return}
+  if(!/test-/.test(h)) return;
+  const s=readToken(h); if(!s) return;
+  try{history.replaceState(null,"",location.pathname+location.search)}catch(e){}
+  go("shared",{shared:s});
+}
+
+/* ---------- social sign-in (Firebase Auth, GitHub version only) ---------- */
+const AUTH={cfg:null,ready:null};
+const PROV=[
+  {id:"apple",name:"Apple",svg:`<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"/></svg>`},
+  {id:"google",name:"Google",svg:`<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`},
+  {id:"microsoft",name:"Microsoft",svg:`<svg viewBox="0 0 21 21" aria-hidden="true"><rect x="1" y="1" width="9" height="9" fill="#F25022"/><rect x="11" y="1" width="9" height="9" fill="#7FBA00"/><rect x="1" y="11" width="9" height="9" fill="#00A4EF"/><rect x="11" y="11" width="9" height="9" fill="#FFB900"/></svg>`},
+  {id:"facebook",name:"Facebook",svg:`<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#0866FF" d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></svg>`}];
+const provName=id=>(PROV.find(p=>p.id===id)||{}).name||id;
+function socialHTML(){
+  return `<div class="social"><p class="sohead">${t("auth.with")}</p>
+    <div class="sbtns">${PROV.map(p=>`<button type="button" class="sbtn" data-prov="${p.id}">${p.svg}<span>${t("auth.cont",{p:p.name})}</span></button>`).join("")}</div>
+    <p class="hint" id="authmsg" role="status"></p>
+    <div class="or"><span>${t("auth.or")}</span></div></div>`;
+}
+function loadScript(src){return new Promise((ok,no)=>{const s=document.createElement("script");s.src=src;s.onload=ok;s.onerror=no;document.head.appendChild(s)})}
+function fbReady(){
+  if(!AUTH.ready) AUTH.ready=(async()=>{const v="10.12.2",b=`https://www.gstatic.com/firebasejs/${v}/`;
+    await loadScript(b+"firebase-app-compat.js"); await loadScript(b+"firebase-auth-compat.js");
+    if(!firebase.apps.length) firebase.initializeApp(AUTH.cfg); return firebase})();
+  return AUTH.ready;
+}
+async function socialLogin(id){
+  const msg=$("#authmsg");
+  if(isArt()){msg.textContent=t("auth.art");return}
+  if(!AUTH.cfg){msg.textContent=t("auth.nocfg");return}
+  msg.textContent=t("auth.wait",{p:provName(id)});
+  try{
+    const fb=await fbReady(), A=fb.auth;
+    const pr=id==="google"?new A.GoogleAuthProvider():id==="facebook"?new A.FacebookAuthProvider():new A.OAuthProvider(id==="apple"?"apple.com":"microsoft.com");
+    if(id==="apple"){pr.addScope("email");pr.addScope("name")}
+    if(id==="microsoft") pr.setCustomParameters({prompt:"select_account"});
+    const u=(await fb.auth().signInWithPopup(pr)).user;
+    const p={name:(u.displayName||(u.email||"").split("@")[0]||"Pilot").slice(0,80),email:u.email||"",crew:(S.profile&&S.profile.crew)||"",prov:id,upd:new Date().toISOString()};
+    await saveProfile(p); S.pmsg=["ok",t("auth.ok",{p:provName(id)})]; paintChrome(); renderProfil();
+  }catch(e){msg.textContent=t("auth.fail")+(e&&e.code?" ("+e.code+")":"")}
+}
+async function socialLogout(){
+  try{if(AUTH.cfg&&window.firebase&&firebase.apps.length) await firebase.auth().signOut()}catch(e){}
+  S.profile=null; store.set("profile",null); S.pmsg=null; paintChrome(); renderProfil();
+}
+async function loadAuthCfg(){
+  if(isArt()) return;
+  try{const r=await fetch("firebase-config.json",{cache:"no-store"});if(!r.ok)return;const c=await r.json();if(c&&c.apiKey&&c.authDomain)AUTH.cfg=c}catch(e){}
+}
+
+/* ---------- road to command: route guide ---------- */
+const RT=()=>DATA&&DATA.route;
+const R2=a=>Array.isArray(a)?(LANG==="en"?a[1]:a[0]):"";
+const rtPdf=()=>LANG==="en"?"road-to-command-en.pdf":"road-to-command.pdf";
+function rtBanner(){return RT()?`<button class="membar rtbar" id="rtgo"><span class="mi">${ms("route")}</span><span class="mt"><b>${esc(R2(RT().title))}</b><span>${t("rt.bar.s")}</span></span><span class="mg"><span>${t("rt.bar.n",{n:RT().wps.length})}</span>${ms("arrow_forward")}</span></button>`:""}
+function rtLinks(themes,arts){
+  const th=(themes||[]).map(id=>{const [r,x]=sysThema(id);return r&&x&&pool({rubrik:r.id,thema:id}).length?`<button class="rtl q" data-rq="${esc(r.id)}|${esc(id)}">${ms("quiz")}${esc(L(x,"name"))}</button>`:""}).join("");
+  const ar=(arts||[]).filter(id=>artById(id)).map(id=>`<button class="rtl a" data-ra="${esc(id)}">${ms("article")}${esc(L(artById(id),"titel"))}</button>`).join("");
+  return th||ar?`<div class="rtls">${ar}${th}</div>`:"";
+}
+function renderRoute(){
+  const R=RT(); if(!R){go("home");return}
+  const done=store.get("route",{}), all=[]; R.wps.forEach(w=>(w.req||[]).forEach((_,i)=>all.push(w.id+"."+i)));
+  const n=all.filter(k=>done[k]).length;
+  const cl=[[t("nav.home"),()=>go("home")],[L(rub("command")||{name:"Road to Command"},"name"),()=>go("rubrik",{rubrik:"command"})],[R2(R.title)]];
+  const wp=(w,i)=>`<li class="wp" id="wp-${w.id}">
+    <div class="wpk"><span class="wpm" aria-hidden="true"></span><b>${esc(w.code)}</b><small>${esc(R2(w.ph))}</small></div>
+    <div class="wpc"><p class="wpn">${t("rt.wp",{n:i+1,k:R.wps.length})}</p><h2>${esc(R2(w.t))}</h2><p class="wps">${md(R2(w.s))}</p>
+      ${w.tracks?`<div class="tblwrap"><table class="rtt"><thead><tr>${w.tracks.h.map(h=>`<th>${esc(R2(h))}</th>`).join("")}</tr></thead><tbody>${w.tracks.r.map(r=>`<tr>${r.map((c,j)=>j?`<td>${esc(R2(c))}</td>`:`<th scope="row">${esc(R2(c))}</th>`).join("")}</tr>`).join("")}</tbody></table></div>`:""}
+      ${w.steps?`<ol class="rtsteps">${w.steps.map(s=>`<li><b>${esc(R2(s[0]))}</b><span>${md(R2(s[1]))}</span></li>`).join("")}</ol>`:""}
+      ${w.req&&w.req.length?`<p class="rth">${t("rt.check")}</p><ul class="rtreq">${w.req.map((r,j)=>{const k=w.id+"."+j;return `<li><label><input type="checkbox" data-rk="${k}" ${done[k]?"checked":""}><span>${md(R2(r))}</span></label></li>`}).join("")}</ul>`:""}
+      ${w.info?`<p class="rtinfo">${ms("info")}<span>${esc(R2(w.info))}</span></p>`:""}
+      <p class="rtsrc">${ms("description")}${esc(w.src)}</p>
+      ${rtLinks(w.themes,w.arts)}
+    </div></li>`;
+  $("#app").innerHTML=crumbs(cl)+phead(emo("command"),esc(R2(R.title)),esc(R2(R.lead)),"var(--red)")+`
+  <div class="rttop"><div class="rtprog"><span>${t("rt.prog",{n,k:all.length})}</span><div class="bar"><i style="width:${all.length?n/all.length*100:0}%"></i></div></div>
+    <button class="btn" id="rtpdf">${ms("picture_as_pdf")}<span>${t("rt.pdf")}</span></button><span class="hint" id="rtpdfm" role="status"></span>
+    ${n?`<button class="btn ghost sm" id="rtreset">${ms("restart_alt")}<span>${t("rt.reset")}</span></button>`:""}</div>
+  <nav class="rtnav" aria-label="${esc(t("rt.nav"))}">${R.wps.map((w,i)=>`<a href="#wp-${w.id}" data-wpj="${w.id}"><b>${esc(w.code)}</b><span>${esc(R2(w.t))}</span></a>`).join(`<i aria-hidden="true">${ms("arrow_forward")}</i>`)}</nav>
+  <ol class="route">${R.wps.map(wp).join("")}</ol>
+  <div class="shead"><h2>${t("rt.topics")}</h2><small>${t("rt.topics.s")}</small></div>
+  <div class="rttopics">${R.topics.map(x=>`<section class="rttopic"><h3><span class="emo" aria-hidden="true">${x.e}</span>${esc(R2(x.t))}</h3><ul>${x.b.map(b=>`<li>${esc(R2(b))}</li>`).join("")}</ul>${rtLinks(x.themes,x.arts)}</section>`).join("")}</div>
+  <div class="rtcols">
+    <section class="panel"><h2>${t("rt.skills")}</h2><p class="hint">${t("rt.skills.s")}</p><ul class="rtskills">${R.skills.map(s=>`<li>${esc(R2(s))}</li>`).join("")}</ul></section>
+    <section class="panel"><h2>${t("rt.plan")}</h2><ol class="rtplan">${R.plan.map(p=>`<li><b>${esc(R2(p[0]))}</b><span>${esc(R2(p[1]))}</span></li>`).join("")}</ol><p class="hint">${esc(R2(R.plan_note))}</p></section>
+  </div>
+  <div class="tract" style="margin-top:20px"><button class="btn pri" id="rtquiz">${IC.play}<span>${t("rt.quiz")}</span></button><button class="btn" id="rtrub">${emo("command")}<span>${t("rt.rub")}</span></button></div>
+  <p class="note">${esc(R2(R.note))}</p>`;
+  bindCrumbs(cl);
+  $$("[data-rk]").forEach(c=>c.onchange=()=>{const d=store.get("route",{});if(c.checked)d[c.dataset.rk]=1;else delete d[c.dataset.rk];store.set("route",d);
+    const m=all.filter(k=>d[k]).length;$(".rtprog span").textContent=t("rt.prog",{n:m,k:all.length});$(".rtprog .bar i").style.width=(m/all.length*100)+"%"});
+  $$("[data-wpj]").forEach(a=>a.onclick=e=>{e.preventDefault();const el=$("#wp-"+a.dataset.wpj);if(el)el.scrollIntoView({behavior:"smooth",block:"start"})});
+  $$("[data-rq]").forEach(b=>b.onclick=()=>{const [r,th]=b.dataset.rq.split("|");go("setup",{rubrik:r,thema:th})});
+  $$("[data-ra]").forEach(b=>b.onclick=()=>openArt(b.dataset.ra));
+  $("#rtpdf").onclick=async()=>{const m=$("#rtpdfm"),f=rtPdf();
+    let dl=null; try{dl=window.claude&&window.claude.use?await claude.use("downloads"):null}catch(e){}
+    if(!dl){const a=document.createElement("a");a.href=f;a.download=f;a.target="_blank";document.body.appendChild(a);a.click();a.remove();return}
+    try{m.textContent=t("rt.pdf.wait");const data=await (await fetch(f)).blob();await dl.save({filename:f,data});m.textContent=""}
+    catch(e){m.textContent=e&&e.code==="declined"?"":t("rt.pdf.fail")}};
+  const rs=$("#rtreset"); if(rs) rs.onclick=()=>{store.set("route",{});renderRoute()};
+  $("#rtquiz").onclick=()=>startQuiz({title:R2(R.title),qs:shuffle(pool({rubrik:"command"})).slice(0,20),mode:"lern",rid:"command"});
+  $("#rtrub").onclick=()=>go("rubrik",{rubrik:"command"});
+}
+
+/* ---------- duel mode ---------- */
+/* engine and transport are separate: today "local" (one device) and "link" (asynchronous challenge);
+   a future app can add a "bluetooth" transport that exchanges the same token and answer events. */
+const DUEL_KEYS=[["q","w","e","r"],["u","i","o","p"]];
+const dPts=(ok,ms,per)=>ok?Math.round(500+500*Math.max(0,1-ms/(per*1000))):0;
+function duelSetup(){
+  if(!S.dset){const me=(S.profile&&S.profile.name)||"";S.dset={rubs:new Set(RUBS().filter(r=>r.id!=="samba").map(r=>r.id)),n:10,per:20,p1:me||t("du.p1"),p2:t("du.p2")}}
+  return S.dset;
+}
+function duelPool(st){return DATA.fragen.filter(q=>acOk(q)&&st.rubs.has(q.rubrik)&&q.thema!=="memory-items")}
+function renderDuel(){
+  const st=duelSetup(), cl=[[t("nav.home"),()=>go("home")],[t("du.title")]];
+  const avail=duelPool(st).length;
+  $("#app").innerHTML=crumbs(cl)+phead(ms("swords"),t("du.title"),t("du.sub"),"var(--red)")+acBar()+`
+  <section class="trainer bld duelset"><div class="trbody">
+    <div class="trsec"><div class="trhead"><h3>${t("tr.rubs")}</h3><span class="trall"><button type="button" class="linkbtn" data-dra="1">${t("tr.all")}</button><button type="button" class="linkbtn" data-dra="0">${t("tr.none")}</button></span></div>
+      <div class="trchips">${RUBS().map(r=>`<label class="trc" style="--c:${rc(r.id)}"><input type="checkbox" data-dr="${r.id}" ${st.rubs.has(r.id)?"checked":""}><span class="trcn">${emo(r.id)} ${esc(L(r,"name"))}</span><small>${fN(pool({rubrik:r.id}).length)}</small></label>`).join("")}</div>
+      <p class="hint" id="dav">${t("du.avail",{n:fN(avail)})}</p></div>
+    <div class="trrow">
+      <div class="trsec"><h3>${t("setup.n")}</h3><div class="seg" role="group">${[5,10,15,20].map(n=>`<button type="button" data-dn="${n}" aria-pressed="${st.n===n}">${n}</button>`).join("")}</div></div>
+      <div class="trsec"><h3>${t("du.per")}</h3><div class="seg" role="group">${[10,20,30].map(n=>`<button type="button" data-dp="${n}" aria-pressed="${st.per===n}">${n} s</button>`).join("")}</div></div>
+    </div>
+  </div></section>
+  <div class="duelmodes">
+    <section class="dmode"><h2>${ms("devices")} ${t("du.local")}</h2><p>${t("du.local.s")}</p>
+      <div class="dnames"><div class="field"><label for="dp1">${t("du.p1")}</label><input id="dp1" maxlength="20" value="${esc(st.p1)}"></div><div class="field"><label for="dp2">${t("du.p2")}</label><input id="dp2" maxlength="20" value="${esc(st.p2)}"></div></div>
+      <button class="btn pri" id="dgo">${ms("play_arrow")}<span>${t("du.start")}</span></button>
+      <p class="hint">${t("du.keys")}</p></section>
+    <section class="dmode"><h2>${ms("send")} ${t("du.link")}</h2><p>${t("du.link.s")}</p>
+      <div class="field"><label for="dme">${t("du.you")}</label><input id="dme" maxlength="20" value="${esc(st.p1)}"></div>
+      <button class="btn dark" id="dch">${ms("bolt")}<span>${t("du.chal")}</span></button>
+      <p class="hint">${t("du.link.h")}</p></section>
+  </div>
+  <p class="bt">${ms("bluetooth")}<span>${t("du.bt")}</span></p>`;
+  bindCrumbs(cl); bindAc();
+  const upd=()=>{const n=duelPool(st).length;$("#dav").textContent=t("du.avail",{n:fN(n)});["#dgo","#dch"].forEach(s=>$(s).disabled=n<st.n)};
+  $$("[data-dr]").forEach(c=>c.onchange=()=>{c.checked?st.rubs.add(c.dataset.dr):st.rubs.delete(c.dataset.dr);upd()});
+  $$("[data-dra]").forEach(b=>b.onclick=()=>{RUBS().forEach(r=>b.dataset.dra==="1"?st.rubs.add(r.id):st.rubs.delete(r.id));$$("[data-dr]").forEach(c=>c.checked=st.rubs.has(c.dataset.dr));upd()});
+  $$("[data-dn]").forEach(b=>b.onclick=()=>{st.n=+b.dataset.dn;$$("[data-dn]").forEach(x=>x.setAttribute("aria-pressed",x===b));upd()});
+  $$("[data-dp]").forEach(b=>b.onclick=()=>{st.per=+b.dataset.dp;$$("[data-dp]").forEach(x=>x.setAttribute("aria-pressed",x===b))});
+  $("#dp1").oninput=e=>st.p1=e.target.value; $("#dp2").oninput=e=>st.p2=e.target.value; $("#dme").oninput=e=>st.p1=e.target.value;
+  $("#dgo").onclick=()=>duelStart({mode:"local",qs:shuffle(duelPool(st)).slice(0,st.n),per:st.per,names:[st.p1.trim()||t("du.p1"),st.p2.trim()||t("du.p2")]});
+  $("#dch").onclick=()=>duelStart({mode:"link",qs:shuffle(duelPool(st)).slice(0,st.n),per:st.per,names:[st.p1.trim()||t("du.you")]});
+  upd();
+}
+let DT=null; const dStop=()=>{if(DT){clearInterval(DT);DT=null}};
+function duelStart({mode,qs,per,names,rival}){
+  stopTimer(); stopSlides();
+  S.duel={mode,per,qs,orders:qs.map(()=>shuffle([0,1,2,3])),i:0,rival:rival||null,
+    pl:names.map(n=>({name:n,score:0,res:[]})),round:null};
+  S.screen="duelplay"; duelRound();
+}
+function duelRound(){
+  const D=S.duel; D.round={t0:Date.now(),picks:D.pl.map(()=>null),revealed:false};
+  render(); window.scrollTo(0,0);
+  dStop(); DT=setInterval(()=>{if(S.screen!=="duelplay"){dStop();return}const left=D.per*1000-(Date.now()-D.round.t0);const b=$("#dtime");if(b){b.style.width=Math.max(0,left/(D.per*10))+"%";const s=$("#dsec");if(s)s.textContent=Math.max(0,Math.ceil(left/1000))}if(left<=0)duelReveal()},100);
+}
+function duelPick(p,o){
+  const D=S.duel,R=D.round; if(!R||R.revealed||R.picks[p]) return;
+  R.picks[p]={o,ms:Date.now()-R.t0};
+  const panel=$(`[data-dpl="${p}"]`); if(panel){panel.classList.add("locked");panel.querySelectorAll(".dans").forEach(b=>{b.disabled=true;if(+b.dataset.o===o)b.classList.add("mine")});const st=panel.querySelector(".dstat");if(st)st.textContent=t("du.locked")}
+  if(R.picks.every(Boolean)) duelReveal();
+}
+function duelReveal(){
+  const D=S.duel,R=D.round; if(!R||R.revealed) return; R.revealed=true; dStop();
+  const q=D.qs[D.i];
+  D.pl.forEach((pl,p)=>{const k=R.picks[p],ok=!!k&&k.o===q.richtig,pts=dPts(ok,k?k.ms:D.per*1000,D.per);pl.score+=pts;pl.res.push({ok,ms:k?k.ms:null,pts});record(q,ok)});
+  save(); renderDuelPlay();
+}
+function duelNext(){const D=S.duel;if(D.i+1<D.qs.length){D.i++;duelRound()}else{dStop();S.screen="dueldone";render();window.scrollTo(0,0)}}
+function renderDuelPlay(){
+  const D=S.duel; if(!D){go("duel");return}
+  const q=D.qs[D.i], ord=D.orders[D.i], R=D.round, rev=R&&R.revealed, two=D.pl.length>1;
+  const panel=p=>{const pl=D.pl[p],k=R.picks[p],res=rev?pl.res[D.i]:null;
+    return `<section class="dpl p${p+1}${k?" locked":""}" data-dpl="${p}">
+      <header><b>${esc(pl.name)}</b><span class="dsc">${fN(pl.score)}</span></header>
+      <h2 class="dq">${qb(q)}${esc(QF(q))}</h2>
+      <div class="dansw">${ord.map((oi,j)=>`<button class="dans${rev&&oi===q.richtig?" ok":""}${rev&&k&&k.o===oi&&oi!==q.richtig?" bad":""}${!rev&&k&&k.o===oi?" mine":""}" data-p="${p}" data-o="${oi}" ${k||rev?"disabled":""}><span class="key">${"ABCD"[j]}</span><span>${esc(QA(q,oi))}</span>${two?`<kbd>${DUEL_KEYS[p][j].toUpperCase()}</kbd>`:""}</button>`).join("")}</div>
+      <p class="dstat" role="status">${rev?(res.ok?`${ms("check_circle",1)} +${res.pts}`:k?`${ms("cancel",1)} 0`:t("du.timeout")):k?t("du.locked"):""}</p>
+    </section>`};
+  $("#app").innerHTML=`<div class="duel ${two?"two":"one"}">
+    <div class="dbar"><button class="btn sm ghost" id="dquit">${IC.bad}<span>${t("quiz.quit")}</span></button><span class="dcount">${t("du.q",{n:D.i+1,k:D.qs.length})}</span><span class="dclock">${ms("timer")} <b id="dsec">${rev?0:D.per}</b> s</span><div class="dtbar"><i id="dtime" style="width:${rev?0:100}%"></i></div></div>
+    <div class="dgrid">${D.pl.map((_,p)=>panel(p)).join("")}</div>
+    ${rev?`<div class="dfb"><p>${esc(QE(q))}</p><p class="rtsrc">${ms("description")}${esc(q.quelle||"")}</p><button class="btn pri" id="dnext">${D.i+1<D.qs.length?t("quiz.next"):t("du.result")}${IC.next}</button></div>`:""}
+  </div>`;
+  $$(".dans").forEach(b=>b.onclick=()=>duelPick(+b.dataset.p,+b.dataset.o));
+  $("#dquit").onclick=()=>{dStop();S.duel=null;go("duel")};
+  const nx=$("#dnext"); if(nx){nx.onclick=duelNext;nx.focus()}
+}
+document.addEventListener("keydown",e=>{
+  if(S.screen!=="duelplay"||!S.duel||e.target.matches("input,textarea")) return;
+  const k=e.key.toLowerCase(), D=S.duel;
+  if(D.round&&D.round.revealed){if(k==="enter"||k===" "){e.preventDefault();duelNext()}return}
+  D.pl.forEach((_,p)=>{const j=DUEL_KEYS[p].indexOf(k);const jd=p===0?["1","2","3","4"].indexOf(k):["7","8","9","0"].indexOf(k);const x=j>=0?j:jd;if(x>=0&&(D.pl.length>1||p===0))duelPick(p,D.orders[D.i][x])});
+});
+function duelToken(D){
+  const p=D.pl.map(pl=>({n:pl.name,s:pl.score,c:pl.res.map(r=>r.ok?1:0).join(""),p:pl.res.map(r=>r.pts)}));
+  const rv=D.rival?[D.rival]:[];
+  return "duel-"+b64u(JSON.stringify({v:1,per:D.per,q:D.qs.map(q=>qh(q.id)).join(""),r:[...rv,...p]}));
+}
+function readDuel(s){
+  const m=String(s||"").match(/duel-([A-Za-z0-9_-]{8,})/); if(!m) return null;
+  try{const o=JSON.parse(unb64u(m[1]));const qs=((o.q||"").match(/.{6}/g)||[]).map(qByHash);if(!qs.length||qs.some(x=>!x))return null;
+    return {per:+o.per||20,qs,r:(o.r||[]).slice(0,2).map(x=>({n:String(x.n||"?").slice(0,20),s:+x.s||0,c:String(x.c||""),p:Array.isArray(x.p)?x.p.map(Number):[]}))}}catch(e){return null}
+}
+function renderDuelDone(){
+  const D=S.duel; if(!D){go("duel");return}
+  const cl=[[t("nav.home"),()=>go("home")],[t("du.title"),()=>go("duel")],[t("du.result")]];
+  let rows;
+  if(D.mode==="local"||D.rival){
+    const A=D.rival?{name:D.rival.n,score:D.rival.s,res:D.rival.p.map((p,i)=>({ok:D.rival.c[i]==="1",pts:p}))}:D.pl[0], B=D.rival?D.pl[0]:D.pl[1];
+    const win=A.score===B.score?null:A.score>B.score?A:B;
+    rows=`<div class="dwin">${win?`<span class="emo">🏆</span><h2>${t("du.wins",{n:esc(win.name)})}</h2>`:`<span class="emo">🤝</span><h2>${t("du.draw")}</h2>`}</div>
+    <div class="dvs"><div class="${win===A?"w":""}"><b>${esc(A.name)}</b><span>${fN(A.score)}</span><small>${t("du.ok",{n:A.res.filter(r=>r.ok).length,k:D.qs.length})}</small></div><i>VS</i><div class="${win===B?"w":""}"><b>${esc(B.name)}</b><span>${fN(B.score)}</span><small>${t("du.ok",{n:B.res.filter(r=>r.ok).length,k:D.qs.length})}</small></div></div>
+    <div class="tblwrap"><table class="rtt dtab"><thead><tr><th>#</th><th>${t("du.qcol")}</th><th>${esc(A.name)}</th><th>${esc(B.name)}</th></tr></thead><tbody>${D.qs.map((q,i)=>`<tr><td>${i+1}</td><td>${esc(QF(q))}</td><td class="${A.res[i]&&A.res[i].ok?"ok":"bad"}">${A.res[i]?(A.res[i].ok?"✓ ":"✗ ")+A.res[i].pts:"–"}</td><td class="${B.res[i]&&B.res[i].ok?"ok":"bad"}">${B.res[i]?(B.res[i].ok?"✓ ":"✗ ")+B.res[i].pts:"–"}</td></tr>`).join("")}</tbody></table></div>`;
+  } else {
+    const A=D.pl[0];
+    rows=`<div class="dwin"><span class="emo">⚡</span><h2>${t("du.chal.done",{s:fN(A.score)})}</h2><p>${t("du.ok",{n:A.res.filter(r=>r.ok).length,k:D.qs.length})}</p></div>`;
+  }
+  const showLink=D.mode==="link";
+  $("#app").innerHTML=crumbs(cl)+phead(ms("swords"),t("du.result"),"","var(--red)")+`<section class="panel">${rows}</section>
+  ${showLink?`<div id="dshare"></div>`:""}
+  <div class="tract" style="margin-top:16px">${D.mode==="local"?`<button class="btn pri" id="drem">${ms("replay")}<span>${t("du.rematch")}</span></button>`:""}<button class="btn" id="dnew">${ms("swords")}<span>${t("du.new")}</span></button></div>`;
+  bindCrumbs(cl);
+  if(showLink){const tok=duelToken(D), url=shareBase()+"#"+tok, el=$("#dshare");
+    shareBox(el,tok,D.rival?t("du.reply.t"):t("du.chal.t"),D.qs.length);
+    el.querySelector(".label span").innerHTML=ms("link")+" "+(D.rival?t("du.reply.l"):t("du.chal.l"));
+    const mb=el.querySelector('a[href^="mailto"]'); if(mb) mb.href=`mailto:?subject=${encodeURIComponent(t("du.mail.s",{n:D.pl[0].name}))}&body=${encodeURIComponent(t("du.mail.b",{n:D.pl[0].name,s:fN(D.pl[0].score),u:url}))}`;
+    const wa=el.querySelector('a[href^="https://wa.me"]'); if(wa) wa.href="https://wa.me/?text="+encodeURIComponent(t("du.mail.b",{n:D.pl[0].name,s:fN(D.pl[0].score),u:url}));}
+  const rm=$("#drem"); if(rm) rm.onclick=()=>duelStart({mode:"local",qs:shuffle(duelPool(duelSetup())).slice(0,D.qs.length),per:D.per,names:D.pl.map(p=>p.name)});
+  $("#dnew").onclick=()=>{S.duel=null;go("duel")};
+}
+function renderDuelIn(){
+  const x=S.duelIn; if(!x){go("duel");return}
+  const cl=[[t("nav.home"),()=>go("home")],[t("du.title")]];
+  const st=duelSetup(), done=x.r.length>=2;
+  if(done){ // answer came back: show the final comparison
+    S.duel={mode:"link",per:x.per,qs:x.qs,orders:[],i:0,rival:x.r[0],pl:[{name:x.r[1].n,score:x.r[1].s,res:x.r[1].p.map((p,i)=>({ok:x.r[1].c[i]==="1",pts:p}))}]};
+    S.duel.mode="view"; renderDuelDone(); return;
+  }
+  const R0=x.r[0];
+  $("#app").innerHTML=crumbs(cl)+phead(ms("swords"),t("du.in.t",{n:esc(R0.n)}),t("du.in.s",{k:x.qs.length,p:x.per}),"var(--red)")+`
+  <section class="panel duelin"><div class="dvs"><div><b>${esc(R0.n)}</b><span>?</span><small>${t("du.hidden")}</small></div><i>VS</i><div><b>${t("du.you")}</b><span>0</span><small>${t("du.ready")}</small></div></div>
+  <div class="field" style="max-width:360px"><label for="dme2">${t("du.you")}</label><input id="dme2" maxlength="20" value="${esc(st.p1)}"></div>
+  <div class="tract"><button class="btn pri" id="dacc">${ms("bolt")}<span>${t("du.accept")}</span></button></div></section>`;
+  bindCrumbs(cl);
+  $("#dacc").onclick=()=>{const n=$("#dme2").value.trim()||t("du.you");st.p1=n;duelStart({mode:"link",qs:x.qs,per:x.per,names:[n],rival:R0})};
 }
 
 /* ---------- quiz ---------- */
@@ -1109,7 +1682,7 @@ function renderQuiz(){
   <nav class="qnav" aria-label="${esc(t("quiz.nav"))}">${Z.items.map((x,k)=>`<button data-qi="${k}" class="${x.pick!=null?"ans-d":""}${x.flag?" flg":""}${lern&&x.pick!=null?(x.pick===x.q.richtig?" q-ok":" q-bad"):""}" ${k===Z.i?'aria-current="step"':""} aria-label="${esc(t("quiz.goto",{n:k+1}))}${x.flag?" · "+esc(t("quiz.flagged")):""}">${k+1}</button>`).join("")}</nav>
   <p class="qlegend"><span><i class="lg-a"></i>${t("quiz.lg.ans")}</span><span><i class="lg-o"></i>${t("quiz.lg.open")}</span><span><i class="lg-f"></i>${t("quiz.lg.flag")}</span></p>
   <div class="card" id="card">
-    <div class="qmeta">${r?`<span class="tagp">${esc(L(r,"name"))}</span>`:""}${th?`<span class="tagp">${esc(L(th,"name"))}</span>`:""}${q.flugzeug&&q.flugzeug!=="beide"?`<span class="tagp">${q.flugzeug}</span>`:""}${q.stufe?`<span class="tagp">${stufeName(q.stufe)}</span>`:""}${it.flag?`<span class="tagp flagtag">${ms("flag",1)} ${t("quiz.flagged")}</span>`:""}</div>
+    <div class="qmeta">${r?`<span class="tagp">${esc(L(r,"name"))}</span>`:""}${th?`<span class="tagp">${esc(L(th,"name"))}</span>`:""}${q.flugzeug&&q.flugzeug!=="beide"?`<span class="tagp">${q.flugzeug}</span>`:""}${it.flag?`<span class="tagp flagtag">${ms("flag",1)} ${t("quiz.flagged")}</span>`:""}</div>
     <h2 class="question">${qb(q)}${esc(QF(q))}</h2>
     <div class="answers" id="answers">${it.order.map((oi,k)=>`<button class="ans" data-o="${oi}"><span class="key">${"ABCD"[k]}</span><span>${esc(QA(q,oi))}</span></button>`).join("")}</div>
     ${lern&&!done?`<div class="peekrow"><button class="peekbtn" id="peek" aria-expanded="${!!it.peek}">${IC.book} ${t("quiz.peek")}</button></div><div id="peekbox">${it.peek?peekHTML(q):""}</div>`:""}
@@ -1165,7 +1738,7 @@ document.addEventListener("keydown",e=>{
   const tg=e.target&&e.target.tagName; if(tg==="INPUT"||tg==="TEXTAREA") return;
   if(e.key==="ArrowRight"){gotoQ(S.quiz.i+1)} else if(e.key==="ArrowLeft"){gotoQ(S.quiz.i-1)}
 });
-function record(q,ok){const x=S.st.q[q.id]||[0,0,0];x[0]++;if(ok){x[1]++;S.st.punkte+=10*(q.stufe||1)}x[2]=ok?1:0;S.st.q[q.id]=x}
+function record(q,ok){const x=S.st.q[q.id]||[0,0,0];x[0]++;if(ok){x[1]++;S.st.punkte+=10}x[2]=ok?1:0;S.st.q[q.id]=x}
 function finish(timeUp){
   stopTimer(); const Z=S.quiz; if(!Z) return;
   if(Z.mode==="pruefung") Z.items.forEach(it=>{if(it.pick!=null) record(it.q,it.pick===it.q.richtig)});
@@ -1279,10 +1852,11 @@ function renderLibRubrik(){
   const r=rub(S.rubrik); if(!r){go("lib");return}
   const cl=[[t("lib.title"),()=>go("lib")],[L(r,"name")]];
   const rarts=ARTS().filter(a=>artVis(a)&&(a.themen||[]).some(id=>r.themen.some(x=>x.id===id)));
-  $("#app").innerHTML=crumbs(cl)+phead(emo(r.id),esc(L(r,"name")),esc(L(r,"beschreibung")))+acBar()+`
+  const tg=[trGroup(r)], tk="l_"+r.id; trState(tk,tg,true);
+  $("#app").innerHTML=crumbs(cl)+phead(emo(r.id),esc(L(r,"name")),esc(L(r,"beschreibung")))+(r.id==="command"?rtBanner():"")+acBar()+(tg[0].items.length?trainerHTML(tk,tg,{open:false}):"")+`
   ${rarts.length?`<section class="artblock"><p class="label">${t("art.title")} <small>${plu("art.n",rarts.length)}</small></p><div class="arts">${rarts.map(artCard).join("")}</div></section>`:""}
   <div class="themen">${r.themen.filter(acVis).sort(acSort).map(th=>`<button class="thema" data-t="${esc(th.id)}"><span class="ti">${ticon(th.id)}</span><b>${esc(L(th,"name"))}</b><span class="t">${esc(L(th,"beschreibung"))}</span><span class="meta"><span class="tagp">${t("n.f",{n:(th.bibliothek&&th.bibliothek.fakten||[]).length})}</span><span class="tagp">${t("n.q",{n:pool({rubrik:r.id,thema:th.id}).length})}</span>${(n=>n?`<span class="tagp">${plu("art.n",n)}</span>`:"")(artOfThema(th.id).length)}${th.flugzeug?`<span class="tagp">${th.flugzeug}</span>`:""}</span></button>`).join("")}</div>`;
-  setC($("#app"),r.id); bindCrumbs(cl); bindAc();
+  setC($("#app"),r.id); bindCrumbs(cl); bindAc(); bindTrainer(tk,tg,{title:L(r,"name"),rid:r.id}); {const g=$("#rtgo"); if(g) g.onclick=()=>go("route");}
   $$("[data-art]").forEach(b=>b.onclick=()=>{const a=artById(b.dataset.art);openArt(b.dataset.art,(a.themen||[]).find(id=>r.themen.some(x=>x.id===id)))});
   $$("[data-t]").forEach(b=>b.onclick=()=>go("libthema",{thema:b.dataset.t}));
 }
@@ -1512,6 +2086,7 @@ function renderProfil(){
   <div class="pgrid">
     <section class="panel">
       <h2>${reg?t("prof.title"):t("prof.login")}</h2>
+      ${reg?(P.prov?`<p class="provline">${(PROV.find(x=>x.id===P.prov)||{}).svg||""}<span>${t("auth.via",{p:provName(P.prov)})}</span><button type="button" class="linkbtn" id="sout">${t("auth.out")}</button></p>`:""):socialHTML()}
       <form class="form" id="pform" novalidate>
         <div class="field"><label for="pn">${t("prof.name")}</label><input id="pn" name="name" autocomplete="name" required maxlength="80" value="${esc(P.name||"")}" aria-describedby="pn-e"><p class="err" id="pn-e" aria-live="polite"></p></div>
         <div class="field"><label for="pe">${t("prof.email")}</label><input id="pe" name="email" type="email" autocomplete="email" required maxlength="120" value="${esc(P.email||"")}" aria-describedby="pe-e"><p class="err" id="pe-e" aria-live="polite"></p></div>
@@ -1531,6 +2106,8 @@ function renderProfil(){
   <p class="label">${t("prof.last")}</p>
   <div class="review" style="margin-top:0">${tests.length?tests.slice(0,15).map(x=>`<div class="rev ${x.ok/x.n>=PASS?"r-ok":"r-bad"}"><b>${esc(x.t)} · ${x.m==="pruefung"?t("mode.pr"):t("mode.l")}</b><span class="m">${esc(fD(x.d))} · ${t("prof.okof",{ok:x.ok,n:x.n,p:fP(x.ok/x.n)})}</span></div>`).join(""):`<p class="hint">${t("prof.none")}</p>`}</div>
   <p class="note">${t("prof.ptsnote")}</p>`:""}`;
+  $$("[data-prov]").forEach(b=>b.onclick=()=>socialLogin(b.dataset.prov));
+  {const so=$("#sout"); if(so) so.onclick=socialLogout;}
   $("#pform").onsubmit=async e=>{
     e.preventDefault();
     const name=$("#pn").value.trim(), email=$("#pe").value.trim(), crew=$("#pc").value.trim().toUpperCase();
@@ -1539,7 +2116,7 @@ function renderProfil(){
     $("#pe").setAttribute("aria-invalid",ee); $("#pe-e").textContent=ee?t("err.email"):"";
     if(en){$("#pn").focus();return} if(ee){$("#pe").focus();return}
     $("#psave").disabled=true; $("#pmsg").className="saved"; $("#pmsg").textContent=t("prof.saving");
-    const p={name,email,crew,upd:new Date().toISOString()};
+    const p={name,email,crew,upd:new Date().toISOString()}; if(P.prov) p.prov=P.prov;
     const where=await saveProfile(p);
     S.pmsg=where==="db"?["ok",t("prof.saved.db")]:["warn",t("prof.saved.local")];
     paintChrome(); renderProfil();
@@ -1554,7 +2131,7 @@ async function saveProfile(p){
 /* ---------- render ---------- */
 function render(){
   if(!DATA) return; renderNav(); paintChrome();
-  ({home:renderHome,rubrik:renderRubrik,setup:renderSetup,quiz:renderQuiz,done:renderDone,lib:renderLib,librubrik:renderLibRubrik,libthema:renderLibThema,libkomp:renderLibKomp,artikel:renderArtikel,memory:renderMemory,profil:renderProfil,compliance:renderCompliance,diff:renderDiff}[S.screen]||renderHome)();
+  ({home:renderHome,rubrik:renderRubrik,setup:renderSetup,quiz:renderQuiz,done:renderDone,lib:renderLib,librubrik:renderLibRubrik,libthema:renderLibThema,libkomp:renderLibKomp,artikel:renderArtikel,memory:renderMemory,profil:renderProfil,compliance:renderCompliance,diff:renderDiff,builder:renderBuilder,shared:renderShared,route:renderRoute,duel:renderDuel,duelplay:renderDuelPlay,dueldone:renderDuelDone,duelin:renderDuelIn}[S.screen]||renderHome)();
 }
 
 /* ---------- persistence ---------- */
@@ -1580,7 +2157,7 @@ function mergeStats(remote){
   if(!Array.isArray(DATA.rubriken))DATA.rubriken=[]; if(!Array.isArray(DATA.fragen))DATA.fragen=[];
   if(S.ac==="E1") S.mac="E1";
   if(S.profile) S.profileSrc="local";
-  render();
+  render(); checkHash(); window.addEventListener("hashchange",checkHash); loadAuthCfg();
   if(!window.claude||!window.claude.use) return;
   try{
     const [db,user]=await Promise.all([claude.use("db"),claude.use("user")]);
@@ -1597,6 +2174,4 @@ function mergeStats(remote){
   }catch(e){}
 })();
 </script>
-
-</body>
-</html>
+</body></html>
