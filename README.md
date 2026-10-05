@@ -1,7 +1,7 @@
 # JetQ – Refresher for Embraer Pilots
 
 Selbsttest- und Lernseite für Pilotinnen und Piloten auf **Embraer E2** (E190-E2/E195-E2) und **Embraer E1** (E190/E195).
-Alle Fragen, Fakten, Fachartikel und Memory Items stammen aus den Handbüchern (AFM, AOM, OM-A, OM-B, MEL), jeweils mit Fundstelle und Originalabschnitt.
+Alle Fragen, Fakten, Fachartikel und Memory Items stammen aus den Handbüchern (AFM, AOM, OM-A, OM-B, MEL, SAMBA E2), jeweils mit Fundstelle und Originalabschnitt.
 
 ## Inhalt
 
