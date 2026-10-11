@@ -8,6 +8,7 @@ Alle Fragen, Fakten, Fachartikel und Memory Items stammen aus den Handbüchern (
 | Datei | Zweck |
 |---|---|
 | `index.html` | Die komplette Seite (HTML, CSS und JavaScript in einer Datei) |
+| `preflight.html` | Preflight Wx: DEP/DEST/ALTN eingeben, live METAR/TAF (aviationweather.gov) gegen OM-A 8.1 prüfen |
 | `fragen.json` | Fragenkatalog, Bibliothek, Fachartikel, Memory Items, Saisontests (DE/EN) |
 | `aircraft-e1.jpg`, `aircraft-e2.jpg`, `cockpit-e1.jpg`, `cockpit-e2.jpg` | Fotos auf der Startseite |
 | `jetq-logo-*.png` | Logo hell und dunkel, gross und klein |
